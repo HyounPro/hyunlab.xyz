@@ -3,545 +3,383 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VOID.LOG</title>
+  <title>hyunlab — Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #080c10;
-      --bg2: #0d1117;
-      --surface: #111820;
-      --border: #1e2d3d;
-      --accent: #00e5ff;
-      --accent2: #7b2fff;
-      --text: #c9d1d9;
-      --text-dim: #4a5568;
-      --glow: 0 0 20px rgba(0, 229, 255, 0.15);
+      --pink:       #FF5C8A;
+      --pink-light: #FFE8EF;
+      --pink-mid:   #FFB3C8;
+      --black:      #1A1A1A;
+      --gray:       #666;
+      --gray-light: #F5F5F5;
+      --gray-mid:   #E8E8E8;
+      --white:      #FFFFFF;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
-
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Space Mono', monospace;
-      min-height: 100vh;
-      overflow-x: hidden;
+      background: #EFEFEF;
+      font-family: 'Noto Sans KR', sans-serif;
+      color: var(--black);
     }
 
-    /* Grid background */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Scan line */
-    body::after {
-      content: '';
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      animation: scanline 6s linear infinite;
-      z-index: 100;
-      opacity: 0.5;
-    }
-
-    @keyframes scanline {
-      0% { top: 0; }
-      100% { top: 100vh; }
-    }
-
-    /* ─── NAV ─── */
+    /* ── NAV ── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 50;
-      padding: 0 2rem;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(8, 12, 16, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      background: var(--white);
+      border-bottom: 1.5px solid var(--gray-mid);
+      position: sticky; top: 0; z-index: 100;
+      padding: 0 40px; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
     }
-
     .logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.2rem;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      text-decoration: none;
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 20px; color: var(--pink); text-decoration: none;
     }
-
-    .logo span { color: var(--accent2); }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 2rem;
-    }
-
+    .logo span { color: var(--black); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
     nav a {
-      color: var(--text-dim);
-      text-decoration: none;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-      position: relative;
+      font-size: 13px; font-weight: 500; color: var(--gray);
+      text-decoration: none; transition: color 0.2s;
     }
+    nav a:hover, nav a.active { color: var(--pink); }
 
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0; right: 100%;
-      height: 1px;
-      background: var(--accent);
-      transition: right 0.3s ease;
-    }
-
-    nav a:hover { color: var(--accent); }
-    nav a:hover::after { right: 0; }
-
-    /* ─── HERO ─── */
+    /* ── HERO ── */
     .hero {
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 80px 2rem 4rem;
-      max-width: 1100px;
-      margin: 0 auto;
+      background: var(--pink);
+      padding: 64px 40px 56px;
+      position: relative; overflow: hidden;
     }
-
-    .hero-inner {
-      max-width: 700px;
+    .hero-dot1 {
+      position: absolute; top: -40px; right: -40px;
+      width: 220px; height: 220px; border-radius: 50%;
+      background: rgba(255,255,255,0.1);
     }
-
-    .hero-tag {
-      font-size: 0.7rem;
-      letter-spacing: 0.25em;
-      color: var(--accent);
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.2s forwards;
+    .hero-dot2 {
+      position: absolute; bottom: -50px; right: 120px;
+      width: 140px; height: 140px; border-radius: 50%;
+      background: rgba(255,255,255,0.07);
     }
-
-    .hero-tag::before {
-      content: '> ';
-      color: var(--accent2);
+    .hero-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 3px;
+      color: rgba(255,255,255,0.7); text-transform: uppercase; margin-bottom: 10px;
     }
-
-    h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(3rem, 8vw, 6rem);
-      font-weight: 800;
-      line-height: 0.95;
-      letter-spacing: -0.02em;
-      color: #fff;
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.4s forwards;
+    .hero h1 {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: clamp(52px, 9vw, 88px);
+      color: var(--white); line-height: 1; letter-spacing: -2px;
+      margin-bottom: 16px; position: relative; z-index: 1;
     }
-
-    h1 .line2 {
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(255,255,255,0.3);
-      display: block;
-    }
-
-    h1 .accent { color: var(--accent); }
-
     .hero-desc {
-      font-size: 0.85rem;
-      line-height: 1.8;
-      color: var(--text-dim);
-      max-width: 480px;
-      margin-bottom: 2.5rem;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.6s forwards;
+      font-size: 15px; font-weight: 500;
+      color: rgba(255,255,255,0.85); max-width: 480px;
+      line-height: 1.7; position: relative; z-index: 1;
     }
-
     .hero-cta {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.8s forwards;
+      margin-top: 30px; display: flex; gap: 12px;
+      position: relative; z-index: 1;
     }
-
     .btn {
-      padding: 0.7rem 1.5rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 2px;
-      transition: all 0.2s;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: var(--bg);
-      font-weight: 700;
-      border: 1px solid var(--accent);
-    }
-
-    .btn-primary:hover {
-      background: transparent;
-      color: var(--accent);
-      box-shadow: var(--glow);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-
-    .btn-ghost:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    /* Terminal decoration */
-    .terminal-deco {
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 340px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      overflow: hidden;
-      opacity: 0;
-      animation: fadeIn 1s 1s forwards;
-    }
-
-    .term-header {
-      background: var(--bg2);
-      padding: 0.5rem 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .dot { width: 10px; height: 10px; border-radius: 50%; }
-    .dot-r { background: #ff5f57; }
-    .dot-y { background: #febc2e; }
-    .dot-g { background: #28c840; }
-
-    .term-body {
-      padding: 1rem;
-      font-size: 0.72rem;
-      line-height: 1.9;
-    }
-
-    .term-line { display: block; }
-    .term-prompt { color: var(--accent2); }
-    .term-cmd { color: #fff; }
-    .term-out { color: var(--text-dim); }
-    .term-ok { color: var(--accent); }
-
-    .cursor {
+      padding: 10px 26px; font-family: 'Noto Sans KR', sans-serif;
+      font-size: 13px; font-weight: 700; border-radius: 24px;
+      text-decoration: none; transition: all 0.2s; cursor: pointer; border: none;
       display: inline-block;
-      width: 7px; height: 1em;
-      background: var(--accent);
-      vertical-align: middle;
-      animation: blink 1s step-end infinite;
     }
-
-    @keyframes blink { 50% { opacity: 0; } }
-
-    /* ─── SECTION GRID ─── */
-    .section {
-      position: relative;
-      z-index: 1;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 5rem 2rem;
+    .btn-white { background: var(--white); color: var(--pink); }
+    .btn-white:hover { background: var(--pink-light); }
+    .btn-outline {
+      background: transparent; color: var(--white);
+      border: 1.5px solid rgba(255,255,255,0.5);
     }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
 
-    .section-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
-      color: var(--accent2);
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
+    /* ── STATS ── */
+    .stats-bar { background: var(--black); padding: 32px 40px; }
+    .stats-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr);
     }
-
-    .section-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 3rem;
-      letter-spacing: -0.02em;
+    .stat-item {
+      text-align: center; padding: 0 20px;
+      border-right: 1px solid #2a2a2a;
     }
-
-    /* ─── CARDS ─── */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-    }
-
-    .card {
-      background: var(--bg);
-      padding: 2rem;
-      transition: background 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s ease;
-    }
-
-    .card:hover { background: var(--surface); }
-    .card:hover::before { transform: scaleX(1); }
-
-    .card-num {
-      font-size: 0.65rem;
-      color: var(--text-dim);
-      margin-bottom: 1.2rem;
-      letter-spacing: 0.1em;
-    }
-
-    .card h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 0.75rem;
-      letter-spacing: -0.01em;
-    }
-
-    .card p {
-      font-size: 0.78rem;
-      line-height: 1.7;
-      color: var(--text-dim);
-      margin-bottom: 1.5rem;
-    }
-
-    .card-link {
-      font-size: 0.7rem;
-      color: var(--accent);
-      text-decoration: none;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: gap 0.2s;
-    }
-
-    .card-link:hover { gap: 0.8rem; }
-    .card-link::after { content: '→'; }
-
-    /* ─── DIVIDER ─── */
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border), transparent);
-      margin: 0 2rem;
-    }
-
-    /* ─── STATS ─── */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-    }
-
-    .stat {
-      background: var(--bg);
-      padding: 2rem 1.5rem;
-      text-align: center;
-    }
-
+    .stat-item:last-child { border-right: none; }
     .stat-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: var(--accent);
-      display: block;
-      line-height: 1;
-      margin-bottom: 0.5rem;
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 40px; color: var(--pink); line-height: 1;
+      display: block; margin-bottom: 6px;
+    }
+    .stat-label { font-size: 11px; font-weight: 500; color: #666; }
+
+    /* ── CAT BAR ── */
+    .cat-bar {
+      background: var(--white);
+      border-bottom: 1.5px solid var(--gray-mid);
+      padding: 0 40px; display: flex; overflow-x: auto;
+    }
+    .cat-btn {
+      padding: 14px 20px; font-size: 13px; font-weight: 500;
+      color: var(--gray); border: none; background: transparent;
+      cursor: pointer; font-family: 'Noto Sans KR', sans-serif;
+      border-bottom: 2.5px solid transparent; transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .cat-btn:hover { color: var(--pink); }
+    .cat-btn.active { color: var(--pink); border-bottom-color: var(--pink); font-weight: 700; }
+
+    /* ── SECTION ── */
+    .section { max-width: 1100px; margin: 0 auto; padding: 48px 40px; }
+    .sec-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 3px;
+      color: var(--pink); text-transform: uppercase;
+      margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
+    }
+    .sec-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--pink-mid); max-width: 60px;
+    }
+    .sec-title {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: clamp(26px, 4vw, 38px); color: var(--black);
+      letter-spacing: -1px; margin-bottom: 28px;
     }
 
-    .stat-label {
-      font-size: 0.65rem;
-      color: var(--text-dim);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+    /* ── CARDS ── */
+    .featured-grid {
+      display: grid; grid-template-columns: 1.6fr 1fr;
+      gap: 16px; margin-bottom: 16px;
     }
+    .portfolio-card {
+      background: var(--white); border-radius: 16px;
+      overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      transition: transform 0.25s, box-shadow 0.25s;
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: column; position: relative;
+    }
+    .portfolio-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(255,92,138,0.15);
+    }
+    .card-thumb {
+      width: 100%; aspect-ratio: 16/9;
+      background: var(--pink-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 52px; position: relative; overflow: hidden;
+    }
+    .card-thumb-sm { aspect-ratio: 4/3; font-size: 36px; }
+    .card-thumb-md { aspect-ratio: 3/2; font-size: 40px; }
+    .card-body {
+      padding: 20px 22px 22px; flex: 1; display: flex; flex-direction: column;
+    }
+    .card-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .card-badge {
+      font-size: 10px; font-weight: 700; padding: 3px 10px;
+      border-radius: 20px; letter-spacing: 0.3px;
+    }
+    .badge-dev    { background: #E8F4FF; color: #1a6bb5; }
+    .badge-design { background: var(--pink-light); color: var(--pink); }
+    .badge-motion { background: #F0EEFF; color: #6b3fb5; }
+    .badge-other  { background: var(--gray-light); color: var(--gray); }
+    .badge-new    { background: var(--pink); color: white; }
+    .card-date { font-size: 11px; color: var(--gray); margin-left: auto; }
+    .card-title {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 20px; color: var(--black); letter-spacing: -0.5px;
+      margin-bottom: 8px; line-height: 1.2;
+    }
+    .card-sm .card-title { font-size: 16px; }
+    .card-md .card-title { font-size: 18px; }
+    .card-desc { font-size: 13px; color: var(--gray); line-height: 1.65; flex: 1; }
+    .card-footer-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--gray-light);
+    }
+    .card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag-chip {
+      font-size: 10px; font-weight: 500; padding: 3px 8px;
+      background: var(--gray-light); color: var(--gray); border-radius: 4px;
+    }
+    .card-arrow { font-size: 18px; color: var(--pink); transition: transform 0.2s; }
+    .portfolio-card:hover .card-arrow { transform: translateX(4px); }
 
-    /* ─── FOOTER ─── */
+    .side-stack { display: flex; flex-direction: column; gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+    /* ── FOOTER ── */
     footer {
-      position: relative;
-      z-index: 1;
-      border-top: 1px solid var(--border);
-      padding: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.7rem;
-      color: var(--text-dim);
-      max-width: 1100px;
-      margin: 0 auto;
+      background: var(--black); padding: 28px 40px;
+      display: flex; align-items: center; justify-content: space-between;
     }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
+    .footer-logo { font-family: 'Black Han Sans', sans-serif; font-size: 16px; color: var(--white); }
+    .footer-logo span { color: var(--pink); }
+    footer p { font-size: 11px; color: #555; }
+    .footer-badge { background: var(--pink); color: white; font-size: 11px; font-weight: 700; padding: 5px 14px; border-radius: 20px; }
 
     @media (max-width: 768px) {
-      .terminal-deco { display: none; }
-      .stats { grid-template-columns: repeat(2, 1fr); }
+      nav { padding: 0 20px; }
+      .hero { padding: 40px 20px 36px; }
+      .section { padding: 36px 20px; }
+      .featured-grid, .grid-3 { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .stat-item { border-right: none; }
+      footer { flex-direction: column; gap: 12px; text-align: center; }
     }
   </style>
 </head>
 <body>
 
-  <nav>
-    <a href="/" class="logo">VOID<span>.</span>LOG</a>
-    <ul>
-      <li><a href="/main">Posts</a></li>
-      <li><a href="/review">Review</a></li>
-      <li><a href="/intro">Intro</a></li>
-    </ul>
-  </nav>
+<nav>
+  <a href="/" class="logo">hyun<span>lab</span></a>
+  <ul>
+    <li><a href="/main">Works</a></li>
+    <li><a href="/review">Review</a></li>
+    <li><a href="/intro">About</a></li>
+  </ul>
+</nav>
 
-  <section class="hero">
-    <div class="hero-inner">
-      <p class="hero-tag">Personal Blog / Digital Journal</p>
-      <h1>
-        WRITING
-        <span class="line2">FROM THE</span>
-        <span class="accent">VOID</span>
-      </h1>
-      <p class="hero-desc">
-        코드와 생각, 기술과 일상 사이 어딘가.<br>
-        기록하지 않으면 사라지는 것들을 붙잡는 공간.
-      </p>
-      <div class="hero-cta">
-        <a href="/main" class="btn btn-primary">Read Posts</a>
-        <a href="/intro" class="btn btn-ghost">About Me</a>
+<div class="hero">
+  <div class="hero-dot1"></div>
+  <div class="hero-dot2"></div>
+  <div class="hero-eyebrow">hyunlab · Portfolio</div>
+  <h1>WORKS &amp;<br>PROJECTS</h1>
+  <p class="hero-desc">디자인과 개발, 그 사이에서 만들어지는 것들을 모아둔 공간입니다.</p>
+  <div class="hero-cta">
+    <a href="/main" class="btn btn-white">작업물 보기</a>
+    <a href="/intro" class="btn btn-outline">소개</a>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item"><span class="stat-num">0</span><span class="stat-label">Total Works</span></div>
+    <div class="stat-item"><span class="stat-num">0</span><span class="stat-label">Dev Projects</span></div>
+    <div class="stat-item"><span class="stat-num">0</span><span class="stat-label">Design Works</span></div>
+    <div class="stat-item"><span class="stat-num">∞</span><span class="stat-label">Ideas</span></div>
+  </div>
+</div>
+
+<div class="cat-bar">
+  <button class="cat-btn active">전체</button>
+  <button class="cat-btn">웹/앱 개발</button>
+  <button class="cat-btn">UI/UX 디자인</button>
+  <button class="cat-btn">그래픽 디자인</button>
+  <button class="cat-btn">영상/모션</button>
+</div>
+
+<div class="section">
+  <div class="sec-label">Featured</div>
+  <h2 class="sec-title">주요 작업물</h2>
+
+  <div class="featured-grid">
+    <a href="/main/project-01" class="portfolio-card">
+      <div class="card-thumb">🖥️</div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-badge badge-dev">Dev</span>
+          <span class="card-badge badge-new">NEW</span>
+          <span class="card-date">2026.03</span>
+        </div>
+        <div class="card-title">프로젝트 제목이 여기 들어갑니다</div>
+        <p class="card-desc">작업물에 대한 간략한 설명이 들어갑니다. 어떤 기술을 사용했는지, 어떤 문제를 해결했는지 두세 줄로 소개합니다.</p>
+        <div class="card-footer-row">
+          <div class="card-tags">
+            <span class="tag-chip">React</span>
+            <span class="tag-chip">TypeScript</span>
+            <span class="tag-chip">Figma</span>
+          </div>
+          <span class="card-arrow">→</span>
+        </div>
       </div>
+    </a>
+
+    <div class="side-stack">
+      <a href="/main/project-02" class="portfolio-card card-sm">
+        <div class="card-thumb card-thumb-sm">🎨</div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-badge badge-design">Design</span>
+            <span class="card-date">2026.02</span>
+          </div>
+          <div class="card-title">디자인 작업 제목</div>
+          <p class="card-desc">UI/UX 디자인 작업 설명.</p>
+          <div class="card-footer-row">
+            <div class="card-tags"><span class="tag-chip">Figma</span></div>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/main/project-03" class="portfolio-card card-sm">
+        <div class="card-thumb card-thumb-sm" style="background:#F0EEFF;">🎬</div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-badge badge-motion">Motion</span>
+            <span class="card-date">2026.01</span>
+          </div>
+          <div class="card-title">모션 작업 제목</div>
+          <p class="card-desc">영상 또는 모션 그래픽 작업 설명.</p>
+          <div class="card-footer-row">
+            <div class="card-tags"><span class="tag-chip">After Effects</span></div>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </a>
     </div>
+  </div>
 
-    <div class="terminal-deco">
-      <div class="term-header">
-        <span class="dot dot-r"></span>
-        <span class="dot dot-y"></span>
-        <span class="dot dot-g"></span>
+  <div class="grid-3">
+    <a href="/main/project-04" class="portfolio-card card-md">
+      <div class="card-thumb card-thumb-md">📱</div>
+      <div class="card-body">
+        <div class="card-meta"><span class="card-badge badge-dev">Dev</span><span class="card-date">2025.12</span></div>
+        <div class="card-title">모바일 앱 프로젝트</div>
+        <p class="card-desc">앱 개발 작업 설명.</p>
+        <div class="card-footer-row">
+          <div class="card-tags"><span class="tag-chip">Swift</span></div>
+          <span class="card-arrow">→</span>
+        </div>
       </div>
-      <div class="term-body">
-        <span class="term-line"><span class="term-prompt">~/blog</span> <span class="term-cmd">git status</span></span>
-        <span class="term-line term-out">On branch main</span>
-        <span class="term-line term-out">Your branch is up to date.</span>
-        <span class="term-line"> </span>
-        <span class="term-line"><span class="term-prompt">~/blog</span> <span class="term-cmd">cat latest.md</span></span>
-        <span class="term-line term-out">---</span>
-        <span class="term-line term-out">title: "새 글 작성 중..."</span>
-        <span class="term-line term-out">date: 2026-03-25</span>
-        <span class="term-line term-out">---</span>
-        <span class="term-line"> </span>
-        <span class="term-line"><span class="term-ok">✓</span> <span class="term-out">draft saved</span> <span class="cursor"></span></span>
+    </a>
+    <a href="/main/project-05" class="portfolio-card card-md">
+      <div class="card-thumb card-thumb-md">🎯</div>
+      <div class="card-body">
+        <div class="card-meta"><span class="card-badge badge-design">Design</span><span class="card-date">2025.11</span></div>
+        <div class="card-title">브랜딩 작업</div>
+        <p class="card-desc">브랜드 아이덴티티 디자인 설명.</p>
+        <div class="card-footer-row">
+          <div class="card-tags"><span class="tag-chip">Illustrator</span></div>
+          <span class="card-arrow">→</span>
+        </div>
       </div>
-    </div>
-  </section>
+    </a>
+    <a href="/main/project-06" class="portfolio-card card-md">
+      <div class="card-thumb card-thumb-md">⚡</div>
+      <div class="card-body">
+        <div class="card-meta"><span class="card-badge badge-other">Other</span><span class="card-date">2025.10</span></div>
+        <div class="card-title">기타 프로젝트</div>
+        <p class="card-desc">그 밖의 다양한 작업들.</p>
+        <div class="card-footer-row">
+          <div class="card-tags"><span class="tag-chip">기타</span></div>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
 
-  <div class="divider"></div>
+<footer>
+  <div class="footer-logo">hyun<span>lab</span></div>
+  <p>© 2026 hyunlab. All rights reserved.</p>
+  <div class="footer-badge">hyunlab.xyz</div>
+</footer>
 
-  <section class="section">
-    <p class="section-label">// explore</p>
-    <h2 class="section-title">Navigate</h2>
-    <div class="cards">
-      <div class="card">
-        <span class="card-num">01 / POSTS</span>
-        <h3>Main Feed</h3>
-        <p>기술, 개발, 일상에 관한 글들. 생각이 코드가 되고 코드가 이야기가 되는 곳.</p>
-        <a href="/main" class="card-link">Read All</a>
-      </div>
-      <div class="card">
-        <span class="card-num">02 / REVIEW</span>
-        <h3>Reviews</h3>
-        <p>책, 제품, 서비스, 경험에 대한 솔직한 리뷰. 써보고 읽어보고 느낀 것들.</p>
-        <a href="/review" class="card-link">See Reviews</a>
-      </div>
-      <div class="card">
-        <span class="card-num">03 / INTRO</span>
-        <h3>About</h3>
-        <p>이 블로그를 만든 사람에 대하여. 무엇을 좋아하고 무엇을 만드는지.</p>
-        <a href="/intro" class="card-link">Learn More</a>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <section class="section">
-    <div class="stats">
-      <div class="stat">
-        <span class="stat-num">0</span>
-        <span class="stat-label">Posts</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">0</span>
-        <span class="stat-label">Reviews</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">∞</span>
-        <span class="stat-label">Ideas</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">1</span>
-        <span class="stat-label">Author</span>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <span>VOID.LOG &copy; 2026</span>
-    <span>Built in the dark.</span>
-  </footer>
-
+<script>
+  document.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
 </body>
 </html>
