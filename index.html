@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VOID.LOG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080c10;
+      --bg2: #0d1117;
+      --surface: #111820;
+      --border: #1e2d3d;
+      --accent: #00e5ff;
+      --accent2: #7b2fff;
+      --text: #c9d1d9;
+      --text-dim: #4a5568;
+      --glow: 0 0 20px rgba(0, 229, 255, 0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Mono', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Scan line */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      animation: scanline 6s linear infinite;
+      z-index: 100;
+      opacity: 0.5;
+    }
+
+    @keyframes scanline {
+      0% { top: 0; }
+      100% { top: 100vh; }
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(8, 12, 16, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--accent2); }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0; right: 100%;
+      height: 1px;
+      background: var(--accent);
+      transition: right 0.3s ease;
+    }
+
+    nav a:hover { color: var(--accent); }
+    nav a:hover::after { right: 0; }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 2rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero-inner {
+      max-width: 700px;
+    }
+
+    .hero-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+
+    .hero-tag::before {
+      content: '> ';
+      color: var(--accent2);
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+
+    h1 .line2 {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+      display: block;
+    }
+
+    h1 .accent { color: var(--accent); }
+
+    .hero-desc {
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: var(--text-dim);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s forwards;
+    }
+
+    .btn {
+      padding: 0.7rem 1.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      font-weight: 700;
+      border: 1px solid var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--accent);
+      box-shadow: var(--glow);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Terminal decoration */
+    .terminal-deco {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 340px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeIn 1s 1s forwards;
+    }
+
+    .term-header {
+      background: var(--bg2);
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #ff5f57; }
+    .dot-y { background: #febc2e; }
+    .dot-g { background: #28c840; }
+
+    .term-body {
+      padding: 1rem;
+      font-size: 0.72rem;
+      line-height: 1.9;
+    }
+
+    .term-line { display: block; }
+    .term-prompt { color: var(--accent2); }
+    .term-cmd { color: #fff; }
+    .term-out { color: var(--text-dim); }
+    .term-ok { color: var(--accent); }
+
+    .cursor {
+      display: inline-block;
+      width: 7px; height: 1em;
+      background: var(--accent);
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ─── SECTION GRID ─── */
+    .section {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: var(--accent2);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 3rem;
+      letter-spacing: -0.02em;
+    }
+
+    /* ─── CARDS ─── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .card {
+      background: var(--bg);
+      padding: 2rem;
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover { background: var(--surface); }
+    .card:hover::before { transform: scaleX(1); }
+
+    .card-num {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.1em;
+    }
+
+    .card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .card p {
+      font-size: 0.78rem;
+      line-height: 1.7;
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+    }
+
+    .card-link {
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: gap 0.2s;
+    }
+
+    .card-link:hover { gap: 0.8rem; }
+    .card-link::after { content: '→'; }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 0 2rem;
+    }
+
+    /* ─── STATS ─── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .stat {
+      background: var(--bg);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .terminal-deco { display: none; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="logo">VOID<span>.</span>LOG</a>
+    <ul>
+      <li><a href="/main">Posts</a></li>
+      <li><a href="/review">Review</a></li>
+      <li><a href="/intro">Intro</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-tag">Personal Blog / Digital Journal</p>
+      <h1>
+        WRITING
+        <span class="line2">FROM THE</span>
+        <span class="accent">VOID</span>
+      </h1>
+      <p class="hero-desc">
+        코드와 생각, 기술과 일상 사이 어딘가.<br>
+        기록하지 않으면 사라지는 것들을 붙잡는 공간.
+      </p>
+      <div class="hero-cta">
+        <a href="/main" class="btn btn-primary">Read Posts</a>
+        <a href="/intro" class="btn btn-ghost">About Me</a>
+      </div>
+    </div>
+
+    <div class="terminal-deco">
+      <div class="term-header">
+        <span class="dot dot-r"></span>
+        <span class="dot dot-y"></span>
+        <span class="dot dot-g"></span>
+      </div>
+      <div class="term-body">
+        <span class="term-line"><span class="term-prompt">~/blog</span> <span class="term-cmd">git status</span></span>
+        <span class="term-line term-out">On branch main</span>
+        <span class="term-line term-out">Your branch is up to date.</span>
+        <span class="term-line"> </span>
+        <span class="term-line"><span class="term-prompt">~/blog</span> <span class="term-cmd">cat latest.md</span></span>
+        <span class="term-line term-out">---</span>
+        <span class="term-line term-out">title: "새 글 작성 중..."</span>
+        <span class="term-line term-out">date: 2026-03-25</span>
+        <span class="term-line term-out">---</span>
+        <span class="term-line"> </span>
+        <span class="term-line"><span class="term-ok">✓</span> <span class="term-out">draft saved</span> <span class="cursor"></span></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section">
+    <p class="section-label">// explore</p>
+    <h2 class="section-title">Navigate</h2>
+    <div class="cards">
+      <div class="card">
+        <span class="card-num">01 / POSTS</span>
+        <h3>Main Feed</h3>
+        <p>기술, 개발, 일상에 관한 글들. 생각이 코드가 되고 코드가 이야기가 되는 곳.</p>
+        <a href="/main" class="card-link">Read All</a>
+      </div>
+      <div class="card">
+        <span class="card-num">02 / REVIEW</span>
+        <h3>Reviews</h3>
+        <p>책, 제품, 서비스, 경험에 대한 솔직한 리뷰. 써보고 읽어보고 느낀 것들.</p>
+        <a href="/review" class="card-link">See Reviews</a>
+      </div>
+      <div class="card">
+        <span class="card-num">03 / INTRO</span>
+        <h3>About</h3>
+        <p>이 블로그를 만든 사람에 대하여. 무엇을 좋아하고 무엇을 만드는지.</p>
+        <a href="/intro" class="card-link">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section">
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-num">0</span>
+        <span class="stat-label">Posts</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">0</span>
+        <span class="stat-label">Reviews</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">∞</span>
+        <span class="stat-label">Ideas</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">1</span>
+        <span class="stat-label">Author</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>VOID.LOG &copy; 2026</span>
+    <span>Built in the dark.</span>
+  </footer>
+
+</body>
+</html>
