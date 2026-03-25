@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>리뷰이벤트 - SBS아카데미 안산</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Black+Han+Sans&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --pink: #FF5C8A;
+    --pink-light: #FFE8EF;
+    --pink-mid: #FFB3C8;
+    --black: #1A1A1A;
+    --gray: #666;
+    --gray-light: #F5F5F5;
+    --white: #FFFFFF;
+  }
+  body {
+    background: #e8e8e8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+    gap: 20px;
+  }
+
+  /* A5 559×794 */
+  .card {
+    width: 559px;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+  }
+
+  /* ── 헤더 ── */
+  .card-header {
+    background: var(--pink);
+    padding: 26px 28px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-dots {
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+  }
+  .header-dots2 {
+    position: absolute;
+    bottom: -30px; right: 60px;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+  }
+  .header-eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .header-title {
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 48px;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+  .header-sub {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    margin-top: 8px;
+  }
+  .header-gift {
+    position: absolute;
+    right: 28px;
+    bottom: 18px;
+    font-size: 40px;
+    line-height: 1;
+  }
+
+  /* ── 조건 섹션 ── */
+  .conditions {
+    padding: 22px 28px 18px;
+    background: var(--pink-light);
+  }
+  .sec-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--pink);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sec-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--pink-mid);
+  }
+  .cond-row {
+    display: flex;
+    gap: 10px;
+  }
+  .cond-chip {
+    flex: 1;
+    background: var(--white);
+    border-radius: 10px;
+    padding: 14px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    border: 1.5px solid var(--pink-mid);
+  }
+  .cond-num {
+    background: var(--pink);
+    color: white;
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 14px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .cond-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--black);
+    line-height: 1.5;
+  }
+  .cond-text em {
+    font-style: normal;
+    color: var(--pink);
+    font-weight: 700;
+  }
+
+  /* ── 리뷰 섹션 ── */
+  .reviews-section {
+    padding: 20px 28px 16px;
+  }
+  .review-card {
+    background: var(--gray-light);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    position: relative;
+    border-left: 3px solid var(--pink);
+  }
+  .review-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .review-avatar {
+    width: 28px;
+    height: 28px;
+    background: var(--pink);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .review-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--black);
+  }
+  .review-stars {
+    color: #FF5C8A;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .review-date {
+    font-size: 10px;
+    color: var(--gray);
+    margin-left: auto;
+  }
+  .review-body {
+    font-size: 12.5px;
+    color: #333;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+  .review-body strong {
+    color: var(--pink);
+    font-weight: 700;
+  }
+  .quote-mark {
+    font-size: 28px;
+    color: var(--pink-mid);
+    font-family: Georgia, serif;
+    line-height: 0.7;
+    float: left;
+    margin-right: 4px;
+    margin-top: 4px;
+  }
+
+  /* ── QR 섹션 ── */
+  .qr-section {
+    padding: 12px 28px 12px;
+    background: var(--gray-light);
+  }
+  .qr-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .qr-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  .qr-label {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .qr-naver .qr-label  { background: #03C75A; color: white; }
+  .qr-kakao .qr-label  { background: #FEE500; color: #3C1E1E; }
+  .qr-google .qr-label { background: white; color: #333; border: 1px solid #ddd; }
+  .qr-box {
+    background: white;
+    padding: 5px;
+    border-radius: 8px;
+    width: 72%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid #eee;
+  }
+  .qr-box canvas, .qr-box img {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .qr-hint {
+    font-size: 9.5px;
+    color: var(--gray);
+    text-align: center;
+    font-weight: 500;
+  }
+
+  /* ── 푸터 ── */
+  .card-footer {
+    background: var(--black);
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-name {
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 13px;
+    color: white;
+    line-height: 1.35;
+  }
+  .footer-name span {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    display: block;
+  }
+  .footer-tag {
+    background: var(--pink);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+  }
+
+  /* ── 다운로드 버튼 ── */
+  .btn-wrap {
+    display: flex;
+    gap: 12px;
+  }
+  .dl-btn {
+    background: var(--pink);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity .2s;
+  }
+  .dl-btn:hover { opacity: .85; }
+</style>
+</head>
+<body>
+
+<div class="card" id="card">
+
+  <!-- 헤더 -->
+  <div class="card-header">
+    <div class="header-dots"></div>
+    <div class="header-dots2"></div>
+    <div class="header-eyebrow">SBS아카데미 안산 · Review Event</div>
+    <div class="header-title">리뷰이벤트</div>
+    <div class="header-sub">소중한 후기를 남겨주시면 혜택을 드려요!</div>
+    <div class="header-gift">🎁</div>
+  </div>
+
+  <!-- 조건 -->
+  <div class="conditions">
+    <div class="sec-label">참여 조건</div>
+    <div class="cond-row">
+      <div class="cond-chip">
+        <div class="cond-num">1</div>
+        <div class="cond-text">담당 <em>멘토 이름</em>을<br>꼭 기재해주세요</div>
+      </div>
+      <div class="cond-chip">
+        <div class="cond-num">2</div>
+        <div class="cond-text"><em>3줄 이상</em><br>작성해주세요</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 리뷰 예시 -->
+  <div class="reviews-section">
+    <div class="sec-label">실제 수강생 후기</div>
+
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar">ㄱ</div>
+        <div class="review-name">ㄱ건우</div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-date">2026.03.23</div>
+      </div>
+      <div class="review-body">
+        <span class="quote-mark">"</span><strong>김현진 멘토님</strong>께 교육받았는데 제가 원하는 수업과정을 잘 소개시켜주시고 수업과정에 대해 꼼꼼하고 자세하게 설명 너무 잘 해주셨어요!! 감사합니다~
+      </div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar">또</div>
+        <div class="review-name">또리</div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-date">2026.03.23</div>
+      </div>
+      <div class="review-body">
+        <span class="quote-mark">"</span>처음 도전해보는 진로라 막막했는데 <strong>김현진 멘토님</strong>께서 귀에 쏙쏙 들어오게 잘 설명해주셔서 여기로 선택하게 되었습니다. 수업 잘 듣고 원하는 곳에 취업해보겠습니다!
+      </div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar">조</div>
+        <div class="review-name">조하나</div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-date">2026.03.18</div>
+      </div>
+      <div class="review-body">
+        <span class="quote-mark">"</span>상담해주신 <strong>김현진 멘토님</strong> 너무 친절하세요. 질문도 많았는데 다 꼼꼼하게 상담해주시고 궁금증 해결해주셨어요. 감사합니다. 이제 수업 열심히 들을게요!
+      </div>
+    </div>
+
+  </div>
+
+  <!-- QR -->
+  <div class="qr-section">
+    <div class="sec-label">리뷰 남기기 📱</div>
+    <div class="qr-grid">
+      <div class="qr-item qr-naver">
+        <div class="qr-label">네이버</div>
+        <div class="qr-box" id="qr-naver"></div>
+        <div class="qr-hint">네이버 지도</div>
+      </div>
+      <div class="qr-item qr-kakao">
+        <div class="qr-label">카카오지도</div>
+        <div class="qr-box" id="qr-kakao"></div>
+        <div class="qr-hint">카카오맵</div>
+      </div>
+      <div class="qr-item qr-google">
+        <div class="qr-label">구글</div>
+        <div class="qr-box" id="qr-google"></div>
+        <div class="qr-hint">구글 지도</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 푸터 -->
+  <div class="card-footer">
+    <div class="footer-name">
+      SBS아카데미 컴퓨터아트학원
+      <span>안산점</span>
+    </div>
+    <div class="footer-tag">안산 No.1 컴퓨터학원</div>
+  </div>
+
+</div>
+
+<div class="btn-wrap">
+  <button class="dl-btn" onclick="downloadCard()">📥 PNG 다운로드</button>
+</div>
+
+<script>
+  const urls = {
+    naver:  'https://m.site.naver.com/1A72n',
+    kakao:  'https://m.site.naver.com/1A73d',
+    google: 'https://m.site.naver.com/1A73R'
+  };
+
+  window.addEventListener('load', () => {
+    ['naver','kakao','google'].forEach(key => {
+      const el = document.getElementById('qr-' + key);
+      const sz = el.offsetWidth - 10;
+      new QRCode(el, { text: urls[key], width: sz, height: sz, correctLevel: QRCode.CorrectLevel.M });
+    });
+  });
+
+  async function downloadCard() {
+    const card = document.getElementById('card');
+    const canvas = await html2canvas(card, { scale: 3, useCORS: true, backgroundColor: '#FFFFFF' });
+    const a = document.createElement('a');
+    a.download = 'sbs-review-event-pink.png';
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+  }
+</script>
+</body>
+</html>
