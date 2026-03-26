@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>hyunlab — Portfolio</title>
+  <title>hyunlab</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
@@ -19,191 +19,142 @@
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body {
-      background: #EFEFEF;
-      font-family: 'Noto Sans KR', sans-serif;
-      color: var(--black);
-    }
+    body { background: #EFEFEF; font-family: 'Noto Sans KR', sans-serif; color: var(--black); }
 
     /* ── NAV ── */
     nav {
-      background: var(--white);
-      border-bottom: 1.5px solid var(--gray-mid);
+      background: var(--white); border-bottom: 1.5px solid var(--gray-mid);
       position: sticky; top: 0; z-index: 100;
       padding: 0 40px; height: 56px;
       display: flex; align-items: center; justify-content: space-between;
     }
-    .logo {
-      font-family: 'Black Han Sans', sans-serif;
-      font-size: 20px; color: var(--pink); text-decoration: none;
-    }
+    .logo { font-family: 'Black Han Sans', sans-serif; font-size: 20px; color: var(--pink); text-decoration: none; }
     .logo span { color: var(--black); }
     nav ul { list-style: none; display: flex; gap: 2rem; }
-    nav a {
-      font-size: 13px; font-weight: 500; color: var(--gray);
-      text-decoration: none; transition: color 0.2s;
-    }
-    nav a:hover, nav a.active { color: var(--pink); }
+    nav a { font-size: 13px; font-weight: 500; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+    nav a:hover { color: var(--pink); }
 
     /* ── HERO ── */
     .hero {
       background: var(--pink);
-      padding: 64px 40px 56px;
+      padding: 52px 40px 48px;
       position: relative; overflow: hidden;
+      display: flex; align-items: center; gap: 36px;
     }
-    .hero-dot1 {
-      position: absolute; top: -40px; right: -40px;
+    .hero::before {
+      content: ''; position: absolute; top: -40px; right: -40px;
       width: 220px; height: 220px; border-radius: 50%;
       background: rgba(255,255,255,0.1);
     }
-    .hero-dot2 {
-      position: absolute; bottom: -50px; right: 120px;
+    .hero::after {
+      content: ''; position: absolute; bottom: -50px; right: 120px;
       width: 140px; height: 140px; border-radius: 50%;
       background: rgba(255,255,255,0.07);
     }
+    .hero-avatar {
+      width: 96px; height: 96px; border-radius: 50%;
+      border: 3px solid rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 42px; flex-shrink: 0; position: relative; z-index: 1;
+    }
+    .hero-text { position: relative; z-index: 1; }
     .hero-eyebrow {
       font-size: 11px; font-weight: 700; letter-spacing: 3px;
-      color: rgba(255,255,255,0.7); text-transform: uppercase; margin-bottom: 10px;
+      color: rgba(255,255,255,0.65); text-transform: uppercase; margin-bottom: 8px;
     }
-    .hero h1 {
+    .hero-name {
       font-family: 'Black Han Sans', sans-serif;
-      font-size: clamp(52px, 9vw, 88px);
-      color: var(--white); line-height: 1; letter-spacing: -2px;
-      margin-bottom: 16px; position: relative; z-index: 1;
+      font-size: clamp(36px, 6vw, 60px);
+      color: var(--white); line-height: 1; letter-spacing: -1.5px; margin-bottom: 12px;
     }
     .hero-desc {
       font-size: 15px; font-weight: 500;
-      color: rgba(255,255,255,0.85); max-width: 480px;
-      line-height: 1.7; position: relative; z-index: 1;
+      color: rgba(255,255,255,0.85); line-height: 1.65; margin-bottom: 22px;
+      max-width: 420px;
     }
-    .hero-cta {
-      margin-top: 30px; display: flex; gap: 12px;
-      position: relative; z-index: 1;
+    .hero-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .hero-link {
+      padding: 8px 20px; border-radius: 24px;
+      font-size: 13px; font-weight: 700; text-decoration: none;
+      transition: all 0.2s; display: inline-block;
     }
-    .btn {
-      padding: 10px 26px; font-family: 'Noto Sans KR', sans-serif;
-      font-size: 13px; font-weight: 700; border-radius: 24px;
-      text-decoration: none; transition: all 0.2s; cursor: pointer; border: none;
-      display: inline-block;
-    }
-    .btn-white { background: var(--white); color: var(--pink); }
-    .btn-white:hover { background: var(--pink-light); }
-    .btn-outline {
+    .hero-link.white { background: var(--white); color: var(--pink); }
+    .hero-link.white:hover { background: var(--pink-light); }
+    .hero-link.outline {
       background: transparent; color: var(--white);
       border: 1.5px solid rgba(255,255,255,0.5);
     }
-    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
-
-    /* ── STATS ── */
-    .stats-bar { background: var(--black); padding: 32px 40px; }
-    .stats-inner {
-      max-width: 1100px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(4, 1fr);
-    }
-    .stat-item {
-      text-align: center; padding: 0 20px;
-      border-right: 1px solid #2a2a2a;
-    }
-    .stat-item:last-child { border-right: none; }
-    .stat-num {
-      font-family: 'Black Han Sans', sans-serif;
-      font-size: 40px; color: var(--pink); line-height: 1;
-      display: block; margin-bottom: 6px;
-    }
-    .stat-label { font-size: 11px; font-weight: 500; color: #666; }
-
-    /* ── CAT BAR ── */
-    .cat-bar {
-      background: var(--white);
-      border-bottom: 1.5px solid var(--gray-mid);
-      padding: 0 40px; display: flex; overflow-x: auto;
-    }
-    .cat-btn {
-      padding: 14px 20px; font-size: 13px; font-weight: 500;
-      color: var(--gray); border: none; background: transparent;
-      cursor: pointer; font-family: 'Noto Sans KR', sans-serif;
-      border-bottom: 2.5px solid transparent; transition: all 0.2s;
-      white-space: nowrap;
-    }
-    .cat-btn:hover { color: var(--pink); }
-    .cat-btn.active { color: var(--pink); border-bottom-color: var(--pink); font-weight: 700; }
+    .hero-link.outline:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
 
     /* ── SECTION ── */
-    .section { max-width: 1100px; margin: 0 auto; padding: 48px 40px; }
+    .section { max-width: 1100px; margin: 0 auto; padding: 44px 40px; }
     .sec-label {
       font-size: 11px; font-weight: 700; letter-spacing: 3px;
       color: var(--pink); text-transform: uppercase;
-      margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
+      margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
     }
-    .sec-label::after {
-      content: ''; flex: 1; height: 1px; background: var(--pink-mid); max-width: 60px;
-    }
+    .sec-label::after { content: ''; flex: 1; height: 1px; background: var(--pink-mid); max-width: 60px; }
     .sec-title {
       font-family: 'Black Han Sans', sans-serif;
-      font-size: clamp(26px, 4vw, 38px); color: var(--black);
-      letter-spacing: -1px; margin-bottom: 28px;
+      font-size: clamp(22px, 3.5vw, 32px); color: var(--black);
+      letter-spacing: -1px; margin-bottom: 22px;
     }
 
-    /* ── CARDS ── */
-    .featured-grid {
-      display: grid; grid-template-columns: 1.6fr 1fr;
-      gap: 16px; margin-bottom: 16px;
+    /* ── SKILL CHIPS ── */
+    .skill-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill-chip {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--white); border: 1.5px solid var(--gray-mid);
+      padding: 10px 18px; border-radius: 12px;
+      font-size: 13px; font-weight: 700; color: var(--black);
+      transition: all 0.2s;
     }
-    .portfolio-card {
-      background: var(--white); border-radius: 16px;
-      overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,0.07);
-      transition: transform 0.25s, box-shadow 0.25s;
+    .skill-chip:hover { border-color: var(--pink); color: var(--pink); }
+    .skill-chip span { font-size: 18px; }
+
+    /* ── DIVIDER ── */
+    .divider { height: 1px; background: var(--gray-mid); }
+
+    /* ── WORKS LIST ── */
+    .works-list { display: flex; flex-direction: column; gap: 1px; background: var(--gray-mid); border-radius: 16px; overflow: hidden; }
+    .work-row {
+      background: var(--white); padding: 20px 24px;
+      display: grid; grid-template-columns: auto 1fr auto;
+      gap: 20px; align-items: center;
       text-decoration: none; color: inherit;
-      display: flex; flex-direction: column; position: relative;
+      transition: background 0.2s;
     }
-    .portfolio-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 32px rgba(255,92,138,0.15);
+    .work-row:hover { background: var(--pink-light); }
+    .work-num {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 22px; color: var(--pink-mid); line-height: 1; width: 36px;
     }
-    .card-thumb {
-      width: 100%; aspect-ratio: 16/9;
-      background: var(--pink-light);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 52px; position: relative; overflow: hidden;
+    .work-info {}
+    .work-meta-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+    .work-badge {
+      font-size: 10px; font-weight: 700; padding: 2px 9px; border-radius: 20px;
     }
-    .card-thumb-sm { aspect-ratio: 4/3; font-size: 36px; }
-    .card-thumb-md { aspect-ratio: 3/2; font-size: 40px; }
-    .card-body {
-      padding: 20px 22px 22px; flex: 1; display: flex; flex-direction: column;
-    }
-    .card-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
-    .card-badge {
-      font-size: 10px; font-weight: 700; padding: 3px 10px;
-      border-radius: 20px; letter-spacing: 0.3px;
-    }
-    .badge-dev    { background: #E8F4FF; color: #1a6bb5; }
     .badge-design { background: var(--pink-light); color: var(--pink); }
+    .badge-dev    { background: #E8F4FF; color: #1a6bb5; }
     .badge-motion { background: #F0EEFF; color: #6b3fb5; }
     .badge-other  { background: var(--gray-light); color: var(--gray); }
     .badge-new    { background: var(--pink); color: white; }
-    .card-date { font-size: 11px; color: var(--gray); margin-left: auto; }
-    .card-title {
-      font-family: 'Black Han Sans', sans-serif;
-      font-size: 20px; color: var(--black); letter-spacing: -0.5px;
-      margin-bottom: 8px; line-height: 1.2;
-    }
-    .card-sm .card-title { font-size: 16px; }
-    .card-md .card-title { font-size: 18px; }
-    .card-desc { font-size: 13px; color: var(--gray); line-height: 1.65; flex: 1; }
-    .card-footer-row {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--gray-light);
-    }
-    .card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-    .tag-chip {
-      font-size: 10px; font-weight: 500; padding: 3px 8px;
-      background: var(--gray-light); color: var(--gray); border-radius: 4px;
-    }
-    .card-arrow { font-size: 18px; color: var(--pink); transition: transform 0.2s; }
-    .portfolio-card:hover .card-arrow { transform: translateX(4px); }
+    .work-date    { font-size: 11px; color: var(--gray); }
+    .work-title   { font-family: 'Black Han Sans', sans-serif; font-size: 16px; color: var(--black); letter-spacing: -0.3px; margin-bottom: 3px; }
+    .work-desc    { font-size: 12px; color: var(--gray); }
+    .work-tags    { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 6px; }
+    .tag-chip     { font-size: 10px; font-weight: 500; padding: 2px 7px; background: var(--gray-light); color: var(--gray); border-radius: 4px; }
+    .work-arrow   { font-size: 18px; color: var(--pink-mid); transition: all 0.2s; }
+    .work-row:hover .work-arrow { color: var(--pink); transform: translateX(4px); }
 
-    .side-stack { display: flex; flex-direction: column; gap: 16px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .works-more {
+      display: block; text-align: center; padding: 16px;
+      background: var(--white); color: var(--pink);
+      font-size: 13px; font-weight: 700; text-decoration: none;
+      border-top: 1px solid var(--gray-light); transition: background 0.2s;
+    }
+    .works-more:hover { background: var(--pink-light); }
 
     /* ── FOOTER ── */
     footer {
@@ -217,12 +168,12 @@
 
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
-      .hero { padding: 40px 20px 36px; }
+      .hero { flex-direction: column; align-items: flex-start; padding: 40px 20px 36px; gap: 20px; }
+      .hero-avatar { width: 72px; height: 72px; font-size: 32px; }
       .section { padding: 36px 20px; }
-      .featured-grid, .grid-3 { grid-template-columns: 1fr; }
-      .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-      .stat-item { border-right: none; }
-      footer { flex-direction: column; gap: 12px; text-align: center; }
+      .work-row { grid-template-columns: auto 1fr; }
+      .work-arrow { display: none; }
+      footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px 20px; }
     }
   </style>
 </head>
@@ -237,73 +188,72 @@
   </ul>
 </nav>
 
+<!-- HERO -->
 <div class="hero">
-  <div class="hero-dot1"></div>
-  <div class="hero-dot2"></div>
-  <div class="hero-eyebrow">hyunlab · Portfolio</div>
-  <h1>WORKS &amp;<br>PROJECTS</h1>
-  <p class="hero-desc">디자인과 개발, 그 사이에서 만들어지는 것들을 모아둔 공간입니다.</p>
-  <div class="hero-cta">
-    <a href="/main" class="btn btn-white">작업물 보기</a>
-    <a href="/intro" class="btn btn-outline">소개</a>
+  <div class="hero-avatar">👤</div>
+  <div class="hero-text">
+    <div class="hero-eyebrow">hyunlab · Portfolio</div>
+    <div class="hero-name">hyunlab</div>
+    <p class="hero-desc">상담자료·콘텐츠를 만드는 사람</p>
+    <div class="hero-links">
+      <a href="/main" class="hero-link white">작업물 보기</a>
+      <a href="/intro" class="hero-link outline">소개</a>
+    </div>
   </div>
 </div>
 
-<div class="stats-bar">
-  <div class="stats-inner">
-    <div class="stat-item"><span class="stat-num">0</span><span class="stat-label">Total Works</span></div>
-    <div class="stat-item"><span class="stat-num">0</span><span class="stat-label">Dev Projects</span></div>
-    <div class="stat-item"><span class="stat-num">0</span><span class="stat-label">Design Works</span></div>
-    <div class="stat-item"><span class="stat-num">∞</span><span class="stat-label">Ideas</span></div>
-  </div>
-</div>
-
-<div class="cat-bar">
-  <button class="cat-btn active">전체</button>
-  <button class="cat-btn">상담자료</button>
-  <button class="cat-btn">개인자료</button>
-  <button class="cat-btn">자기계발</button>
-</div>
-
+<!-- SKILLS -->
 <div class="section">
-  <div class="sec-label">Featured</div>
-  <h2 class="sec-title">주요 작업물</h2>
+  <div class="sec-label">Skills</div>
+  <h2 class="sec-title">사용하는 것들</h2>
+  <div class="skill-chips">
+    <div class="skill-chip"><span>🖥️</span> HTML / CSS</div>
+    <div class="skill-chip"><span>🎨</span> Figma</div>
+    <div class="skill-chip"><span>🎬</span> After Effects</div>
+    <div class="skill-chip"><span>🖼️</span> Photoshop</div>
+    <div class="skill-chip"><span>✏️</span> Illustrator</div>
+    <div class="skill-chip"><span>🤖</span> 클로드</div>
+  </div>
+</div>
 
-  <a href="/main/01" class="portfolio-card">
-      <div class="card-thumb">🎁</div>
-      <div class="card-body">
-        <div class="card-meta">
-          <span class="card-badge badge-design">Design</span>
-          <span class="card-badge badge-new">NEW</span>
-          <span class="card-date">2026.03</span>
+<div class="divider"></div>
+
+<!-- RECENT WORKS -->
+<div class="section">
+  <div class="sec-label">Recent Works</div>
+  <h2 class="sec-title">최근 작업물</h2>
+
+  <div class="works-list">
+
+    <a href="/main/01" class="work-row">
+      <div class="work-num">01</div>
+      <div class="work-info">
+        <div class="work-meta-row">
+          <span class="work-badge badge-design">Design</span>
+          <span class="work-badge badge-new">NEW</span>
+          <span class="work-date">2026.03</span>
         </div>
-        <div class="card-title">리뷰이벤트 카드 — SBS아카데미 안산</div>
-        <p class="card-desc">수강생 후기 이벤트용 홍보 카드. 참여 조건 안내, 실제 후기 예시, 네이버·카카오·구글 지도 QR코드를 담은 A5 인쇄용 디자인.</p>
-        <div class="card-footer-row">
-          <div class="card-tags">
-            <span class="tag-chip">HTML/CSS</span>
-            <span class="tag-chip">QR코드</span>
-            <span class="tag-chip">인쇄물</span>
-          </div>
-          <span class="card-arrow">→</span>
+        <div class="work-title">리뷰이벤트 카드 — SBS아카데미 안산</div>
+        <p class="work-desc">수강생 후기 이벤트용 홍보 카드. A5 인쇄용 디자인.</p>
+        <div class="work-tags">
+          <span class="tag-chip">HTML/CSS</span>
+          <span class="tag-chip">QR코드</span>
+          <span class="tag-chip">인쇄물</span>
         </div>
       </div>
+      <span class="work-arrow">→</span>
     </a>
+
+    <a href="/main" class="works-more">전체 작업물 보기 →</a>
+  </div>
 </div>
 
+<!-- FOOTER -->
 <footer>
   <div class="footer-logo">hyun<span>lab</span></div>
   <p>© 2026 hyunlab. All rights reserved.</p>
   <div class="footer-badge">hyunlab.xyz</div>
 </footer>
 
-<script>
-  document.querySelectorAll('.cat-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
-  });
-</script>
 </body>
 </html>
