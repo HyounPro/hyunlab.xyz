@@ -72,3 +72,24 @@
 </div>
 </body>
 </html>
+<script>
+// 영문 slug → 한글 매핑
+const DEPT_KO = {
+  editorial: '시각/편집디자인',
+  drawing:   '드로잉/아트웍',
+  motion:    '2D/3D 모션그래픽',
+  cg:        'CG/마야',
+  interior:  '인테리어/건축',
+  machine:   '기계/설계',
+  it:        'IT/웹/프로그래밍',
+  youtube:   '유튜브',
+  ai:        'AI',
+  oa:        '자격증/OA',
+};
+
+// dept-tag 텍스트를 한글로 변환
+document.querySelectorAll('.dept-tag').forEach(el => {
+  const slug = el.textContent.trim().toLowerCase();
+  if (DEPT_KO[slug]) el.textContent = DEPT_KO[slug];
+});
+</script>
