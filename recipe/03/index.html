@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>까르보나라 · hyunlab 레시피</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink:       #FF5C8A;
+      --pink-light: #FFE8EF;
+      --pink-mid:   #FFB3C8;
+      --black:      #1A1A1A;
+      --gray:       #666;
+      --gray-light: #F5F5F5;
+      --gray-mid:   #E8E8E8;
+      --white:      #FFFFFF;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: #EFEFEF; font-family: 'Noto Sans KR', sans-serif; color: var(--black); }
+
+    /* NAV */
+    nav {
+      background: var(--white); border-bottom: 1.5px solid var(--gray-mid);
+      position: sticky; top: 0; z-index: 100;
+      padding: 0 40px; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { font-family: 'Black Han Sans', sans-serif; font-size: 20px; color: var(--pink); text-decoration: none; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--gray); }
+    .breadcrumb a { color: var(--gray); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--pink); }
+    .breadcrumb span { color: var(--gray-mid); }
+
+    /* HERO */
+    .hero {
+      background: var(--pink); padding: 40px 40px 36px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -60px; right: -40px;
+      width: 240px; height: 240px; border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 720px; }
+    .hero-num {
+      font-size: 11px; font-weight: 700; letter-spacing: 3px;
+      color: rgba(255,255,255,0.65); margin-bottom: 8px;
+    }
+    .hero-title {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: clamp(32px, 5vw, 52px);
+      color: var(--white); line-height: 1; margin-bottom: 14px;
+    }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .hero-tag {
+      font-size: 12px; font-weight: 700; padding: 4px 12px;
+      border-radius: 20px; background: rgba(255,255,255,0.2);
+      color: var(--white); border: 1px solid rgba(255,255,255,0.3);
+    }
+    .hero-meta { display: flex; gap: 20px; flex-wrap: wrap; }
+    .hero-meta-item { display: flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.85); font-size: 14px; font-weight: 500; }
+
+    /* MAIN LAYOUT */
+    .layout { max-width: 760px; margin: 0 auto; padding: 32px 40px; display: flex; flex-direction: column; gap: 20px; }
+
+    /* CARD */
+    .card {
+      background: var(--white); border-radius: 14px;
+      border: 1.5px solid var(--gray-mid); padding: 28px;
+    }
+    .section-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 2.5px;
+      color: var(--pink); text-transform: uppercase; margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .section-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--gray-light);
+    }
+
+    /* THUMBNAIL */
+    .thumb-wrap {
+      width: 100%; aspect-ratio: 16/9; border-radius: 10px;
+      background: var(--pink-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 80px; overflow: hidden; margin-bottom: 4px;
+    }
+    .thumb-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .thumb-hint { font-size: 12px; color: var(--gray); text-align: center; padding-top: 8px; }
+
+    /* INGREDIENTS */
+    .ingredient-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+    .ingredient-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 14px; border-radius: 8px;
+      background: var(--gray-light); border: 1px solid var(--gray-mid);
+      font-size: 13px;
+    }
+    .ingredient-name { font-weight: 500; }
+    .ingredient-amount { color: var(--pink); font-weight: 700; font-size: 12px; }
+    .ingredient-section-title {
+      font-size: 12px; font-weight: 700; color: var(--gray);
+      margin: 16px 0 8px; letter-spacing: 1px;
+    }
+    .ingredient-section-title:first-child { margin-top: 0; }
+
+    /* STEPS */
+    .step-list { display: flex; flex-direction: column; gap: 16px; }
+    .step-item { display: flex; gap: 16px; align-items: flex-start; }
+    .step-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--pink); color: var(--white);
+      font-family: 'Black Han Sans', sans-serif; font-size: 14px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .step-text { font-size: 14px; line-height: 1.75; color: var(--black); padding-top: 5px; }
+    .step-tip {
+      display: inline-block; margin-top: 6px;
+      font-size: 12px; color: var(--pink); font-weight: 600;
+      background: var(--pink-light); padding: 4px 10px; border-radius: 6px;
+    }
+
+    /* REVIEWS */
+    .review-form {
+      background: var(--gray-light); border-radius: 10px;
+      padding: 20px; margin-bottom: 24px; border: 1.5px solid var(--gray-mid);
+    }
+    .review-form-title {
+      font-weight: 700; font-size: 14px; margin-bottom: 14px;
+      color: var(--black);
+    }
+    .form-row { display: flex; gap: 10px; margin-bottom: 10px; }
+    .form-input {
+      flex: 1; padding: 10px 14px;
+      border: 1.5px solid var(--gray-mid); border-radius: 8px;
+      font-size: 13px; font-family: 'Noto Sans KR', sans-serif;
+      background: var(--white); outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus { border-color: var(--pink); }
+    textarea.form-input { resize: vertical; min-height: 80px; }
+    .photo-label {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 16px; border: 1.5px dashed var(--gray-mid);
+      border-radius: 8px; cursor: pointer; font-size: 13px; color: var(--gray);
+      background: var(--white); transition: border-color 0.2s;
+    }
+    .photo-label:hover { border-color: var(--pink); color: var(--pink); }
+    .photo-input { display: none; }
+    .photo-preview { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .photo-thumb {
+      width: 72px; height: 72px; border-radius: 8px;
+      object-fit: cover; border: 1.5px solid var(--gray-mid);
+    }
+    .rating-wrap { display: flex; gap: 4px; margin-bottom: 10px; }
+    .star {
+      font-size: 24px; cursor: pointer;
+      color: #ddd; transition: color 0.15s;
+      user-select: none;
+    }
+    .star.on { color: #FFB800; }
+    .submit-btn {
+      width: 100%; padding: 12px;
+      background: var(--pink); color: var(--white);
+      border: none; border-radius: 8px; cursor: pointer;
+      font-size: 14px; font-weight: 700; font-family: 'Noto Sans KR', sans-serif;
+      transition: opacity 0.2s;
+    }
+    .submit-btn:hover { opacity: 0.85; }
+
+    /* REVIEW LIST */
+    .review-list { display: flex; flex-direction: column; gap: 14px; }
+    .review-item {
+      padding: 16px; border-radius: 10px;
+      border: 1.5px solid var(--gray-mid); background: var(--gray-light);
+    }
+    .review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .review-name { font-weight: 700; font-size: 14px; }
+    .review-date { font-size: 11px; color: var(--gray); }
+    .review-stars { color: #FFB800; font-size: 14px; margin-bottom: 6px; }
+    .review-text { font-size: 13px; line-height: 1.65; color: var(--black); }
+    .review-photos { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+    .review-photo {
+      width: 80px; height: 80px; border-radius: 8px;
+      object-fit: cover; border: 1.5px solid var(--gray-mid); cursor: pointer;
+    }
+    .no-review { text-align: center; padding: 30px; color: var(--gray); font-size: 13px; }
+
+    /* IMAGE MODAL */
+    .modal {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.8); z-index: 999;
+      align-items: center; justify-content: center;
+    }
+    .modal.open { display: flex; }
+    .modal img { max-width: 90vw; max-height: 90vh; border-radius: 10px; }
+    .modal-close {
+      position: absolute; top: 20px; right: 24px;
+      font-size: 32px; color: white; cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      .layout { padding: 20px; }
+      .hero { padding: 28px 20px; }
+      .card { padding: 20px; }
+      .form-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="/">hyunlab</a>
+  <div class="breadcrumb">
+    <a href="/recipe">레시피</a>
+    <span>/</span>
+    <span>까르보나라</span>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-num">RECIPE · 03</div>
+    <div class="hero-title">🍝 까르보나라</div>
+    <div class="hero-tags">
+      <span class="hero-tag">양식</span>
+      <span class="hero-tag">면</span>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">⏱ 25분</div>
+      <div class="hero-meta-item">👥 2인분</div>
+      <div class="hero-meta-item">🔥 난이도 하</div>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- 사진 -->
+  <div class="card">
+    <div class="section-label">사진</div>
+    <div class="thumb-wrap">🍝</div>
+    <div class="thumb-hint">요리 사진을 추가하면 더 좋아요</div>
+  </div>
+
+  <!-- 재료 -->
+  <div class="card">
+    <div class="section-label">재료</div>
+
+    <div class="ingredient-section-title">메인 재료</div>
+    <div class="ingredient-grid">
+      <div class="ingredient-item"><span class="ingredient-name">스파게티 면</span><span class="ingredient-amount">160g</span></div>
+      <div class="ingredient-item"><span class="ingredient-name">관체알레(판체타)</span><span class="ingredient-amount">80g</span></div>
+      <div class="ingredient-item"><span class="ingredient-name">계란 노른자</span><span class="ingredient-amount">3개</span></div>
+      <div class="ingredient-item"><span class="ingredient-name">계란 전란</span><span class="ingredient-amount">1개</span></div>
+      <div class="ingredient-item"><span class="ingredient-name">페코리노 치즈</span><span class="ingredient-amount">50g</span></div>
+    </div>
+
+    <div class="ingredient-section-title">기타</div>
+    <div class="ingredient-grid">
+      <div class="ingredient-item"><span class="ingredient-name">소금</span><span class="ingredient-amount">약간</span></div>
+      <div class="ingredient-item"><span class="ingredient-name">후추</span><span class="ingredient-amount">넉넉히</span></div>
+      <div class="ingredient-item"><span class="ingredient-name">면수</span><span class="ingredient-amount">100ml</span></div>
+    </div>
+  </div>
+
+  <!-- 조리순서 -->
+  <div class="card">
+    <div class="section-label">조리순서</div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          볼에 계란 노른자 3개 + 전란 1개를 풀고, 강판에 간 페코리노 치즈와 후추를 넉넉히 넣어 소스를 만든다.
+          <div class="step-tip">💡 파마산 치즈로 대체 가능해요</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          끓는 물에 소금을 넣고 스파게티를 알덴테보다 1분 짧게 삶는다. 면수는 반드시 따로 보관한다.
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          팬에 관체알레(판체타)를 기름 없이 중불로 바삭하게 굽는다. 불을 끄고 잠시 식힌다.
+          <div class="step-tip">🔥 불을 끄는 것이 핵심! 계란이 익으면 안 돼요</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-text">
+          팬의 온도가 내려가면 삶은 면을 넣고, 계란 소스를 붓는다. 면수를 조금씩 추가하며 크리미하게 만든다.
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-text">
+          그릇에 담고 후추와 치즈를 추가로 뿌리면 완성!
+          <div class="step-tip">🍽 잔열로 소스가 계속 익으니 빠르게 드세요</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 요리 후기 -->
+  <div class="card">
+    <div class="section-label">요리 후기</div>
+
+    <div class="review-form">
+      <div class="review-form-title">후기 남기기</div>
+      <div class="rating-wrap" id="stars">
+        <span class="star" data-v="1">★</span>
+        <span class="star" data-v="2">★</span>
+        <span class="star" data-v="3">★</span>
+        <span class="star" data-v="4">★</span>
+        <span class="star" data-v="5">★</span>
+      </div>
+      <div class="form-row">
+        <input class="form-input" id="reviewName" type="text" placeholder="이름 (예: 현진)">
+      </div>
+      <div class="form-row">
+        <textarea class="form-input" id="reviewText" placeholder="맛은 어땠나요? 수정한 점이 있다면 적어주세요 😊"></textarea>
+      </div>
+      <label class="photo-label">
+        📷 사진 첨부 (선택)
+        <input class="photo-input" type="file" id="photoInput" accept="image/*" multiple>
+      </label>
+      <div class="photo-preview" id="photoPreview"></div>
+      <br>
+      <button class="submit-btn" onclick="submitReview()">후기 등록하기</button>
+    </div>
+
+    <div class="review-list" id="reviewList">
+      <div class="no-review" id="noReview">아직 후기가 없어요. 첫 후기를 남겨보세요! 🍴</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Image Modal -->
+<div class="modal" id="imgModal" onclick="closeModal()">
+  <span class="modal-close">✕</span>
+  <img id="modalImg" src="" alt="">
+</div>
+
+<script>
+  // ── STARS ──
+  let rating = 0;
+  const stars = document.querySelectorAll('.star');
+  stars.forEach(s => {
+    s.addEventListener('mouseenter', () => {
+      stars.forEach(x => x.classList.toggle('on', x.dataset.v <= s.dataset.v));
+    });
+    s.addEventListener('click', () => { rating = parseInt(s.dataset.v); });
+  });
+  document.getElementById('stars').addEventListener('mouseleave', () => {
+    stars.forEach(x => x.classList.toggle('on', x.dataset.v <= rating));
+  });
+
+  // ── PHOTO PREVIEW ──
+  let photoFiles = [];
+  document.getElementById('photoInput').addEventListener('change', function() {
+    photoFiles = Array.from(this.files);
+    const preview = document.getElementById('photoPreview');
+    preview.innerHTML = '';
+    photoFiles.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.className = 'photo-thumb';
+        preview.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+
+  // ── REVIEWS (localStorage) ──
+  const STORE_KEY = 'reviews_recipe_03';
+  let reviews = JSON.parse(localStorage.getItem(STORE_KEY) || '[]');
+
+  function renderReviews() {
+    const list = document.getElementById('reviewList');
+    const noR = document.getElementById('noReview');
+    if (reviews.length === 0) { noR.style.display = ''; return; }
+    noR.style.display = 'none';
+    list.innerHTML = '';
+    [...reviews].reverse().forEach(r => {
+      const el = document.createElement('div');
+      el.className = 'review-item';
+      const starStr = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+      const photoHTML = (r.photos || []).map(p =>
+        `<img class="review-photo" src="${p}" onclick="openModal('${p}')" alt="">`
+      ).join('');
+      el.innerHTML = `
+        <div class="review-header">
+          <span class="review-name">${r.name}</span>
+          <span class="review-date">${r.date}</span>
+        </div>
+        <div class="review-stars">${starStr}</div>
+        <div class="review-text">${r.text}</div>
+        ${photoHTML ? `<div class="review-photos">${photoHTML}</div>` : ''}
+      `;
+      list.appendChild(el);
+    });
+  }
+
+  function submitReview() {
+    const name = document.getElementById('reviewName').value.trim() || '익명';
+    const text = document.getElementById('reviewText').value.trim();
+    if (!text) { alert('후기 내용을 입력해주세요!'); return; }
+
+    const now = new Date();
+    const date = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')}`;
+
+    const preview = document.getElementById('photoPreview');
+    const photos = Array.from(preview.querySelectorAll('img')).map(i => i.src);
+
+    reviews.push({ name, text, rating: rating || 5, date, photos });
+    localStorage.setItem(STORE_KEY, JSON.stringify(reviews));
+
+    document.getElementById('reviewName').value = '';
+    document.getElementById('reviewText').value = '';
+    document.getElementById('photoPreview').innerHTML = '';
+    rating = 0;
+    stars.forEach(s => s.classList.remove('on'));
+    photoFiles = [];
+
+    renderReviews();
+  }
+
+  function openModal(src) {
+    document.getElementById('modalImg').src = src;
+    document.getElementById('imgModal').classList.add('open');
+  }
+  function closeModal() {
+    document.getElementById('imgModal').classList.remove('open');
+  }
+
+  renderReviews();
+</script>
+</body>
+</html>
