@@ -3,211 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>부대찌개 · hyunlab 레시피</title>
+  <title>돼지고기 간장불고기 · hyunlab 레시피</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --pink:       #FF5C8A;
-      --pink-light: #FFE8EF;
-      --pink-mid:   #FFB3C8;
-      --black:      #1A1A1A;
-      --gray:       #666;
-      --gray-light: #F5F5F5;
-      --gray-mid:   #E8E8E8;
-      --white:      #FFFFFF;
+      --pink: #FF5C8A; --pink-light: #FFE8EF; --pink-mid: #FFB3C8;
+      --black: #1A1A1A; --gray: #666; --gray-light: #F5F5F5;
+      --gray-mid: #E8E8E8; --white: #FFFFFF;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { background: #EFEFEF; font-family: 'Noto Sans KR', sans-serif; color: var(--black); }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { background:#EFEFEF; font-family:'Noto Sans KR',sans-serif; color:var(--black); }
 
-    /* NAV */
-    nav {
-      background: var(--white); border-bottom: 1.5px solid var(--gray-mid);
-      position: sticky; top: 0; z-index: 100;
-      padding: 0 40px; height: 56px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .logo { font-family: 'Black Han Sans', sans-serif; font-size: 20px; color: var(--pink); text-decoration: none; }
-    .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--gray); }
-    .breadcrumb a { color: var(--gray); text-decoration: none; }
-    .breadcrumb a:hover { color: var(--pink); }
-    .breadcrumb span { color: var(--gray-mid); }
+    nav { background:var(--white); border-bottom:1.5px solid var(--gray-mid); position:sticky; top:0; z-index:100; padding:0 40px; height:56px; display:flex; align-items:center; justify-content:space-between; }
+    .logo { font-family:'Black Han Sans',sans-serif; font-size:20px; color:var(--pink); text-decoration:none; }
+    .breadcrumb { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--gray); }
+    .breadcrumb a { color:var(--gray); text-decoration:none; }
+    .breadcrumb a:hover { color:var(--pink); }
+    .breadcrumb span { color:var(--gray-mid); }
 
-    /* HERO */
-    .hero {
-      background: var(--pink); padding: 40px 40px 36px;
-      position: relative; overflow: hidden;
-    }
-    .hero::before {
-      content: ''; position: absolute; top: -60px; right: -40px;
-      width: 240px; height: 240px; border-radius: 50%;
-      background: rgba(255,255,255,0.1);
-    }
-    .hero-inner { position: relative; z-index: 1; max-width: 720px; }
-    .hero-num {
-      font-size: 11px; font-weight: 700; letter-spacing: 3px;
-      color: rgba(255,255,255,0.65); margin-bottom: 8px;
-    }
-    .hero-title {
-      font-family: 'Black Han Sans', sans-serif;
-      font-size: clamp(32px, 5vw, 52px);
-      color: var(--white); line-height: 1; margin-bottom: 14px;
-    }
-    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
-    .hero-tag {
-      font-size: 12px; font-weight: 700; padding: 4px 12px;
-      border-radius: 20px; background: rgba(255,255,255,0.2);
-      color: var(--white); border: 1px solid rgba(255,255,255,0.3);
-    }
-    .hero-meta { display: flex; gap: 20px; flex-wrap: wrap; }
-    .hero-meta-item { display: flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.85); font-size: 14px; font-weight: 500; }
+    .hero { background:var(--pink); padding:40px 40px 36px; position:relative; overflow:hidden; }
+    .hero::before { content:''; position:absolute; top:-60px; right:-40px; width:240px; height:240px; border-radius:50%; background:rgba(255,255,255,0.1); }
+    .hero-inner { position:relative; z-index:1; max-width:720px; }
+    .hero-num { font-size:11px; font-weight:700; letter-spacing:3px; color:rgba(255,255,255,0.65); margin-bottom:8px; }
+    .hero-title { font-family:'Black Han Sans',sans-serif; font-size:clamp(26px,5vw,46px); color:var(--white); line-height:1.1; margin-bottom:14px; }
+    .hero-tags { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+    .hero-tag { font-size:12px; font-weight:700; padding:4px 12px; border-radius:20px; background:rgba(255,255,255,0.2); color:var(--white); border:1px solid rgba(255,255,255,0.3); }
+    .hero-meta { display:flex; gap:20px; flex-wrap:wrap; }
+    .hero-meta-item { color:rgba(255,255,255,0.85); font-size:14px; font-weight:500; }
 
-    /* MAIN LAYOUT */
-    .layout { max-width: 760px; margin: 0 auto; padding: 32px 40px; display: flex; flex-direction: column; gap: 20px; }
+    .layout { max-width:760px; margin:0 auto; padding:32px 40px; display:flex; flex-direction:column; gap:20px; }
+    .card { background:var(--white); border-radius:14px; border:1.5px solid var(--gray-mid); padding:28px; }
+    .section-label { font-size:10px; font-weight:700; letter-spacing:2.5px; color:var(--pink); text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+    .section-label::after { content:''; flex:1; height:1px; background:var(--gray-light); }
 
-    /* CARD */
-    .card {
-      background: var(--white); border-radius: 14px;
-      border: 1.5px solid var(--gray-mid); padding: 28px;
-    }
-    .section-label {
-      font-size: 10px; font-weight: 700; letter-spacing: 2.5px;
-      color: var(--pink); text-transform: uppercase; margin-bottom: 16px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .section-label::after {
-      content: ''; flex: 1; height: 1px; background: var(--gray-light);
-    }
+    /* PHOTO */
+    .photo-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:8px; margin-bottom:8px; }
+    .photo-item { position:relative; aspect-ratio:4/3; border-radius:10px; overflow:hidden; background:var(--gray-light); }
+    .photo-item img { width:100%; height:100%; object-fit:cover; cursor:pointer; display:block; }
+    .photo-del { position:absolute; top:6px; right:6px; width:24px; height:24px; border-radius:50%; background:rgba(0,0,0,0.55); color:white; border:none; cursor:pointer; font-size:12px; display:flex; align-items:center; justify-content:center; }
+    .add-photo-main { width:100%; aspect-ratio:16/9; border-radius:10px; border:2px dashed var(--pink-mid); background:var(--pink-light); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; cursor:pointer; color:var(--pink); transition:all 0.2s; }
+    .add-photo-main:hover { border-color:var(--pink); background:#FFD6E5; }
+    .add-photo-main svg { width:32px; height:32px; }
+    .add-photo-main .btn-label { font-size:14px; font-weight:700; }
+    .add-photo-main small { font-size:11px; color:var(--pink-mid); }
+    .add-photo-small { padding:8px 16px; border:1.5px dashed var(--gray-mid); border-radius:8px; background:var(--white); color:var(--gray); font-size:12px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:6px; transition:all 0.2s; font-family:'Noto Sans KR',sans-serif; }
+    .add-photo-small:hover { border-color:var(--pink); color:var(--pink); }
+    #photoFileInput { display:none; }
 
-    /* THUMBNAIL */
-    .thumb-wrap {
-      width: 100%; aspect-ratio: 16/9; border-radius: 10px;
-      background: var(--pink-light);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 80px; overflow: hidden; margin-bottom: 4px;
-    }
-    .thumb-wrap img { width: 100%; height: 100%; object-fit: cover; }
-    .thumb-hint { font-size: 12px; color: var(--gray); text-align: center; padding-top: 8px; }
+    /* EDIT FAB */
+    .edit-fab { position:fixed; bottom:24px; right:24px; background:var(--black); color:var(--white); border:none; border-radius:50px; padding:12px 20px; font-size:13px; font-weight:700; font-family:'Noto Sans KR',sans-serif; cursor:pointer; z-index:50; display:flex; align-items:center; gap:8px; box-shadow:0 4px 20px rgba(0,0,0,0.2); transition:all 0.2s; }
+    .edit-fab:hover, .edit-fab.active { background:var(--pink); }
 
-    /* INGREDIENTS */
-    .ingredient-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
-    .ingredient-item {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 10px 14px; border-radius: 8px;
-      background: var(--gray-light); border: 1px solid var(--gray-mid);
-      font-size: 13px;
-    }
-    .ingredient-name { font-weight: 500; }
-    .ingredient-amount { color: var(--pink); font-weight: 700; font-size: 12px; }
-    .ingredient-section-title {
-      font-size: 12px; font-weight: 700; color: var(--gray);
-      margin: 16px 0 8px; letter-spacing: 1px;
-    }
-    .ingredient-section-title:first-child { margin-top: 0; }
+    .view-el { display:block; }
+    .edit-el { display:none; }
+    body.editing .view-el { display:none; }
+    body.editing .edit-el { display:block; }
 
-    /* STEPS */
-    .step-list { display: flex; flex-direction: column; gap: 16px; }
-    .step-item { display: flex; gap: 16px; align-items: flex-start; }
-    .step-num {
-      width: 32px; height: 32px; border-radius: 50%;
-      background: var(--pink); color: var(--white);
-      font-family: 'Black Han Sans', sans-serif; font-size: 14px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; margin-top: 2px;
-    }
-    .step-text { font-size: 14px; line-height: 1.75; color: var(--black); padding-top: 5px; }
-    .step-tip {
-      display: inline-block; margin-top: 6px;
-      font-size: 12px; color: var(--pink); font-weight: 600;
-      background: var(--pink-light); padding: 4px 10px; border-radius: 6px;
-    }
+    .edit-input { width:100%; padding:10px 14px; border:1.5px solid var(--gray-mid); border-radius:8px; font-size:13px; font-family:'Noto Sans KR',sans-serif; background:var(--white); outline:none; transition:border-color 0.2s; margin-bottom:6px; }
+    .edit-input:focus { border-color:var(--pink); }
+    textarea.edit-input { resize:vertical; }
+    .ing-row { display:grid; grid-template-columns:1fr 90px 32px; gap:6px; align-items:center; margin-bottom:6px; }
+    .step-row { display:flex; gap:8px; align-items:flex-start; margin-bottom:8px; }
+    .step-row-num { width:28px; height:28px; border-radius:50%; background:var(--pink); color:white; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:6px; }
+    .del-btn { width:32px; height:32px; border-radius:8px; background:#FFF0F0; border:1px solid #FFCCCC; color:#FF4444; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .add-row-btn { padding:8px 14px; border:1.5px dashed var(--gray-mid); border-radius:8px; background:var(--gray-light); color:var(--gray); font-size:12px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:6px; font-family:'Noto Sans KR',sans-serif; }
+    .add-row-btn:hover { border-color:var(--pink); color:var(--pink); }
+    .save-btn { width:100%; padding:13px; background:var(--pink); color:white; border:none; border-radius:10px; cursor:pointer; font-size:15px; font-weight:700; font-family:'Noto Sans KR',sans-serif; transition:opacity 0.2s; }
+    .save-btn:hover { opacity:0.85; }
+
+    /* INGREDIENTS VIEW */
+    .ing-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:10px; }
+    .ing-item { display:flex; justify-content:space-between; align-items:center; padding:10px 14px; border-radius:8px; background:var(--gray-light); border:1px solid var(--gray-mid); font-size:13px; }
+    .ing-name { font-weight:500; }
+    .ing-amt { color:var(--pink); font-weight:700; font-size:12px; }
+
+    /* STEPS VIEW */
+    .step-list { display:flex; flex-direction:column; gap:16px; }
+    .step-item { display:flex; gap:16px; align-items:flex-start; }
+    .step-num { width:32px; height:32px; border-radius:50%; background:var(--pink); color:white; font-family:'Black Han Sans',sans-serif; font-size:14px; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
+    .step-text { font-size:14px; line-height:1.75; padding-top:5px; }
 
     /* REVIEWS */
-    .review-form {
-      background: var(--gray-light); border-radius: 10px;
-      padding: 20px; margin-bottom: 24px; border: 1.5px solid var(--gray-mid);
-    }
-    .review-form-title {
-      font-weight: 700; font-size: 14px; margin-bottom: 14px;
-      color: var(--black);
-    }
-    .form-row { display: flex; gap: 10px; margin-bottom: 10px; }
-    .form-input {
-      flex: 1; padding: 10px 14px;
-      border: 1.5px solid var(--gray-mid); border-radius: 8px;
-      font-size: 13px; font-family: 'Noto Sans KR', sans-serif;
-      background: var(--white); outline: none;
-      transition: border-color 0.2s;
-    }
-    .form-input:focus { border-color: var(--pink); }
-    textarea.form-input { resize: vertical; min-height: 80px; }
-    .photo-label {
-      display: flex; align-items: center; gap: 8px;
-      padding: 10px 16px; border: 1.5px dashed var(--gray-mid);
-      border-radius: 8px; cursor: pointer; font-size: 13px; color: var(--gray);
-      background: var(--white); transition: border-color 0.2s;
-    }
-    .photo-label:hover { border-color: var(--pink); color: var(--pink); }
-    .photo-input { display: none; }
-    .photo-preview { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
-    .photo-thumb {
-      width: 72px; height: 72px; border-radius: 8px;
-      object-fit: cover; border: 1.5px solid var(--gray-mid);
-    }
-    .rating-wrap { display: flex; gap: 4px; margin-bottom: 10px; }
-    .star {
-      font-size: 24px; cursor: pointer;
-      color: #ddd; transition: color 0.15s;
-      user-select: none;
-    }
-    .star.on { color: #FFB800; }
-    .submit-btn {
-      width: 100%; padding: 12px;
-      background: var(--pink); color: var(--white);
-      border: none; border-radius: 8px; cursor: pointer;
-      font-size: 14px; font-weight: 700; font-family: 'Noto Sans KR', sans-serif;
-      transition: opacity 0.2s;
-    }
-    .submit-btn:hover { opacity: 0.85; }
+    .review-form { background:var(--gray-light); border-radius:10px; padding:20px; margin-bottom:24px; border:1.5px solid var(--gray-mid); }
+    .review-form-title { font-weight:700; font-size:14px; margin-bottom:14px; }
+    .form-row { display:flex; gap:10px; margin-bottom:10px; }
+    .form-input { flex:1; padding:10px 14px; border:1.5px solid var(--gray-mid); border-radius:8px; font-size:13px; font-family:'Noto Sans KR',sans-serif; background:var(--white); outline:none; transition:border-color 0.2s; }
+    .form-input:focus { border-color:var(--pink); }
+    textarea.form-input { resize:vertical; min-height:80px; }
+    .r-photo-label { display:flex; align-items:center; gap:8px; padding:10px 16px; border:1.5px dashed var(--gray-mid); border-radius:8px; cursor:pointer; font-size:13px; color:var(--gray); background:var(--white); transition:border-color 0.2s; }
+    .r-photo-label:hover { border-color:var(--pink); color:var(--pink); }
+    #reviewPhotoInput { display:none; }
+    .photo-prev { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+    .photo-thumb { width:72px; height:72px; border-radius:8px; object-fit:cover; border:1.5px solid var(--gray-mid); }
+    .rating-wrap { display:flex; gap:4px; margin-bottom:10px; }
+    .star { font-size:24px; cursor:pointer; color:#ddd; transition:color 0.15s; user-select:none; }
+    .star.on { color:#FFB800; }
+    .submit-btn { width:100%; padding:12px; background:var(--pink); color:white; border:none; border-radius:8px; cursor:pointer; font-size:14px; font-weight:700; font-family:'Noto Sans KR',sans-serif; transition:opacity 0.2s; }
+    .submit-btn:hover { opacity:0.85; }
+    .review-list { display:flex; flex-direction:column; gap:14px; }
+    .review-item { padding:16px; border-radius:10px; border:1.5px solid var(--gray-mid); background:var(--gray-light); }
+    .review-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+    .review-name { font-weight:700; font-size:14px; }
+    .review-date { font-size:11px; color:var(--gray); }
+    .review-stars { color:#FFB800; font-size:14px; margin-bottom:6px; }
+    .review-text { font-size:13px; line-height:1.65; }
+    .review-photos { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .review-photo { width:80px; height:80px; border-radius:8px; object-fit:cover; border:1.5px solid var(--gray-mid); cursor:pointer; }
+    .no-review { text-align:center; padding:30px; color:var(--gray); font-size:13px; }
 
-    /* REVIEW LIST */
-    .review-list { display: flex; flex-direction: column; gap: 14px; }
-    .review-item {
-      padding: 16px; border-radius: 10px;
-      border: 1.5px solid var(--gray-mid); background: var(--gray-light);
-    }
-    .review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-    .review-name { font-weight: 700; font-size: 14px; }
-    .review-date { font-size: 11px; color: var(--gray); }
-    .review-stars { color: #FFB800; font-size: 14px; margin-bottom: 6px; }
-    .review-text { font-size: 13px; line-height: 1.65; color: var(--black); }
-    .review-photos { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
-    .review-photo {
-      width: 80px; height: 80px; border-radius: 8px;
-      object-fit: cover; border: 1.5px solid var(--gray-mid); cursor: pointer;
-    }
-    .no-review { text-align: center; padding: 30px; color: var(--gray); font-size: 13px; }
+    .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:999; align-items:center; justify-content:center; }
+    .modal.open { display:flex; }
+    .modal img { max-width:92vw; max-height:90vh; border-radius:10px; }
+    .modal-close { position:absolute; top:20px; right:24px; font-size:32px; color:white; cursor:pointer; }
 
-    /* IMAGE MODAL */
-    .modal {
-      display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,0.8); z-index: 999;
-      align-items: center; justify-content: center;
-    }
-    .modal.open { display: flex; }
-    .modal img { max-width: 90vw; max-height: 90vh; border-radius: 10px; }
-    .modal-close {
-      position: absolute; top: 20px; right: 24px;
-      font-size: 32px; color: white; cursor: pointer;
-    }
-
-    @media (max-width: 600px) {
-      nav { padding: 0 20px; }
-      .layout { padding: 20px; }
-      .hero { padding: 28px 20px; }
-      .card { padding: 20px; }
-      .form-row { flex-direction: column; }
+    @media(max-width:600px){
+      nav { padding:0 16px; }
+      .layout { padding:16px; }
+      .hero { padding:28px 20px; }
+      .card { padding:20px; }
+      .form-row { flex-direction:column; }
+      .edit-fab { bottom:16px; right:16px; }
+      .ing-grid { grid-template-columns:1fr 1fr; }
     }
   </style>
 </head>
@@ -218,21 +136,21 @@
   <div class="breadcrumb">
     <a href="/recipe">레시피</a>
     <span>/</span>
-    <span>부대찌개</span>
+    <span>돼지고기 간장불고기</span>
   </div>
 </nav>
 
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-num">RECIPE · 01</div>
-    <div class="hero-title">🥘 부대찌개</div>
+    <div class="hero-title">🥩 돼지고기 간장불고기</div>
     <div class="hero-tags">
       <span class="hero-tag">한식</span>
-      <span class="hero-tag">국/찌개</span>
+      <span class="hero-tag">볶음</span>
     </div>
     <div class="hero-meta">
-      <div class="hero-meta-item">⏱ 30분</div>
-      <div class="hero-meta-item">👥 2인분</div>
+      <div class="hero-meta-item">⏱ 숙성 8시간+</div>
+      <div class="hero-meta-item">👥 3인분</div>
       <div class="hero-meta-item">🔥 난이도 하</div>
     </div>
   </div>
@@ -243,210 +161,314 @@
   <!-- 사진 -->
   <div class="card">
     <div class="section-label">사진</div>
-    <div class="thumb-wrap">🥘</div>
-    <div class="thumb-hint">요리 사진을 추가하면 더 좋아요</div>
+    <input type="file" id="photoFileInput" accept="image/*" multiple>
+    <div id="photoGrid" class="photo-grid"></div>
+    <div id="photoAddArea"></div>
   </div>
 
   <!-- 재료 -->
   <div class="card">
     <div class="section-label">재료</div>
-
-    <div class="ingredient-section-title">메인 재료</div>
-    <div class="ingredient-grid">
-      <div class="ingredient-item"><span class="ingredient-name">스팸(햄)</span><span class="ingredient-amount">1캔</span></div>
-      <div class="ingredient-item"><span class="ingredient-name">비엔나 소시지</span><span class="ingredient-amount">200g</span></div>
-      <div class="ingredient-item"><span class="ingredient-name">묵은지</span><span class="ingredient-amount">200g</span></div>
-      <div class="ingredient-item"><span class="ingredient-name">두부</span><span class="ingredient-amount">1/2모</span></div>
-      <div class="ingredient-item"><span class="ingredient-name">떡</span><span class="ingredient-amount">100g</span></div>
-      <div class="ingredient-item"><span class="ingredient-name">라면사리</span><span class="ingredient-amount">1개</span></div>
-    </div>
-
-    <div class="ingredient-section-title">육수 & 양념</div>
-    <div class="ingredient-grid">
-      <div class="ingredient-item"><span class="ingredient-name">물</span><span class="ingredient-amount">500ml</span></div>
-      <div class="ingredient-item"><span class="ingredient-name">다진 마늘</span><span class="ingredient-amount">1큰술</span></div>
-      <div class="ingredient-item"><span class="ingredient-name">고추장</span><span class="ingredient-amount">1큰술</span></div>
-      <div class="ingredient-item"><span class="ingredient-name">고춧가루</span><span class="ingredient-amount">1큰술</span></div>
-      <div class="ingredient-item"><span class="ingredient-name">간장</span><span class="ingredient-amount">1큰술</span></div>
-      <div class="ingredient-item"><span class="ingredient-name">설탕</span><span class="ingredient-amount">1/2큰술</span></div>
+    <div class="view-el" id="ingView"></div>
+    <div class="edit-el">
+      <div id="ingEditorList"></div>
+      <button class="add-row-btn" onclick="addIngRow()">＋ 재료 추가</button>
     </div>
   </div>
 
   <!-- 조리순서 -->
   <div class="card">
     <div class="section-label">조리순서</div>
-    <div class="step-list">
-      <div class="step-item">
-        <div class="step-num">1</div>
-        <div class="step-text">
-          재료를 모두 먹기 좋은 크기로 썰어 준비한다. 스팸은 1cm 두께로, 두부는 1.5cm 두께로, 소시지는 어슷하게 칼집을 낸다.
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">2</div>
-        <div class="step-text">
-          냄비에 묵은지를 깔고, 스팸·소시지·두부·떡을 올린다.
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">3</div>
-        <div class="step-text">
-          물 500ml를 붓고 다진 마늘, 고추장, 고춧가루, 간장, 설탕을 넣는다.
-          <div class="step-tip">💡 육수가 있으면 더 깊은 맛이 나요</div>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">4</div>
-        <div class="step-text">
-          센 불로 끓이다가 끓어오르면 중불로 줄여 10분간 더 끓인다.
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">5</div>
-        <div class="step-text">
-          라면 사리를 넣고 익을 때까지 3분 더 끓이면 완성!
-          <div class="step-tip">🍜 치즈를 올리면 더 맛있어요</div>
-        </div>
-      </div>
+    <div class="view-el step-list" id="stepView"></div>
+    <div class="edit-el">
+      <div id="stepEditorList"></div>
+      <button class="add-row-btn" onclick="addStepRow()">＋ 단계 추가</button>
     </div>
   </div>
 
-  <!-- 요리 후기 -->
+  <!-- 후기 -->
   <div class="card">
     <div class="section-label">요리 후기</div>
-
     <div class="review-form">
       <div class="review-form-title">후기 남기기</div>
       <div class="rating-wrap" id="stars">
-        <span class="star" data-v="1">★</span>
-        <span class="star" data-v="2">★</span>
-        <span class="star" data-v="3">★</span>
-        <span class="star" data-v="4">★</span>
+        <span class="star" data-v="1">★</span><span class="star" data-v="2">★</span>
+        <span class="star" data-v="3">★</span><span class="star" data-v="4">★</span>
         <span class="star" data-v="5">★</span>
       </div>
       <div class="form-row">
-        <input class="form-input" id="reviewName" type="text" placeholder="이름 (예: 현진)">
+        <input class="form-input" id="reviewName" type="text" placeholder="이름">
       </div>
       <div class="form-row">
         <textarea class="form-input" id="reviewText" placeholder="맛은 어땠나요? 수정한 점이 있다면 적어주세요 😊"></textarea>
       </div>
-      <label class="photo-label">
+      <label class="r-photo-label">
         📷 사진 첨부 (선택)
-        <input class="photo-input" type="file" id="photoInput" accept="image/*" multiple>
+        <input id="reviewPhotoInput" type="file" accept="image/*" multiple>
       </label>
-      <div class="photo-preview" id="photoPreview"></div>
+      <div class="photo-prev" id="reviewPhotoPrev"></div>
       <br>
       <button class="submit-btn" onclick="submitReview()">후기 등록하기</button>
     </div>
-
-    <div class="review-list" id="reviewList">
-      <div class="no-review" id="noReview">아직 후기가 없어요. 첫 후기를 남겨보세요! 🍴</div>
-    </div>
+    <div class="review-list" id="reviewList"></div>
   </div>
 
+  <!-- 편집 저장 버튼 -->
+  <div class="edit-el card" style="padding:20px">
+    <button class="save-btn" onclick="saveEdit()">✓ 저장하기</button>
+  </div>
 </div>
 
-<!-- Image Modal -->
+<button class="edit-fab" id="editFab" onclick="toggleEdit()">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+  </svg>
+  <span id="fabLabel">레시피 수정</span>
+</button>
+
 <div class="modal" id="imgModal" onclick="closeModal()">
   <span class="modal-close">✕</span>
   <img id="modalImg" src="" alt="">
 </div>
 
 <script>
-  // ── STARS ──
-  let rating = 0;
-  const stars = document.querySelectorAll('.star');
-  stars.forEach(s => {
-    s.addEventListener('mouseenter', () => {
-      stars.forEach(x => x.classList.toggle('on', x.dataset.v <= s.dataset.v));
-    });
-    s.addEventListener('click', () => { rating = parseInt(s.dataset.v); });
-  });
-  document.getElementById('stars').addEventListener('mouseleave', () => {
-    stars.forEach(x => x.classList.toggle('on', x.dataset.v <= rating));
-  });
+// ── DATA ──
+const STORE = 'recipe_01_data';
+const REVIEW_STORE = 'reviews_recipe_01';
 
-  // ── PHOTO PREVIEW ──
-  let photoFiles = [];
-  document.getElementById('photoInput').addEventListener('change', function() {
-    photoFiles = Array.from(this.files);
-    const preview = document.getElementById('photoPreview');
-    preview.innerHTML = '';
-    photoFiles.forEach(file => {
-      const reader = new FileReader();
-      reader.onload = e => {
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.className = 'photo-thumb';
-        preview.appendChild(img);
-      };
-      reader.readAsDataURL(file);
-    });
-  });
+const DEFAULT = {
+  ingredients: [
+    { name: '돼지고기 (앞다리살 불고기용)', amount: '600g' },
+    { name: '대파', amount: '1대' },
+    { name: '양파', amount: '1/2개' },
+    { name: '미림(청주)', amount: '6큰술' },
+    { name: '진간장', amount: '6큰술' },
+    { name: '참기름', amount: '3큰술' },
+    { name: '백설탕', amount: '3큰술' },
+    { name: '후추', amount: '1작은술' },
+    { name: '통깨', amount: '1큰술' },
+    { name: '다진마늘', amount: '1큰술' },
+  ],
+  steps: [
+    '불고기용 돼지고기는 핏물을 제거하고 한 입 크기로 손질한 후 미림이나 청주로 밑간을 해주세요.',
+    '양파는 길이로 채썰고 대파는 어슷하게 썰어요.',
+    '마늘은 곱게 다져 간장양념을 만들어요.',
+    '진간장, 참기름, 설탕, 다진 마늘, 통깨, 후추를 섞어 양념장을 만들어요.',
+    '잡내를 우려낸 돼지고기를 양념장에 재워요.',
+    '돼지고기에 양념 맛이 배도록 부드럽게 주물러줘요.',
+    '양파와 대파를 넣고 가볍게 버무려주세요.',
+    '8시간 정도 냉장 숙성시켜주면 식감과 맛이 좋아요. 최소 한 시간 재워주세요.',
+    '약불은 돼지고기 육즙이 빠져나오므로 센 불에서 볶아주세요.',
+    '돼지고기 표면이 단단해지면 중 불에서 타지 않게 볶아요.',
+    '간장양념의 색과 맛이 고르게 배인 돼지불고기와 채소를 그릇에 담아내요.',
+  ],
+  photos: []
+};
 
-  // ── REVIEWS (localStorage) ──
-  const STORE_KEY = 'reviews_recipe_01';
-  let reviews = JSON.parse(localStorage.getItem(STORE_KEY) || '[]');
+function loadData() { try { return JSON.parse(localStorage.getItem(STORE)) || DEFAULT; } catch { return DEFAULT; } }
+function saveData(d) { localStorage.setItem(STORE, JSON.stringify(d)); }
+let data = loadData();
 
-  function renderReviews() {
-    const list = document.getElementById('reviewList');
-    const noR = document.getElementById('noReview');
-    if (reviews.length === 0) { noR.style.display = ''; return; }
-    noR.style.display = 'none';
-    list.innerHTML = '';
-    [...reviews].reverse().forEach(r => {
+// ── PHOTOS ──
+function renderPhotos() {
+  const grid = document.getElementById('photoGrid');
+  const area = document.getElementById('photoAddArea');
+  grid.innerHTML = '';
+
+  if (data.photos.length === 0) {
+    area.innerHTML = `<div class="add-photo-main" onclick="document.getElementById('photoFileInput').click()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="12" cy="12" r="3"/><path d="M3 9h3l2-3h4l2 3h3"/></svg>
+      <span class="btn-label">📷 요리 사진 추가</span>
+      <small>카메라 또는 갤러리에서 선택</small>
+    </div>`;
+  } else {
+    data.photos.forEach((src, i) => {
       const el = document.createElement('div');
-      el.className = 'review-item';
-      const starStr = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
-      const photoHTML = (r.photos || []).map(p =>
-        `<img class="review-photo" src="${p}" onclick="openModal('${p}')" alt="">`
-      ).join('');
-      el.innerHTML = `
-        <div class="review-header">
-          <span class="review-name">${r.name}</span>
-          <span class="review-date">${r.date}</span>
-        </div>
-        <div class="review-stars">${starStr}</div>
-        <div class="review-text">${r.text}</div>
-        ${photoHTML ? `<div class="review-photos">${photoHTML}</div>` : ''}
-      `;
-      list.appendChild(el);
+      el.className = 'photo-item';
+      const escapedSrc = src.replace(/'/g, "\\'");
+      el.innerHTML = `<img src="${src}" alt="요리사진" onclick="openModal('${escapedSrc}')"><button class="photo-del" onclick="deletePhoto(${i})">✕</button>`;
+      grid.appendChild(el);
     });
+    area.innerHTML = `<button class="add-photo-small" onclick="document.getElementById('photoFileInput').click()">📷 사진 추가</button>`;
   }
+}
 
-  function submitReview() {
-    const name = document.getElementById('reviewName').value.trim() || '익명';
-    const text = document.getElementById('reviewText').value.trim();
-    if (!text) { alert('후기 내용을 입력해주세요!'); return; }
+document.getElementById('photoFileInput').addEventListener('change', function() {
+  const files = Array.from(this.files);
+  if (!files.length) return;
+  let done = 0;
+  files.forEach(file => {
+    const r = new FileReader();
+    r.onload = e => { data.photos.push(e.target.result); if (++done === files.length) { saveData(data); renderPhotos(); } };
+    r.readAsDataURL(file);
+  });
+  this.value = '';
+});
 
-    const now = new Date();
-    const date = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')}`;
+function deletePhoto(i) {
+  if (!confirm('사진을 삭제할까요?')) return;
+  data.photos.splice(i, 1);
+  saveData(data); renderPhotos();
+}
 
-    const preview = document.getElementById('photoPreview');
-    const photos = Array.from(preview.querySelectorAll('img')).map(i => i.src);
+// ── ING VIEW ──
+function renderIngView() {
+  document.getElementById('ingView').innerHTML = `
+    <div class="ing-grid">
+      ${data.ingredients.map(i => `
+        <div class="ing-item">
+          <span class="ing-name">${i.name}</span>
+          <span class="ing-amt">${i.amount}</span>
+        </div>`).join('')}
+    </div>`;
+}
 
-    reviews.push({ name, text, rating: rating || 5, date, photos });
-    localStorage.setItem(STORE_KEY, JSON.stringify(reviews));
+// ── STEP VIEW ──
+function renderStepView() {
+  document.getElementById('stepView').innerHTML = data.steps.map((s, i) => `
+    <div class="step-item">
+      <div class="step-num">${i+1}</div>
+      <div class="step-text">${s}</div>
+    </div>`).join('');
+}
 
-    document.getElementById('reviewName').value = '';
-    document.getElementById('reviewText').value = '';
-    document.getElementById('photoPreview').innerHTML = '';
-    rating = 0;
-    stars.forEach(s => s.classList.remove('on'));
-    photoFiles = [];
+// ── ING EDITOR ──
+function renderIngEditor() {
+  const el = document.getElementById('ingEditorList');
+  el.innerHTML = '';
+  data.ingredients.forEach((ing, i) => {
+    const row = document.createElement('div');
+    row.className = 'ing-row';
+    row.innerHTML = `
+      <input class="edit-input" style="margin:0" value="${ing.name}" placeholder="재료 이름" data-ing="${i}" data-field="name">
+      <input class="edit-input" style="margin:0" value="${ing.amount}" placeholder="양" data-ing="${i}" data-field="amount">
+      <button class="del-btn" onclick="removeIng(${i})">✕</button>`;
+    el.appendChild(row);
+  });
+  el.querySelectorAll('input').forEach(inp => {
+    inp.addEventListener('input', function() {
+      data.ingredients[this.dataset.ing][this.dataset.field] = this.value;
+    });
+  });
+}
+function addIngRow() { data.ingredients.push({name:'',amount:''}); renderIngEditor(); }
+function removeIng(i) { data.ingredients.splice(i,1); renderIngEditor(); }
 
-    renderReviews();
+// ── STEP EDITOR ──
+function renderStepEditor() {
+  const el = document.getElementById('stepEditorList');
+  el.innerHTML = '';
+  data.steps.forEach((s, i) => {
+    const row = document.createElement('div');
+    row.className = 'step-row';
+    row.innerHTML = `
+      <div class="step-row-num">${i+1}</div>
+      <textarea class="edit-input" style="margin:0;flex:1" rows="2" data-step="${i}">${s}</textarea>
+      <button class="del-btn" onclick="removeStep(${i})">✕</button>`;
+    el.appendChild(row);
+  });
+  el.querySelectorAll('textarea').forEach(ta => {
+    ta.addEventListener('input', function() { data.steps[this.dataset.step] = this.value; });
+  });
+}
+function addStepRow() { data.steps.push(''); renderStepEditor(); }
+function removeStep(i) { data.steps.splice(i,1); renderStepEditor(); }
+
+// ── EDIT TOGGLE ──
+let editing = false;
+function toggleEdit() {
+  editing = !editing;
+  document.body.classList.toggle('editing', editing);
+  document.getElementById('fabLabel').textContent = editing ? '수정 취소' : '레시피 수정';
+  document.getElementById('editFab').classList.toggle('active', editing);
+  if (editing) { renderIngEditor(); renderStepEditor(); }
+  else { renderIngView(); renderStepView(); }
+}
+function saveEdit() {
+  saveData(data); editing = false;
+  document.body.classList.remove('editing');
+  document.getElementById('fabLabel').textContent = '레시피 수정';
+  document.getElementById('editFab').classList.remove('active');
+  renderIngView(); renderStepView();
+  alert('저장됐어요! ✓');
+}
+
+// ── REVIEWS ──
+let rating = 0;
+const starEls = document.querySelectorAll('.star');
+starEls.forEach(s => {
+  s.addEventListener('mouseenter', () => starEls.forEach(x => x.classList.toggle('on', x.dataset.v <= s.dataset.v)));
+  s.addEventListener('click', () => { rating = parseInt(s.dataset.v); });
+});
+document.getElementById('stars').addEventListener('mouseleave', () => {
+  starEls.forEach(x => x.classList.toggle('on', x.dataset.v <= rating));
+});
+
+let reviewPhotos = [];
+document.getElementById('reviewPhotoInput').addEventListener('change', function() {
+  reviewPhotos = [];
+  const prev = document.getElementById('reviewPhotoPrev');
+  prev.innerHTML = '';
+  Array.from(this.files).forEach(file => {
+    const r = new FileReader();
+    r.onload = e => {
+      reviewPhotos.push(e.target.result);
+      const img = document.createElement('img');
+      img.src = e.target.result; img.className = 'photo-thumb';
+      prev.appendChild(img);
+    };
+    r.readAsDataURL(file);
+  });
+});
+
+function getReviews() { try { return JSON.parse(localStorage.getItem(REVIEW_STORE)) || []; } catch { return []; } }
+
+function renderReviews() {
+  const reviews = getReviews();
+  const list = document.getElementById('reviewList');
+  if (reviews.length === 0) {
+    list.innerHTML = '<div class="no-review">아직 후기가 없어요. 첫 후기를 남겨보세요! 🍴</div>';
+    return;
   }
+  list.innerHTML = '';
+  [...reviews].reverse().forEach(r => {
+    const el = document.createElement('div');
+    el.className = 'review-item';
+    const stars = '★'.repeat(r.rating||5) + '☆'.repeat(5-(r.rating||5));
+    const photos = (r.photos||[]).map(p => `<img class="review-photo" src="${p}" onclick="openModal('${p.replace(/'/g,"\\'")}')">` ).join('');
+    el.innerHTML = `
+      <div class="review-header"><span class="review-name">${r.name}</span><span class="review-date">${r.date}</span></div>
+      <div class="review-stars">${stars}</div>
+      <div class="review-text">${r.text}</div>
+      ${photos ? `<div class="review-photos">${photos}</div>` : ''}`;
+    list.appendChild(el);
+  });
+}
 
-  function openModal(src) {
-    document.getElementById('modalImg').src = src;
-    document.getElementById('imgModal').classList.add('open');
-  }
-  function closeModal() {
-    document.getElementById('imgModal').classList.remove('open');
-  }
-
+function submitReview() {
+  const name = document.getElementById('reviewName').value.trim() || '익명';
+  const text = document.getElementById('reviewText').value.trim();
+  if (!text) { alert('후기 내용을 입력해주세요!'); return; }
+  const now = new Date();
+  const date = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')}`;
+  const reviews = getReviews();
+  reviews.push({ name, text, rating: rating||5, date, photos: reviewPhotos });
+  localStorage.setItem(REVIEW_STORE, JSON.stringify(reviews));
+  document.getElementById('reviewName').value = '';
+  document.getElementById('reviewText').value = '';
+  document.getElementById('reviewPhotoPrev').innerHTML = '';
+  rating = 0; reviewPhotos = [];
+  starEls.forEach(s => s.classList.remove('on'));
   renderReviews();
+}
+
+// ── MODAL ──
+function openModal(src) { document.getElementById('modalImg').src = src; document.getElementById('imgModal').classList.add('open'); }
+function closeModal() { document.getElementById('imgModal').classList.remove('open'); }
+
+// ── INIT ──
+renderPhotos(); renderIngView(); renderStepView(); renderReviews();
 </script>
 </body>
 </html>
