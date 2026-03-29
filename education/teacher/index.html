@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>강사 소개 — hyunlab Education</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --pink:#FF5C8A;--pink-light:#FFE8EF;--black:#1A1A1A;--gray:#666;--gray-light:#F5F5F5;--gray-mid:#E8E8E8;--white:#FFFFFF; }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:#EFEFEF;font-family:'Noto Sans KR',sans-serif;color:var(--black);}
+    nav{background:var(--white);border-bottom:1.5px solid var(--gray-mid);position:sticky;top:0;z-index:100;padding:0 40px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+    .logo{font-family:'Black Han Sans',sans-serif;font-size:20px;color:var(--pink);text-decoration:none;}
+    .logo span{color:var(--black);}
+    nav ul{list-style:none;display:flex;gap:2rem;}
+    nav a{font-size:13px;font-weight:500;color:var(--gray);text-decoration:none;transition:color 0.2s;}
+    nav a:hover,nav a.active{color:var(--pink);}
+    .page-header{background:var(--pink);padding:44px 40px 36px;position:relative;overflow:hidden;}
+    .page-header::before{content:'';position:absolute;top:-30px;right:-30px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,0.1);}
+    .breadcrumb{font-size:11px;font-weight:500;color:rgba(255,255,255,0.6);margin-bottom:8px;letter-spacing:0.05em;}
+    .breadcrumb a{color:rgba(255,255,255,0.8);text-decoration:none;}
+    .breadcrumb span{margin:0 6px;}
+    .page-icon{font-size:36px;margin-bottom:10px;position:relative;z-index:1;}
+    .page-header h1{font-family:'Black Han Sans',sans-serif;font-size:clamp(30px,5vw,52px);color:var(--white);letter-spacing:-1.5px;line-height:1;position:relative;z-index:1;}
+    .page-header-sub{font-size:13px;font-weight:500;color:rgba(255,255,255,0.75);margin-top:6px;position:relative;z-index:1;}
+    .content{max-width:900px;margin:0 auto;padding:60px 40px;text-align:center;}
+    .empty-state{background:var(--white);border-radius:14px;padding:64px 40px;border:1.5px dashed var(--gray-mid);}
+    .empty-icon{font-size:48px;margin-bottom:16px;}
+    .empty-state h2{font-family:'Black Han Sans',sans-serif;font-size:20px;margin-bottom:8px;}
+    .empty-state p{font-size:13px;color:var(--gray);}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">hyun<span>lab</span></a>
+  <ul>
+    <li><a href="/main">Works</a></li>
+    <li><a href="/education" class="active">Education</a></li>
+  </ul>
+</nav>
+<div class="page-header">
+  <div class="breadcrumb"><a href="/">hyunlab</a><span>›</span><a href="/education">Education</a><span>›</span>강사 소개</div>
+  <div class="page-icon">🎓</div>
+  <h1>강사 소개</h1>
+  <p class="page-header-sub">Teacher</p>
+</div>
+<div class="content">
+  <div class="empty-state">
+    <div class="empty-icon">🎓</div>
+    <h2>강사 소개</h2>
+    <p>준비 중입니다.</p>
+  </div>
+</div>
+</body>
+</html>
