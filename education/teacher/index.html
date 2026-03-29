@@ -7,28 +7,46 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-    :root { --pink:#FF5C8A;--pink-light:#FFE8EF;--black:#1A1A1A;--gray:#666;--gray-light:#F5F5F5;--gray-mid:#E8E8E8;--white:#FFFFFF; }
-    *{margin:0;padding:0;box-sizing:border-box;}
-    body{background:#EFEFEF;font-family:'Noto Sans KR',sans-serif;color:var(--black);}
-    nav{background:var(--white);border-bottom:1.5px solid var(--gray-mid);position:sticky;top:0;z-index:100;padding:0 40px;height:56px;display:flex;align-items:center;justify-content:space-between;}
-    .logo{font-family:'Black Han Sans',sans-serif;font-size:20px;color:var(--pink);text-decoration:none;}
-    .logo span{color:var(--black);}
-    nav ul{list-style:none;display:flex;gap:2rem;}
-    nav a{font-size:13px;font-weight:500;color:var(--gray);text-decoration:none;transition:color 0.2s;}
-    nav a:hover,nav a.active{color:var(--pink);}
-    .page-header{background:var(--pink);padding:44px 40px 36px;position:relative;overflow:hidden;}
-    .page-header::before{content:'';position:absolute;top:-30px;right:-30px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,0.1);}
-    .breadcrumb{font-size:11px;font-weight:500;color:rgba(255,255,255,0.6);margin-bottom:8px;letter-spacing:0.05em;}
-    .breadcrumb a{color:rgba(255,255,255,0.8);text-decoration:none;}
-    .breadcrumb span{margin:0 6px;}
-    .page-icon{font-size:36px;margin-bottom:10px;position:relative;z-index:1;}
-    .page-header h1{font-family:'Black Han Sans',sans-serif;font-size:clamp(30px,5vw,52px);color:var(--white);letter-spacing:-1.5px;line-height:1;position:relative;z-index:1;}
-    .page-header-sub{font-size:13px;font-weight:500;color:rgba(255,255,255,0.75);margin-top:6px;position:relative;z-index:1;}
-    .content{max-width:900px;margin:0 auto;padding:60px 40px;text-align:center;}
-    .empty-state{background:var(--white);border-radius:14px;padding:64px 40px;border:1.5px dashed var(--gray-mid);}
-    .empty-icon{font-size:48px;margin-bottom:16px;}
-    .empty-state h2{font-family:'Black Han Sans',sans-serif;font-size:20px;margin-bottom:8px;}
-    .empty-state p{font-size:13px;color:var(--gray);}
+    :root {
+      --pink: #FF5C8A; --pink-light: #FFE8EF; --pink-mid: #FFB3C8;
+      --black: #1A1A1A; --gray: #666; --gray-light: #F5F5F5;
+      --gray-mid: #E8E8E8; --white: #FFFFFF;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #EFEFEF; font-family: 'Noto Sans KR', sans-serif; color: var(--black); }
+    nav { background: var(--white); border-bottom: 1.5px solid var(--gray-mid); position: sticky; top: 0; z-index: 100; padding: 0 40px; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: 'Black Han Sans', sans-serif; font-size: 20px; color: var(--pink); text-decoration: none; }
+    .logo span { color: var(--black); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav a { font-size: 13px; font-weight: 500; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+    nav a:hover, nav a.active { color: var(--pink); }
+    .page-header { background: var(--pink); padding: 44px 40px 36px; position: relative; overflow: hidden; }
+    .page-header::before { content: ''; position: absolute; top: -30px; right: -30px; width: 160px; height: 160px; border-radius: 50%; background: rgba(255,255,255,0.1); }
+    .breadcrumb { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.6); margin-bottom: 8px; letter-spacing: 0.05em; }
+    .breadcrumb a { color: rgba(255,255,255,0.8); text-decoration: none; }
+    .breadcrumb span { margin: 0 6px; }
+    .page-icon { font-size: 36px; margin-bottom: 10px; position: relative; z-index: 1; }
+    .page-header h1 { font-family: 'Black Han Sans', sans-serif; font-size: clamp(30px, 5vw, 52px); color: var(--white); letter-spacing: -1.5px; line-height: 1; position: relative; z-index: 1; }
+    .page-header-sub { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.75); margin-top: 6px; position: relative; z-index: 1; }
+    .content { max-width: 960px; margin: 0 auto; padding: 40px; }
+    .teacher-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .teacher-card { background: var(--white); border-radius: 14px; border: 1.5px solid var(--gray-mid); overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+    .teacher-card:hover { border-color: var(--pink); box-shadow: 0 4px 20px rgba(255,92,138,0.12); }
+    .teacher-photo { width: 100%; aspect-ratio: 4/3; background: var(--pink-light); display: flex; align-items: center; justify-content: center; font-size: 56px; overflow: hidden; }
+    .teacher-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .teacher-body { padding: 20px 20px 24px; }
+    .teacher-name { font-family: 'Black Han Sans', sans-serif; font-size: 18px; margin-bottom: 8px; }
+    .dept-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .dept-tag { background: var(--pink-light); color: var(--pink); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+    .subject-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+    .subject-label { font-size: 11px; font-weight: 700; color: var(--gray); background: var(--gray-light); padding: 2px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
+    .subject-value { font-size: 13px; color: var(--black); line-height: 1.5; }
+    .teacher-intro { font-size: 13px; color: var(--gray); line-height: 1.7; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--gray-mid); }
+    .empty-state { background: var(--white); border-radius: 14px; padding: 64px 40px; text-align: center; border: 1.5px dashed var(--gray-mid); }
+    .empty-icon { font-size: 48px; margin-bottom: 16px; }
+    .empty-state h2 { font-family: 'Black Han Sans', sans-serif; font-size: 20px; margin-bottom: 8px; }
+    .empty-state p { font-size: 13px; color: var(--gray); }
+    @media (max-width: 600px) { nav { padding: 0 20px; } .page-header { padding: 32px 20px 24px; } .content { padding: 20px; } .teacher-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
