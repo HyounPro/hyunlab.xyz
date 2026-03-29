@@ -20,7 +20,6 @@
     nav ul { list-style: none; display: flex; gap: 2rem; }
     nav a { font-size: 13px; font-weight: 500; color: var(--gray); text-decoration: none; transition: color 0.2s; }
     nav a:hover, nav a.active { color: var(--pink); }
-
     .page-header { background: var(--pink); padding: 44px 40px 36px; position: relative; overflow: hidden; }
     .page-header::before { content: ''; position: absolute; top: -30px; right: -30px; width: 160px; height: 160px; border-radius: 50%; background: rgba(255,255,255,0.1); }
     .breadcrumb { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.6); margin-bottom: 8px; letter-spacing: 0.05em; }
@@ -29,35 +28,21 @@
     .page-icon { font-size: 36px; margin-bottom: 10px; position: relative; z-index: 1; }
     .page-header h1 { font-family: 'Black Han Sans', sans-serif; font-size: clamp(30px, 5vw, 52px); color: var(--white); letter-spacing: -1.5px; line-height: 1; position: relative; z-index: 1; }
     .page-header-sub { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.75); margin-top: 6px; position: relative; z-index: 1; }
-
     .content { max-width: 1000px; margin: 0 auto; padding: 40px; }
-
     .teacher-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-
     .teacher-card { background: var(--white); border-radius: 14px; border: 1.5px solid var(--gray-mid); overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
     .teacher-card:hover { border-color: var(--pink); box-shadow: 0 4px 20px rgba(255,92,138,0.12); }
-
     .teacher-photo { width: 100%; aspect-ratio: 3/2; background: var(--pink-light); display: flex; align-items: center; justify-content: center; font-size: 56px; overflow: hidden; }
     .teacher-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-
     .teacher-body { padding: 20px 20px 24px; }
     .teacher-name { font-family: 'Black Han Sans', sans-serif; font-size: 20px; margin-bottom: 10px; }
-
     .dept-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
     .dept-tag { background: var(--pink-light); color: var(--pink); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
-
     .subject-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; }
     .subject-label { font-size: 11px; font-weight: 700; color: var(--gray); background: var(--gray-light); padding: 3px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
     .subject-value { font-size: 13px; color: var(--black); line-height: 1.6; }
-
     .teacher-intro { font-size: 13px; color: var(--gray); line-height: 1.7; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--gray-mid); }
-
-    @media (max-width: 600px) {
-      nav { padding: 0 20px; }
-      .page-header { padding: 32px 20px 24px; }
-      .content { padding: 20px; }
-      .teacher-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 600px) { nav { padding: 0 20px; } .page-header { padding: 32px 20px 24px; } .content { padding: 20px; } .teacher-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -68,231 +53,14 @@
     <li><a href="/education" class="active">Education</a></li>
   </ul>
 </nav>
-
 <div class="page-header">
   <div class="breadcrumb"><a href="/">hyunlab</a><span>›</span><a href="/education">Education</a><span>›</span>강사 소개</div>
   <div class="page-icon">🎓</div>
   <h1>강사 소개</h1>
   <p class="page-header-sub">Teacher</p>
 </div>
-
 <div class="content">
-  <div class="teacher-grid">
-
-    <!-- 위성혁 -->
-    <div class="teacher-card">
-      <div class="teacher-photo">
-        <img src="http://sbsansanart.co.kr/img/academy/teacher/artwork/teacher022.png" alt="위성혁" onerror="this.parentElement.innerHTML='👤'">
-      </div>
-      <div class="teacher-body">
-        <div class="teacher-name">위성혁</div>
-        <div class="dept-tags">
-          <span class="dept-tag">drawing</span>
-          <span class="dept-tag">ai</span>
-        </div>
-        <div class="subject-row">
-          <span class="subject-label">담당과목</span>
-          <span class="subject-value">디지털드로잉, 색채학, 발상과표현, 해부학, 컬러리스트, AI, 포토샵, 일러스트, 디일러, 플랫모션, 2D애니메이션, 웹툰</span>
-        </div>
-        <p class="teacher-intro">(현) SBS아카데미 컴퓨터아트학원 안산 학과장</p>
-      </div>
-    </div>
-
-    <!-- 정희주 -->
-    <div class="teacher-card">
-      <div class="teacher-photo">👤</div>
-      <div class="teacher-body">
-        <div class="teacher-name">정희주</div>
-        <div class="dept-tags">
-          <span class="dept-tag">drawing</span>
-          <span class="dept-tag">editorial</span>
-        </div>
-        <div class="subject-row">
-          <span class="subject-label">담당과목</span>
-          <span class="subject-value">디지털드로잉, 편집디자인</span>
-        </div>
-        <p class="teacher-intro">(현) SBS아카데미 컴퓨터아트학원 안산 강사</p>
-      </div>
-    </div>
-
-    <!-- 나지우 -->
-    <div class="teacher-card">
-      <div class="teacher-photo">👤</div>
-      <div class="teacher-body">
-        <div class="teacher-name">나지우</div>
-        <div class="dept-tags">
-          <span class="dept-tag">drawing</span>
-          <span class="dept-tag">oa</span>
-        </div>
-        <div class="subject-row">
-          <span class="subject-label">담당과목</span>
-          <span class="subject-value">디지털드로잉, GTQ, GTQi</span>
-        </div>
-        <p class="teacher-intro">(현) SBS아카데미 컴퓨터아트학원 안산 강사</p>
-      </div>
-    </div>
-
-    <!-- 장수지 -->
-    <div class="teacher-card">
-      <div class="teacher-photo">
-        <img src="http://sbsansanart.co.kr/img/academy/teacher/interior/teacher046.png" alt="장수지" onerror="this.parentElement.innerHTML='👤'">
-      </div>
-      <div class="teacher-body">
-        <div class="teacher-name">장수지</div>
-        <div class="dept-tags">
-          <span class="dept-tag">interior</span>
-          <span class="dept-tag">machine</span>
-        </div>
-        <div class="subject-row">
-          <span class="subject-label">담당과목</span>
-          <span class="subject-value">캐드, 스케치업, 맥스, 인벤터</span>
-        </div>
-        <p class="teacher-intro">홍익대 실내건축디자인 석사, 다원앤컴퍼니 재직</p>
-      </div>
-    </div>
-
-    <!-- 성유진 -->
-    <div class="teacher-card">
-      <div class="teacher-photo">
-        <img src="http://sbsansanart.co.kr/img/academy/teacher/interior/teacher072.png" alt="성유진" onerror="this.parentElement.innerHTML='👤'">
-      </div>
-      <div class="teacher-body">
-        <div class="teacher-name">성유진</div>
-        <div class="dept-tags">
-          <span class="dept-tag">interior</span>
-        </div>
-        <div class="subject-row">
-          <span class="subject-label">담당과목</span>
-          <span class="subject-value">캐드, 스케치업, 맥스</span>
-        </div>
-        <p class="teacher-intro">인천대 도시건축학 학사</p>
-      </div>
-    </div>
-
-    <!-- 이유진 -->
-    <div class="teacher-card">
-      <div class="teacher-photo">👤</div>
-      <div class="teacher-body">
-        <div class="teacher-name">이유진</div>
-        <div class="dept-tags">
-          <span class="dept-tag">interior</span>
-        </div>
-        <div class="subject-row">
-          <span class="subject-label">담당과목</span>
-          <span class="subject-value">캐드, 스케치업, 맥스</span>
-        </div>
-        <p class="teacher-intro">(현) SBS아카데미 컴퓨터아트학원 안산 강사</p>
-      </div>
-    </div>
-
-    <!-- 이주형 -->
-    <div class="teacher-card">
-      <div class="teacher-photo">
-        <img src="http://sbsansanart.co.kr/img/academy/teacher/cg/teacher043.png" alt="이주형" onerror="this.parentElement.innerHTML='👤'">
-      </div>
-      <div class="teacher-body">
-        <div class="teacher-name">이주형</div>
-        <div class="dept-tags">
-          <span class="dept-tag">cg</span>
-          <span class="dept-tag">ai</span>
-        </div>
-        <div class="subject-row">
-          <span class="subject-label">담당과목</span>
-          <span class="subject-value">마야, 누크</span>
-        </div>
-        <p class="teacher-intro">(현) SBS아카데미 컴퓨터아트학원 안산 강사</p>
-      </div>
-    </div>
-
-    <!-- 송지우 -->
-    <div class="teacher-card">
-      <div class="teacher-photo">
-        <img src="http://sbsansanart.co.kr/img/academy/teacher/cg/teacher084.png" alt="송지우" onerror="this.parentElement.innerHTML='👤'">
-      </div>
-      <div class="teacher-body">
-        <div class="teacher-name">송지우</div>
-        <div class="dept-tags">
-          <span class="dept-tag">motion</span>
-          <span class="dept-tag">ai</span>
-        </div>
-        <div class="subject-row">
-          <span class="subject-label">담당과목</span>
-          <span class="subject-value">시포디, 프리미어, 에펙</span>
-        </div>
-        <p class="teacher-intro">(현) SBS아카데미 컴퓨터아트학원 안산 강사</p>
-      </div>
-    </div>
-
-    <!-- 이정우 -->
-    <div class="teacher-card">
-      <div class="teacher-photo">👤</div>
-      <div class="teacher-body">
-        <div class="teacher-name">이정우</div>
-        <div class="dept-tags">
-          <span class="dept-tag">motion</span>
-        </div>
-        <div class="subject-row">
-          <span class="subject-label">담당과목</span>
-          <span class="subject-value">시포디, 프리미어, 에펙</span>
-        </div>
-        <p class="teacher-intro">(현) SBS아카데미 컴퓨터아트학원 안산 강사</p>
-      </div>
-    </div>
-
-    <!-- 서재현 -->
-    <div class="teacher-card">
-      <div class="teacher-photo">👤</div>
-      <div class="teacher-body">
-        <div class="teacher-name">서재현</div>
-        <div class="dept-tags">
-          <span class="dept-tag">it</span>
-        </div>
-        <div class="subject-row">
-          <span class="subject-label">담당과목</span>
-          <span class="subject-value">웹, 백엔드, 바이브코딩</span>
-        </div>
-        <p class="teacher-intro">한양대(ERICA) 소프트웨어 학사</p>
-      </div>
-    </div>
-
-    <!-- 이효근 -->
-    <div class="teacher-card">
-      <div class="teacher-photo">
-        <img src="http://sbsansanart.co.kr/img/academy/teacher/office/teacher020.png" alt="이효근" onerror="this.parentElement.innerHTML='👤'">
-      </div>
-      <div class="teacher-body">
-        <div class="teacher-name">이효근</div>
-        <div class="dept-tags">
-          <span class="dept-tag">oa</span>
-          <span class="dept-tag">ai</span>
-        </div>
-        <div class="subject-row">
-          <span class="subject-label">담당과목</span>
-          <span class="subject-value">컴활, MOS, GTQ, GTQi</span>
-        </div>
-        <p class="teacher-intro">(현) SBS아카데미 컴퓨터아트학원 안산 강사</p>
-      </div>
-    </div>
-
-    <!-- 양윤석 -->
-    <div class="teacher-card">
-      <div class="teacher-photo">
-        <img src="http://sbsansanart.co.kr/img/academy/teacher/office/teacher021.png" alt="양윤석" onerror="this.parentElement.innerHTML='👤'">
-      </div>
-      <div class="teacher-body">
-        <div class="teacher-name">양윤석</div>
-        <div class="dept-tags">
-          <span class="dept-tag">oa</span>
-        </div>
-        <div class="subject-row">
-          <span class="subject-label">담당과목</span>
-          <span class="subject-value">전산회계, 전산세무</span>
-        </div>
-        <p class="teacher-intro">(현) SBS아카데미 컴퓨터아트학원 안산 강사</p>
-      </div>
-    </div>
-
-  </div>
+  <div class="teacher-grid" id="teacherGrid"></div>
 </div>
 
 <script>
@@ -303,11 +71,49 @@ const DEPT_KO = {
   it: 'IT/웹/프로그래밍', youtube: '유튜브',
   ai: 'AI', oa: '자격증/OA',
 };
-document.querySelectorAll('.dept-tag').forEach(el => {
-  const slug = el.textContent.trim().toLowerCase();
-  if (DEPT_KO[slug]) el.textContent = DEPT_KO[slug];
-});
-</script>
 
+// ── 강사 데이터 ──────────────────────────────────────────
+const TEACHERS = [
+  { name:"위성혁", dept:["drawing","ai"], subjects:"디지털드로잉, 2D애니메이션, 웹툰", intro:"(현) SBS아카데미 컴퓨터아트학원 안산 학과장", photo:"http://sbsansanart.co.kr/img/academy/teacher/artwork/teacher022.png" },
+  { name:"정희주", dept:["drawing","editorial"], subjects:"디지털드로잉, 편집디자인", intro:"(현) SBS아카데미 컴퓨터아트학원 안산 강사", photo:"" },
+  { name:"나지우", dept:["drawing","oa"], subjects:"디지털드로잉, GTQ, GTQi", intro:"(현) SBS아카데미 컴퓨터아트학원 안산 강사", photo:"" },
+  { name:"장수지", dept:["interior","machine"], subjects:"캐드, 스케치업, 맥스, 인벤터", intro:"홍익대 실내건축디자인 석사, 다원앤컴퍼니 재직", photo:"http://sbsansanart.co.kr/img/academy/teacher/interior/teacher046.png" },
+  { name:"성유진", dept:["interior"], subjects:"캐드, 스케치업, 맥스", intro:"인천대 도시건축학 학사", photo:"http://sbsansanart.co.kr/img/academy/teacher/interior/teacher072.png" },
+  { name:"이유진", dept:["interior"], subjects:"캐드, 스케치업, 맥스", intro:"(현) SBS아카데미 컴퓨터아트학원 안산 강사", photo:"" },
+  { name:"이주형", dept:["cg","ai"], subjects:"마야, 누크", intro:"(현) SBS아카데미 컴퓨터아트학원 안산 강사", photo:"http://sbsansanart.co.kr/img/academy/teacher/cg/teacher043.png" },
+  { name:"송지우", dept:["motion","ai"], subjects:"시포디, 프리미어, 에펙", intro:"(현) SBS아카데미 컴퓨터아트학원 안산 강사", photo:"http://sbsansanart.co.kr/img/academy/teacher/cg/teacher084.png" },
+  { name:"이정우", dept:["motion"], subjects:"시포디, 프리미어, 에펙", intro:"(현) SBS아카데미 컴퓨터아트학원 안산 강사", photo:"" },
+  { name:"서재현", dept:["it"], subjects:"웹, 백엔드, 바이브코딩", intro:"한양대(ERICA) 소프트웨어 학사", photo:"" },
+  { name:"이효근", dept:["oa","ai"], subjects:"컴활, MOS, GTQ, GTQi", intro:"(현) SBS아카데미 컴퓨터아트학원 안산 강사", photo:"http://sbsansanart.co.kr/img/academy/teacher/office/teacher020.png" },
+  { name:"양윤석", dept:["oa"], subjects:"전산회계, 전산세무", intro:"(현) SBS아카데미 컴퓨터아트학원 안산 강사", photo:"http://sbsansanart.co.kr/img/academy/teacher/office/teacher021.png" },
+];
+// ─────────────────────────────────────────────────────────
+
+function renderTeachers(list) {
+  const grid = document.getElementById('teacherGrid');
+  grid.innerHTML = list.map(t => `
+    <div class="teacher-card">
+      <div class="teacher-photo">
+        ${t.photo
+          ? `<img src="${t.photo}" alt="${t.name}" onerror="this.parentElement.innerHTML='👤'">`
+          : '👤'}
+      </div>
+      <div class="teacher-body">
+        <div class="teacher-name">${t.name}</div>
+        <div class="dept-tags">
+          ${t.dept.map(d => `<span class="dept-tag">${DEPT_KO[d] || d}</span>`).join('')}
+        </div>
+        <div class="subject-row">
+          <span class="subject-label">담당과목</span>
+          <span class="subject-value">${t.subjects}</span>
+        </div>
+        <p class="teacher-intro">${t.intro}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+renderTeachers(TEACHERS);
+</script>
 </body>
 </html>

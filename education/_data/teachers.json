@@ -1,0 +1,86 @@
+[
+  {
+    "name": "위성혁",
+    "dept": ["drawing", "ai"],
+    "subjects": "디지털드로잉, 2D애니메이션, 웹툰",
+    "intro": "(현) SBS아카데미 컴퓨터아트학원 안산 학과장",
+    "photo": "http://sbsansanart.co.kr/img/academy/teacher/artwork/teacher022.png"
+  },
+  {
+    "name": "정희주",
+    "dept": ["drawing", "editorial"],
+    "subjects": "디지털드로잉, 편집디자인",
+    "intro": "(현) SBS아카데미 컴퓨터아트학원 안산 강사",
+    "photo": ""
+  },
+  {
+    "name": "나지우",
+    "dept": ["drawing", "oa"],
+    "subjects": "디지털드로잉, GTQ, GTQi",
+    "intro": "(현) SBS아카데미 컴퓨터아트학원 안산 강사",
+    "photo": ""
+  },
+  {
+    "name": "장수지",
+    "dept": ["interior", "machine"],
+    "subjects": "캐드, 스케치업, 맥스, 인벤터",
+    "intro": "홍익대 실내건축디자인 석사, 다원앤컴퍼니 재직",
+    "photo": "http://sbsansanart.co.kr/img/academy/teacher/interior/teacher046.png"
+  },
+  {
+    "name": "성유진",
+    "dept": ["interior"],
+    "subjects": "캐드, 스케치업, 맥스",
+    "intro": "인천대 도시건축학 학사",
+    "photo": "http://sbsansanart.co.kr/img/academy/teacher/interior/teacher072.png"
+  },
+  {
+    "name": "이유진",
+    "dept": ["interior"],
+    "subjects": "캐드, 스케치업, 맥스",
+    "intro": "(현) SBS아카데미 컴퓨터아트학원 안산 강사",
+    "photo": ""
+  },
+  {
+    "name": "이주형",
+    "dept": ["cg", "ai"],
+    "subjects": "마야, 누크",
+    "intro": "(현) SBS아카데미 컴퓨터아트학원 안산 강사",
+    "photo": "http://sbsansanart.co.kr/img/academy/teacher/cg/teacher043.png"
+  },
+  {
+    "name": "송지우",
+    "dept": ["motion", "ai"],
+    "subjects": "시포디, 프리미어, 에펙",
+    "intro": "(현) SBS아카데미 컴퓨터아트학원 안산 강사",
+    "photo": "http://sbsansanart.co.kr/img/academy/teacher/cg/teacher084.png"
+  },
+  {
+    "name": "이정우",
+    "dept": ["motion"],
+    "subjects": "시포디, 프리미어, 에펙",
+    "intro": "(현) SBS아카데미 컴퓨터아트학원 안산 강사",
+    "photo": ""
+  },
+  {
+    "name": "서재현",
+    "dept": ["it"],
+    "subjects": "웹, 백엔드, 바이브코딩",
+    "intro": "한양대(ERICA) 소프트웨어 학사",
+    "photo": ""
+  },
+  {
+    "name": "이효근",
+    "dept": ["oa", "ai"],
+    "subjects": "컴활, MOS, GTQ, GTQi",
+    "intro": "(현) SBS아카데미 컴퓨터아트학원 안산 강사",
+    "photo": "http://sbsansanart.co.kr/img/academy/teacher/office/teacher020.png"
+  },
+  {
+    "name": "양윤석",
+    "dept": ["oa"],
+    "subjects": "전산회계, 전산세무",
+    "intro": "(현) SBS아카데미 컴퓨터아트학원 안산 강사",
+    "photo": "http://sbsansanart.co.kr/img/academy/teacher/office/teacher021.png"
+  }
+]
