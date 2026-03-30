@@ -310,18 +310,12 @@ function showToast(msg, type=''){
 // ════════════════════════════════
 let photos = []; // {id, url, filename}
 
-async function loadPhotos(retry=0){
+async function loadPhotos(){
   try{
     const res = await fetch(`${API}/api/recipes/${RECIPE_ID}/photos`);
-    if(!res.ok) throw new Error('api error');
     photos = await res.json();
   } catch {
     photos = [];
-    // 서버 콜드스타트 시 최대 2회 재시도
-    if(retry < 5){
-      setTimeout(()=>loadPhotos(retry+1), 3000);
-      return;
-    }
   }
   renderPhotos();
 }
@@ -532,17 +526,12 @@ document.getElementById('reviewPhotoInput').addEventListener('change',function()
   });
 });
 
-async function loadReviews(retry=0){
+async function loadReviews(){
   try{
     const res=await fetch(`${API}/api/recipes/${RECIPE_ID}/reviews`);
-    if(!res.ok) throw new Error();
     const reviews=await res.json();
     renderReviews(reviews);
   } catch {
-    if(retry < 5){
-      setTimeout(()=>loadReviews(retry+1), 3000);
-      return;
-    }
     renderReviews([]);
   }
 }
@@ -620,9 +609,6 @@ async function deleteReview(reviewId){
 // ── 모달
 function openModal(src){document.getElementById('modalImg').src=src;document.getElementById('imgModal').classList.add('open');}
 function closeModal(){document.getElementById('imgModal').classList.remove('open');}
-
-// ── 서버 웜업 (콜드스타트 방지)
-fetch(`${API}/health`).catch(()=>{});
 
 // ── 초기화
 renderIngView();

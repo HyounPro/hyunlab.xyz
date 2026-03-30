@@ -224,13 +224,11 @@
 
   // ── 썸네일 로드 (콜드스타트 재시도 포함)
   const API = 'https://hyunlab-api.onrender.com';
-  async function loadThumb(card, retry=0) {
+  async function loadThumb(card) {
     const id = card.getAttribute('href').replace('/recipe/', '');
     const thumbEl = card.querySelector('.card-thumb');
-    if (thumbEl.querySelector('img')) return; // 이미 로드됨
     try {
       const res = await fetch(`${API}/api/recipes/${id}/photos`);
-      if (!res.ok) throw new Error();
       const photos = await res.json();
       if (photos && photos.length > 0) {
         const img = document.createElement('img');
@@ -239,9 +237,7 @@
         img.loading = 'lazy';
         thumbEl.appendChild(img);
       }
-    } catch(e) {
-      if (retry < 6) setTimeout(() => loadThumb(card, retry+1), 3000);
-    }
+    } catch(e) {}
   }
   document.querySelectorAll('.recipe-card').forEach(card => loadThumb(card));
 </script>
