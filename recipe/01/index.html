@@ -339,7 +339,7 @@ function renderPhotos(){
     area.innerHTML = `<div class="add-photo-main" onclick="document.getElementById('photoFileInput').click()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="12" cy="12" r="3"/><path d="M3 9h3l2-3h4l2 3h3"/></svg>
       <span class="lbl">📷 요리 사진 추가</span>
-      <small>카메라 또는 갤러리에서 선택</small>
+      <small>클릭하여 파일 선택 (PC) 또는 카메라/갤러리 (모바일)</small>
     </div>`;
   } else {
     area.innerHTML = `<button class="add-photo-small" onclick="document.getElementById('photoFileInput').click()">📷 사진 추가</button>`;

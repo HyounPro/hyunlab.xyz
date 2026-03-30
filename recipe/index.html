@@ -43,7 +43,8 @@
     .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:20px; }
     .recipe-card { background:var(--white); border-radius:14px; border:1.5px solid var(--gray-mid); overflow:hidden; text-decoration:none; color:inherit; transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s; display:block; }
     .recipe-card:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(255,92,138,0.13); border-color:var(--pink-mid); }
-    .card-thumb { width:100%; aspect-ratio:4/3; background:var(--pink-light); display:flex; align-items:center; justify-content:center; font-size:48px; }
+    .card-thumb { width:100%; aspect-ratio:4/3; background:var(--pink-light); display:flex; align-items:center; justify-content:center; font-size:48px; overflow:hidden; position:relative; }
+    .card-thumb img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
     .card-body { padding:16px 18px 20px; }
     .card-num { font-size:10px; font-weight:700; letter-spacing:2px; color:var(--pink); margin-bottom:6px; }
     .card-name { font-family:'Black Han Sans',sans-serif; font-size:18px; color:var(--black); margin-bottom:8px; line-height:1.3; }
@@ -220,6 +221,24 @@
   });
   searchInput.addEventListener('input', filterAndSort);
   sortSelect.addEventListener('change', filterAndSort);
+
+  // ── 썸네일 로드
+  const API = 'https://hyunlab-api.onrender.com';
+  document.querySelectorAll('.recipe-card').forEach(async card => {
+    const id = card.getAttribute('href').replace('/recipe/', '');
+    const thumbEl = card.querySelector('.card-thumb');
+    try {
+      const res = await fetch(`${API}/api/recipes/${id}/photos`);
+      const photos = await res.json();
+      if (photos && photos.length > 0) {
+        const img = document.createElement('img');
+        img.src = photos[0].url;
+        img.alt = card.dataset.name;
+        img.loading = 'lazy';
+        thumbEl.appendChild(img);
+      }
+    } catch(e) { /* 실패 시 이모지 그대로 */ }
+  });
 </script>
 </body>
 </html>
