@@ -240,7 +240,7 @@
         thumbEl.appendChild(img);
       }
     } catch(e) {
-      if (retry < 3) setTimeout(() => loadThumb(card, retry+1), 5000);
+      if (retry < 6) setTimeout(() => loadThumb(card, retry+1), 3000);
     }
   }
   document.querySelectorAll('.recipe-card').forEach(card => loadThumb(card));
