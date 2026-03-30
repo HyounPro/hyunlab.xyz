@@ -305,12 +305,18 @@ function showToast(msg, type=''){
 // ════════════════════════════════
 let photos = []; // {id, url, filename}
 
-async function loadPhotos(){
+async function loadPhotos(retry=0){
   try{
     const res = await fetch(`${API}/api/recipes/${RECIPE_ID}/photos`);
+    if(!res.ok) throw new Error('api error');
     photos = await res.json();
   } catch {
     photos = [];
+    // 서버 콜드스타트 시 최대 2회 재시도
+    if(retry < 2){
+      setTimeout(()=>loadPhotos(retry+1), 4000);
+      return;
+    }
   }
   renderPhotos();
 }
