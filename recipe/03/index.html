@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>간장 비빔국수 · hyunlab 레시피</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink:#FF5C8A; --pink-light:#FFE8EF; --pink-mid:#FFB3C8;
+      --black:#1A1A1A; --gray:#666; --gray-light:#F5F5F5;
+      --gray-mid:#E8E8E8; --white:#FFFFFF;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:#EFEFEF;font-family:'Noto Sans KR',sans-serif;color:var(--black);}
+
+    nav{background:var(--white);border-bottom:1.5px solid var(--gray-mid);position:sticky;top:0;z-index:100;padding:0 40px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+    .logo{font-family:'Black Han Sans',sans-serif;font-size:20px;color:var(--pink);text-decoration:none;}
+    .breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--gray);}
+    .breadcrumb a{color:var(--gray);text-decoration:none;}
+    .breadcrumb a:hover{color:var(--pink);}
+    .breadcrumb .sep{color:var(--gray-mid);}
+
+    .hero{background:var(--pink);padding:40px 40px 36px;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;top:-60px;right:-40px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,0.1);}
+    .hero-inner{position:relative;z-index:1;max-width:720px;}
+    .hero-num{font-size:11px;font-weight:700;letter-spacing:3px;color:rgba(255,255,255,0.65);margin-bottom:8px;}
+    .hero-title{font-family:'Black Han Sans',sans-serif;font-size:clamp(26px,5vw,46px);color:var(--white);line-height:1.1;margin-bottom:14px;}
+    .hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+    .hero-tag{font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;background:rgba(255,255,255,0.2);color:var(--white);border:1px solid rgba(255,255,255,0.3);}
+    .hero-meta{display:flex;gap:20px;flex-wrap:wrap;}
+    .hero-meta-item{color:rgba(255,255,255,0.85);font-size:14px;font-weight:500;}
+
+    .layout{max-width:760px;margin:0 auto;padding:32px 40px;display:flex;flex-direction:column;gap:20px;}
+    .card{background:var(--white);border-radius:14px;border:1.5px solid var(--gray-mid);padding:28px;}
+    .section-label{font-size:10px;font-weight:700;letter-spacing:2.5px;color:var(--pink);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+    .section-label::after{content:'';flex:1;height:1px;background:var(--gray-light);}
+
+    /* ── PHOTO ── */
+    .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-bottom:8px;}
+    .photo-item{position:relative;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:var(--gray-light);}
+    .photo-item img{width:100%;height:100%;object-fit:cover;cursor:pointer;display:block;}
+    .photo-del{position:absolute;top:6px;right:6px;width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,0.55);color:white;border:none;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;}
+    .add-photo-main{width:100%;aspect-ratio:16/9;border-radius:10px;border:2px dashed var(--pink-mid);background:var(--pink-light);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;color:var(--pink);transition:all 0.2s;}
+    .add-photo-main:hover{border-color:var(--pink);background:#FFD6E5;}
+    .add-photo-main svg{width:32px;height:32px;}
+    .add-photo-main .lbl{font-size:14px;font-weight:700;}
+    .add-photo-main small{font-size:11px;color:var(--pink-mid);}
+    .add-photo-small{padding:8px 16px;border:1.5px dashed var(--gray-mid);border-radius:8px;background:var(--white);color:var(--gray);font-size:12px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all 0.2s;font-family:'Noto Sans KR',sans-serif;}
+    .add-photo-small:hover{border-color:var(--pink);color:var(--pink);}
+    #photoFileInput{display:none;}
+
+    /* 업로드 상태 */
+    .upload-progress{display:none;align-items:center;gap:10px;padding:10px 14px;background:var(--pink-light);border-radius:8px;font-size:13px;color:var(--pink);font-weight:600;}
+    .upload-progress.show{display:flex;}
+    .spinner{width:16px;height:16px;border:2px solid var(--pink-mid);border-top-color:var(--pink);border-radius:50%;animation:spin 0.7s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+
+    /* ── EDIT FAB ── */
+    .edit-fab{position:fixed;bottom:24px;right:24px;background:var(--black);color:var(--white);border:none;border-radius:50px;padding:12px 20px;font-size:13px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;z-index:50;display:flex;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,0.2);transition:all 0.2s;}
+    .edit-fab:hover,.edit-fab.active{background:var(--pink);}
+
+    .view-el{display:block;}
+    .edit-el{display:none;}
+    body.editing .view-el{display:none;}
+    body.editing .edit-el{display:block;}
+
+    .edit-input{width:100%;padding:10px 14px;border:1.5px solid var(--gray-mid);border-radius:8px;font-size:13px;font-family:'Noto Sans KR',sans-serif;background:var(--white);outline:none;transition:border-color 0.2s;margin-bottom:6px;}
+    .edit-input:focus{border-color:var(--pink);}
+    textarea.edit-input{resize:vertical;}
+    .ing-row{display:grid;grid-template-columns:1fr 90px 32px;gap:6px;align-items:center;margin-bottom:6px;}
+    .step-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;}
+    .step-row-num{width:28px;height:28px;border-radius:50%;background:var(--pink);color:white;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:6px;}
+    .del-btn{width:32px;height:32px;border-radius:8px;background:#FFF0F0;border:1px solid #FFCCCC;color:#FF4444;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .add-row-btn{padding:8px 14px;border:1.5px dashed var(--gray-mid);border-radius:8px;background:var(--gray-light);color:var(--gray);font-size:12px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-family:'Noto Sans KR',sans-serif;}
+    .add-row-btn:hover{border-color:var(--pink);color:var(--pink);}
+    .save-btn{width:100%;padding:13px;background:var(--pink);color:white;border:none;border-radius:10px;cursor:pointer;font-size:15px;font-weight:700;font-family:'Noto Sans KR',sans-serif;transition:opacity 0.2s;}
+    .save-btn:hover{opacity:0.85;}
+
+    /* ── ING / STEP VIEW ── */
+    .ing-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;}
+    .ing-item{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:8px;background:var(--gray-light);border:1px solid var(--gray-mid);font-size:13px;}
+    .ing-name{font-weight:500;}
+    .ing-amt{color:var(--pink);font-weight:700;font-size:12px;}
+    .step-list{display:flex;flex-direction:column;gap:16px;}
+    .step-item{display:flex;gap:16px;align-items:flex-start;}
+    .step-num{width:32px;height:32px;border-radius:50%;background:var(--pink);color:white;font-family:'Black Han Sans',sans-serif;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+    .step-text{font-size:14px;line-height:1.75;padding-top:5px;}
+
+    /* ── REVIEWS ── */
+    .review-form{background:var(--gray-light);border-radius:10px;padding:20px;margin-bottom:24px;border:1.5px solid var(--gray-mid);}
+    .review-form-title{font-weight:700;font-size:14px;margin-bottom:14px;}
+    .form-row{display:flex;gap:10px;margin-bottom:10px;}
+    .form-input{flex:1;padding:10px 14px;border:1.5px solid var(--gray-mid);border-radius:8px;font-size:13px;font-family:'Noto Sans KR',sans-serif;background:var(--white);outline:none;transition:border-color 0.2s;}
+    .form-input:focus{border-color:var(--pink);}
+    textarea.form-input{resize:vertical;min-height:80px;}
+    .r-photo-label{display:flex;align-items:center;gap:8px;padding:10px 16px;border:1.5px dashed var(--gray-mid);border-radius:8px;cursor:pointer;font-size:13px;color:var(--gray);background:var(--white);transition:border-color 0.2s;}
+    .r-photo-label:hover{border-color:var(--pink);color:var(--pink);}
+    #reviewPhotoInput{display:none;}
+    .photo-prev{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+    .photo-thumb{width:72px;height:72px;border-radius:8px;object-fit:cover;border:1.5px solid var(--gray-mid);}
+    .rating-wrap{display:flex;gap:4px;margin-bottom:10px;}
+    .star{font-size:24px;cursor:pointer;color:#ddd;transition:color 0.15s;user-select:none;}
+    .star.on{color:#FFB800;}
+    .submit-btn{width:100%;padding:12px;background:var(--pink);color:white;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:700;font-family:'Noto Sans KR',sans-serif;transition:opacity 0.2s;}
+    .submit-btn:hover{opacity:0.85;}
+    .submit-btn:disabled{opacity:0.5;cursor:default;}
+    .review-list{display:flex;flex-direction:column;gap:14px;}
+    .review-item{padding:16px;border-radius:10px;border:1.5px solid var(--gray-mid);background:var(--gray-light);position:relative;}
+    .review-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+    .review-name{font-weight:700;font-size:14px;}
+    .review-date{font-size:11px;color:var(--gray);}
+    .review-stars{color:#FFB800;font-size:14px;margin-bottom:6px;}
+    .review-text{font-size:13px;line-height:1.65;}
+    .review-photos{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+    .review-photo{width:80px;height:80px;border-radius:8px;object-fit:cover;border:1.5px solid var(--gray-mid);cursor:pointer;}
+    .review-del{position:absolute;top:12px;right:12px;background:none;border:none;color:var(--gray);cursor:pointer;font-size:16px;padding:2px;}
+    .review-del:hover{color:#FF4444;}
+    .no-review{text-align:center;padding:30px;color:var(--gray);font-size:13px;}
+
+    /* 오류 토스트 */
+    .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--black);color:white;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;opacity:0;transition:all 0.3s;z-index:200;pointer-events:none;}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+    .toast.success{background:#22C55E;}
+    .toast.error{background:#EF4444;}
+
+    .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:999;align-items:center;justify-content:center;}
+    .modal.open{display:flex;}
+    .modal img{max-width:92vw;max-height:90vh;border-radius:10px;}
+    .modal-close{position:absolute;top:20px;right:24px;font-size:32px;color:white;cursor:pointer;}
+
+    @media(max-width:600px){
+      nav{padding:0 16px;}
+      .layout{padding:16px;}
+      .hero{padding:28px 20px;}
+      .card{padding:20px;}
+      .form-row{flex-direction:column;}
+      .edit-fab{bottom:16px;right:16px;}
+      .ing-grid{grid-template-columns:1fr 1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="/">hyunlab</a>
+  <div class="breadcrumb">
+    <a href="/recipe">레시피</a>
+    <span class="sep">/</span>
+    <span>간장 비빔국수</span>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-num">RECIPE · 03</div>
+    <div class="hero-title">🍜 간장 비빔국수</div>
+    <div class="hero-tags">
+      <span class="hero-tag">한식</span>
+      <span class="hero-tag">면</span>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">⏱ 15분</div>
+      <div class="hero-meta-item">👥 1인분</div>
+      <div class="hero-meta-item">🔥 난이도 하</div>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- 사진 -->
+  <div class="card">
+    <div class="section-label">사진</div>
+    <input type="file" id="photoFileInput" accept="image/*" multiple>
+    <div id="uploadProgress" class="upload-progress">
+      <div class="spinner"></div>
+      <span id="uploadMsg">업로드 중...</span>
+    </div>
+    <div id="photoGrid" class="photo-grid"></div>
+    <div id="photoAddArea"></div>
+  </div>
+
+  <!-- 재료 -->
+  <div class="card">
+    <div class="section-label">재료</div>
+    <div class="view-el" id="ingView"></div>
+    <div class="edit-el">
+      <div id="ingEditorList"></div>
+      <button class="add-row-btn" onclick="addIngRow()">＋ 재료 추가</button>
+    </div>
+  </div>
+
+  <!-- 조리순서 -->
+  <div class="card">
+    <div class="section-label">조리순서</div>
+    <div class="view-el step-list" id="stepView"></div>
+    <div class="edit-el">
+      <div id="stepEditorList"></div>
+      <button class="add-row-btn" onclick="addStepRow()">＋ 단계 추가</button>
+    </div>
+  </div>
+
+  <!-- 후기 -->
+  <div class="card">
+    <div class="section-label">요리 후기</div>
+    <div class="review-form">
+      <div class="review-form-title">후기 남기기</div>
+      <div class="rating-wrap" id="stars">
+        <span class="star" data-v="1">★</span><span class="star" data-v="2">★</span>
+        <span class="star" data-v="3">★</span><span class="star" data-v="4">★</span>
+        <span class="star" data-v="5">★</span>
+      </div>
+      <div class="form-row">
+        <input class="form-input" id="reviewName" type="text" placeholder="이름">
+      </div>
+      <div class="form-row">
+        <textarea class="form-input" id="reviewText" placeholder="맛은 어땠나요? 수정한 점이 있다면 적어주세요 😊"></textarea>
+      </div>
+      <label class="r-photo-label">
+        📷 사진 첨부 (선택, 최대 5장)
+        <input id="reviewPhotoInput" type="file" accept="image/*" multiple>
+      </label>
+      <div class="photo-prev" id="reviewPhotoPrev"></div>
+      <br>
+      <button class="submit-btn" id="submitBtn" onclick="submitReview()">후기 등록하기</button>
+    </div>
+    <div class="review-list" id="reviewList"></div>
+  </div>
+
+  <!-- 편집 저장 -->
+  <div class="edit-el card" style="padding:20px">
+    <button class="save-btn" onclick="saveEdit()">✓ 저장하기</button>
+  </div>
+
+</div>
+
+<button class="edit-fab" id="editFab" onclick="toggleEdit()">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+  </svg>
+  <span id="fabLabel">레시피 수정</span>
+</button>
+
+<div class="modal" id="imgModal" onclick="closeModal()">
+  <span class="modal-close">✕</span>
+  <img id="modalImg" src="" alt="">
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ════════════════════════════════
+//  CONFIG — 배포 후 API URL 교체
+// ════════════════════════════════
+const API = 'https://hyunlab-api.onrender.com';  // ← Render 배포 후 URL로 교체
+const RECIPE_ID = '03';
+const LOCAL_STORE = 'recipe_03_local'; // 재료/순서는 여전히 localStorage
+
+// ════════════════════════════════
+//  로컬 데이터 (재료 + 순서)
+// ════════════════════════════════
+const DEFAULT = {
+  ingredients: [
+    {name:'소면 (500원짜리 동전크기)',amount:'1인분'},
+    {name:'간장',amount:'2T'},
+    {name:'설탕',amount:'1/2T'},
+    {name:'다진 마늘',amount:'1/2T'},
+    {name:'고춧가루 (생략 가능)',amount:'1/2T'},
+    {name:'참기름',amount:'1/2T'},
+    {name:'깨',amount:'조금'},
+  ],
+  steps: [
+    '끓는 물에 소면을 넣어주세요. 찬물 한 컵을 따로 준비해두세요.',
+    '거품이 끓어오르면 찬물 반 컵을 넣어주세요. 거품이 가라앉아요.',
+    '다시 팔팔 끓어오르면 나머지 찬물 반 컵을 넣어주세요.',
+    '또다시 끓어오르면 불을 꺼주세요. (팔팔 끓어오르는 거 총 3번)',
+    '바로 찬물에 소면을 옮겨 박박 문질러 씻어주세요. 소면의 점성이 떨어지면서 붙지 않아요.',
+    '체에 물기를 빼주세요.',
+    '간장 2T, 설탕 1/2T, 다진 마늘 1/2T, 고춧가루 1/2T, 참기름 1/2T, 깨를 섞어 양념장을 만들어요.',
+    '소면에 양념장 2T 정도 넣어 섞어주면 완성! 먹어보면서 양념 가감해주세요. 🍜',
+  ]
+};
+
+function loadLocal(){try{return JSON.parse(localStorage.getItem(LOCAL_STORE))||DEFAULT;}catch{return DEFAULT;}}
+function saveLocal(d){localStorage.setItem(LOCAL_STORE,JSON.stringify(d));}
+let localData = loadLocal();
+
+// ════════════════════════════════
+//  토스트
+// ════════════════════════════════
+function showToast(msg, type=''){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + type;
+  setTimeout(()=>t.className='toast', 2500);
+}
+
+// ════════════════════════════════
+//  사진 — API 연동
+// ════════════════════════════════
+let photos = []; // {id, url, filename}
+
+async function loadPhotos(){
+  try{
+    const res = await fetch(`${API}/api/recipes/${RECIPE_ID}/photos`);
+    photos = await res.json();
+  } catch {
+    photos = [];
+  }
+  renderPhotos();
+}
+
+function renderPhotos(){
+  const grid = document.getElementById('photoGrid');
+  const area = document.getElementById('photoAddArea');
+  grid.innerHTML = '';
+
+  photos.forEach(p => {
+    const el = document.createElement('div');
+    el.className = 'photo-item';
+    const fullUrl = p.url.startsWith('http') ? p.url : API + p.url;
+    el.innerHTML = `
+      <img src="${fullUrl}" loading="lazy" onclick="openModal('${fullUrl}')">
+      <button class="photo-del" onclick="deletePhoto('${p.id}')">✕</button>`;
+    grid.appendChild(el);
+  });
+
+  if(photos.length === 0){
+    area.innerHTML = `<div class="add-photo-main" onclick="document.getElementById('photoFileInput').click()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="12" cy="12" r="3"/><path d="M3 9h3l2-3h4l2 3h3"/></svg>
+      <span class="lbl">📷 요리 사진 추가</span>
+      <small>클릭하여 파일 선택 (PC) 또는 카메라/갤러리 (모바일)</small>
+    </div>`;
+  } else {
+    area.innerHTML = `<button class="add-photo-small" onclick="document.getElementById('photoFileInput').click()">📷 사진 추가</button>`;
+  }
+}
+
+document.getElementById('photoFileInput').addEventListener('change', async function(){
+  const files = Array.from(this.files);
+  if(!files.length) return;
+  this.value = '';
+
+  const prog = document.getElementById('uploadProgress');
+  const msg = document.getElementById('uploadMsg');
+  prog.classList.add('show');
+
+  for(let i=0; i<files.length; i++){
+    msg.textContent = `업로드 중... (${i+1}/${files.length})`;
+    try{
+      // 클라이언트 사전 압축: 1600px, quality 0.8
+      const compressed = await compressImage(files[i], 1600, 0.8);
+      const fd = new FormData();
+      fd.append('photo', compressed, 'photo.jpg');
+      const res = await fetch(`${API}/api/recipes/${RECIPE_ID}/photos`, {
+        method:'POST', body:fd
+      });
+      if(!res.ok) throw new Error(await res.text());
+      const photo = await res.json();
+      photos.push(photo);
+      renderPhotos();
+    } catch(e){
+      showToast('업로드 실패: ' + e.message, 'error');
+    }
+  }
+  prog.classList.remove('show');
+  showToast('사진이 저장됐어요! 📷', 'success');
+});
+
+// 클라이언트 이미지 압축 (Canvas)
+function compressImage(file, maxPx, quality){
+  return new Promise((resolve, reject)=>{
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = ()=>{
+      URL.revokeObjectURL(url);
+      let w = img.width, h = img.height;
+      if(w > maxPx || h > maxPx){
+        if(w > h){ h = Math.round(h * maxPx/w); w = maxPx; }
+        else      { w = Math.round(w * maxPx/h); h = maxPx; }
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      canvas.toBlob(blob=>{
+        if(blob) resolve(new File([blob],'photo.jpg',{type:'image/jpeg'}));
+        else reject(new Error('압축 실패'));
+      }, 'image/jpeg', quality);
+    };
+    img.onerror = ()=>reject(new Error('이미지 로드 실패'));
+    img.src = url;
+  });
+}
+
+async function deletePhoto(photoId){
+  if(!confirm('사진을 삭제할까요?')) return;
+  try{
+    await fetch(`${API}/api/recipes/${RECIPE_ID}/photos/${photoId}`,{method:'DELETE'});
+    photos = photos.filter(p=>p.id!==photoId);
+    renderPhotos();
+    showToast('삭제됐어요', 'success');
+  } catch {
+    showToast('삭제 실패', 'error');
+  }
+}
+
+// ════════════════════════════════
+//  재료 / 순서 뷰
+// ════════════════════════════════
+function renderIngView(){
+  document.getElementById('ingView').innerHTML = `
+    <div class="ing-grid">
+      ${localData.ingredients.map(i=>`
+        <div class="ing-item">
+          <span class="ing-name">${i.name}</span>
+          <span class="ing-amt">${i.amount}</span>
+        </div>`).join('')}
+    </div>`;
+}
+function renderStepView(){
+  document.getElementById('stepView').innerHTML = localData.steps.map((s,i)=>`
+    <div class="step-item">
+      <div class="step-num">${i+1}</div>
+      <div class="step-text">${s}</div>
+    </div>`).join('');
+}
+
+// ════════════════════════════════
+//  편집 모드
+// ════════════════════════════════
+function renderIngEditor(){
+  const el = document.getElementById('ingEditorList');
+  el.innerHTML = '';
+  localData.ingredients.forEach((ing,i)=>{
+    const row = document.createElement('div');
+    row.className = 'ing-row';
+    row.innerHTML = `
+      <input class="edit-input" style="margin:0" value="${ing.name}" placeholder="재료 이름" data-i="${i}" data-f="name">
+      <input class="edit-input" style="margin:0" value="${ing.amount}" placeholder="양" data-i="${i}" data-f="amount">
+      <button class="del-btn" onclick="removeIng(${i})">✕</button>`;
+    el.appendChild(row);
+  });
+  el.querySelectorAll('input').forEach(inp=>{
+    inp.addEventListener('input',function(){
+      localData.ingredients[this.dataset.i][this.dataset.f]=this.value;
+    });
+  });
+}
+function addIngRow(){localData.ingredients.push({name:'',amount:''});renderIngEditor();}
+function removeIng(i){localData.ingredients.splice(i,1);renderIngEditor();}
+
+function renderStepEditor(){
+  const el = document.getElementById('stepEditorList');
+  el.innerHTML = '';
+  localData.steps.forEach((s,i)=>{
+    const row = document.createElement('div');
+    row.className = 'step-row';
+    row.innerHTML = `
+      <div class="step-row-num">${i+1}</div>
+      <textarea class="edit-input" style="margin:0;flex:1" rows="2" data-s="${i}">${s}</textarea>
+      <button class="del-btn" onclick="removeStep(${i})">✕</button>`;
+    el.appendChild(row);
+  });
+  el.querySelectorAll('textarea').forEach(ta=>{
+    ta.addEventListener('input',function(){localData.steps[this.dataset.s]=this.value;});
+  });
+}
+function addStepRow(){localData.steps.push('');renderStepEditor();}
+function removeStep(i){localData.steps.splice(i,1);renderStepEditor();}
+
+let editing=false;
+function toggleEdit(){
+  editing=!editing;
+  document.body.classList.toggle('editing',editing);
+  document.getElementById('fabLabel').textContent=editing?'수정 취소':'레시피 수정';
+  document.getElementById('editFab').classList.toggle('active',editing);
+  if(editing){renderIngEditor();renderStepEditor();}
+  else{renderIngView();renderStepView();}
+}
+function saveEdit(){
+  saveLocal(localData);
+  editing=false;
+  document.body.classList.remove('editing');
+  document.getElementById('fabLabel').textContent='레시피 수정';
+  document.getElementById('editFab').classList.remove('active');
+  renderIngView();renderStepView();
+  showToast('저장됐어요! ✓','success');
+}
+
+// ════════════════════════════════
+//  후기 — API 연동
+// ════════════════════════════════
+let rating=0;
+const starEls=document.querySelectorAll('.star');
+starEls.forEach(s=>{
+  s.addEventListener('mouseenter',()=>starEls.forEach(x=>x.classList.toggle('on',x.dataset.v<=s.dataset.v)));
+  s.addEventListener('click',()=>{rating=parseInt(s.dataset.v);});
+});
+document.getElementById('stars').addEventListener('mouseleave',()=>{
+  starEls.forEach(x=>x.classList.toggle('on',x.dataset.v<=rating));
+});
+
+let reviewPhotoFiles=[];
+document.getElementById('reviewPhotoInput').addEventListener('change',function(){
+  reviewPhotoFiles=Array.from(this.files).slice(0,5);
+  const prev=document.getElementById('reviewPhotoPrev');
+  prev.innerHTML='';
+  reviewPhotoFiles.forEach(f=>{
+    const r=new FileReader();
+    r.onload=e=>{
+      const img=document.createElement('img');
+      img.src=e.target.result; img.className='photo-thumb';
+      prev.appendChild(img);
+    };
+    r.readAsDataURL(f);
+  });
+});
+
+async function loadReviews(){
+  try{
+    const res=await fetch(`${API}/api/recipes/${RECIPE_ID}/reviews`);
+    const reviews=await res.json();
+    renderReviews(reviews);
+  } catch {
+    renderReviews([]);
+  }
+}
+
+function renderReviews(reviews){
+  const list=document.getElementById('reviewList');
+  if(!reviews||reviews.length===0){
+    list.innerHTML='<div class="no-review">아직 후기가 없어요. 첫 후기를 남겨보세요! 🍴</div>';
+    return;
+  }
+  list.innerHTML='';
+  [...reviews].reverse().forEach(r=>{
+    const el=document.createElement('div');
+    el.className='review-item';
+    const stars='★'.repeat(r.rating||5)+'☆'.repeat(5-(r.rating||5));
+    const photoHTML=(r.photos||[]).map(p=>{
+      const full=p.startsWith('http')?p:API+p;
+      return `<img class="review-photo" src="${full}" onclick="openModal('${full}')">`;
+    }).join('');
+    el.innerHTML=`
+      <button class="review-del" onclick="deleteReview('${r.id}')" title="삭제">✕</button>
+      <div class="review-header"><span class="review-name">${r.name}</span><span class="review-date">${r.date}</span></div>
+      <div class="review-stars">${stars}</div>
+      <div class="review-text">${r.text}</div>
+      ${photoHTML?`<div class="review-photos">${photoHTML}</div>`:''}`;
+    list.appendChild(el);
+  });
+}
+
+async function submitReview(){
+  const name=document.getElementById('reviewName').value.trim()||'익명';
+  const text=document.getElementById('reviewText').value.trim();
+  if(!text){showToast('후기 내용을 입력해주세요!','error');return;}
+
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=true; btn.textContent='등록 중...';
+
+  try{
+    const fd=new FormData();
+    fd.append('name',name);
+    fd.append('text',text);
+    fd.append('rating',rating||5);
+    for(const f of reviewPhotoFiles){
+      const compressed=await compressImage(f,800,0.75);
+      fd.append('photos',compressed,'photo.jpg');
+    }
+    const res=await fetch(`${API}/api/recipes/${RECIPE_ID}/reviews`,{method:'POST',body:fd});
+    if(!res.ok) throw new Error(await res.text());
+
+    document.getElementById('reviewName').value='';
+    document.getElementById('reviewText').value='';
+    document.getElementById('reviewPhotoPrev').innerHTML='';
+    rating=0; reviewPhotoFiles=[];
+    starEls.forEach(s=>s.classList.remove('on'));
+    showToast('후기가 등록됐어요! 🎉','success');
+    await loadReviews();
+  } catch(e){
+    showToast('등록 실패: '+e.message,'error');
+  } finally {
+    btn.disabled=false; btn.textContent='후기 등록하기';
+  }
+}
+
+async function deleteReview(reviewId){
+  if(!confirm('후기를 삭제할까요?')) return;
+  try{
+    await fetch(`${API}/api/recipes/${RECIPE_ID}/reviews/${reviewId}`,{method:'DELETE'});
+    showToast('삭제됐어요','success');
+    await loadReviews();
+  } catch {
+    showToast('삭제 실패','error');
+  }
+}
+
+// ── 모달
+function openModal(src){document.getElementById('modalImg').src=src;document.getElementById('imgModal').classList.add('open');}
+function closeModal(){document.getElementById('imgModal').classList.remove('open');}
+
+// ── 초기화
+renderIngView();
+renderStepView();
+loadPhotos();
+loadReviews();
+</script>
+</body>
+</html>
