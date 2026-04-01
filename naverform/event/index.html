@@ -3,210 +3,100 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>이벤트 참여 | SBS아카데미 컴퓨터아트학원 안산점</title>
+  <title>이벤트 참여 — SBS아카데미 컴퓨터아트학원 안산점</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --primary: #FF5C8A;
-      --primary-dark: #e04070;
-      --primary-light: #fff0f4;
-      --text-dark: #1a1a1a;
-      --text-mid: #555;
-      --text-light: #999;
-      --border: #f0f0f0;
-      --white: #ffffff;
+      --bg: #ffffff;
+      --surface: #f8f8f8;
+      --border: #e8e8e8;
+      --border-hover: #c0c0c0;
+      --text-primary: #111111;
+      --text-secondary: #555555;
+      --text-muted: #999999;
+      --accent: #111111;
+      --accent-light: #f0f0f0;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    html { font-size: 16px; }
     body {
       font-family: 'Noto Sans KR', sans-serif;
-      background: #f8f8f8;
+      background: var(--bg);
+      color: var(--text-primary);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 32px 20px;
-    }
-
-    /* 배경 장식 */
-    body::before {
-      content: '';
-      position: fixed;
-      top: -120px;
-      right: -120px;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(255,92,138,0.12) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-    body::after {
-      content: '';
-      position: fixed;
-      bottom: -100px;
-      left: -100px;
-      width: 350px;
-      height: 350px;
-      background: radial-gradient(circle, rgba(255,92,138,0.08) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
+      padding: 48px 20px;
+      -webkit-font-smoothing: antialiased;
     }
 
     .container {
-      position: relative;
-      z-index: 1;
+      max-width: 480px;
       width: 100%;
-      max-width: 520px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-    }
-
-    /* 헤더 */
-    .header {
-      width: 100%;
-      background: var(--white);
-      border-radius: 20px 20px 0 0;
-      padding: 36px 40px 28px;
       text-align: center;
-      border-bottom: 1px solid var(--border);
+      animation: fadeIn 0.4s ease;
     }
 
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 20px;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    .brand-logo {
-      width: 32px;
-      height: 32px;
-      background: var(--primary);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .brand-logo svg {
-      width: 18px;
-      height: 18px;
-      fill: white;
-    }
-
-    .brand-name {
-      font-family: 'Black Han Sans', sans-serif;
-      font-size: 14px;
-      color: var(--text-mid);
-      letter-spacing: 0.02em;
-    }
-
-    .event-badge {
+    .badge {
       display: inline-block;
-      background: var(--primary-light);
-      color: var(--primary);
       font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+    }
+
+    .logo {
+      display: block;
+      margin: 0 auto 28px;
+      width: 56px;
+      height: 56px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 6vw, 40px);
       font-weight: 700;
-      letter-spacing: 0.08em;
-      padding: 4px 12px;
-      border-radius: 20px;
-      margin-bottom: 14px;
-    }
-
-    .title {
-      font-family: 'Black Han Sans', sans-serif;
-      font-size: 26px;
-      color: var(--text-dark);
-      line-height: 1.3;
-      letter-spacing: -0.01em;
-    }
-
-    .title span {
-      color: var(--primary);
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 10px;
     }
 
     .subtitle {
-      margin-top: 10px;
-      font-size: 13px;
-      color: var(--text-light);
-      line-height: 1.7;
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      letter-spacing: 0.01em;
     }
 
-    /* QR 카드 */
-    .qr-card {
-      width: 100%;
-      background: var(--white);
-      padding: 40px;
-      display: flex;
-      flex-direction: column;
+    .qr-wrap {
+      display: inline-flex;
       align-items: center;
-      gap: 24px;
-    }
-
-    .qr-wrapper {
-      position: relative;
-      padding: 20px;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 4px 32px rgba(255,92,138,0.12), 0 1px 8px rgba(0,0,0,0.06);
-      border: 1.5px solid rgba(255,92,138,0.15);
-    }
-
-    /* QR 모서리 장식 */
-    .qr-wrapper::before,
-    .qr-wrapper::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      border-color: var(--primary);
-      border-style: solid;
-    }
-    .qr-wrapper::before {
-      top: -2px; left: -2px;
-      border-width: 3px 0 0 3px;
-      border-radius: 4px 0 0 0;
-    }
-    .qr-wrapper::after {
-      bottom: -2px; right: -2px;
-      border-width: 0 3px 3px 0;
-      border-radius: 0 0 4px 0;
-    }
-
-    /* 추가 모서리 */
-    .qr-corner-tr,
-    .qr-corner-bl {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      border-color: var(--primary);
-      border-style: solid;
-    }
-    .qr-corner-tr {
-      top: -2px; right: -2px;
-      border-width: 3px 3px 0 0;
-      border-radius: 0 4px 0 0;
-    }
-    .qr-corner-bl {
-      bottom: -2px; left: -2px;
-      border-width: 0 0 3px 3px;
-      border-radius: 0 0 0 4px;
-    }
-
-    #qrcode {
-      display: block;
-      line-height: 0;
+      justify-content: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
     }
 
     #qrcode canvas,
@@ -215,42 +105,19 @@
       border-radius: 4px;
     }
 
-    .qr-label {
-      text-align: center;
+    .hint {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      line-height: 1.7;
     }
 
-    .qr-label .icon {
-      font-size: 22px;
-      margin-bottom: 6px;
-      display: block;
-      animation: bounce 2s ease-in-out infinite;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-
-    .qr-label p {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text-dark);
-      margin-bottom: 4px;
-    }
-
-    .qr-label small {
-      font-size: 12px;
-      color: var(--text-light);
-    }
-
-    /* 구분선 */
     .divider {
-      width: 100%;
       display: flex;
       align-items: center;
       gap: 12px;
+      margin-bottom: 20px;
     }
-
     .divider::before,
     .divider::after {
       content: '';
@@ -258,155 +125,180 @@
       height: 1px;
       background: var(--border);
     }
-
     .divider span {
       font-size: 11px;
-      color: var(--text-light);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
       white-space: nowrap;
     }
 
-    /* 직접 이동 버튼 */
-    .link-btn {
+    .btn-row {
       display: flex;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      flex: 1;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      width: 100%;
-      padding: 14px 24px;
-      background: var(--primary);
-      color: white;
-      font-family: 'Noto Sans KR', sans-serif;
+      padding: 15px 24px;
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 600;
+      font-family: 'Noto Sans KR', sans-serif;
+      color: #fff;
+      background: var(--text-primary);
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
       text-decoration: none;
-      border-radius: 12px;
-      transition: all 0.2s ease;
-      letter-spacing: 0.02em;
+      transition: opacity 0.2s, transform 0.15s;
+      letter-spacing: 0.01em;
     }
+    .btn-primary:hover { opacity: 0.82; transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
 
-    .link-btn:hover {
-      background: var(--primary-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255,92,138,0.35);
-    }
-
-    .link-btn:active {
-      transform: translateY(0);
-    }
-
-    .link-btn svg {
-      width: 16px;
-      height: 16px;
-      fill: white;
-      flex-shrink: 0;
-    }
-
-    /* 푸터 */
-    .footer {
-      width: 100%;
-      background: #fafafa;
-      border-top: 1px solid var(--border);
-      border-radius: 0 0 20px 20px;
-      padding: 18px 40px;
-      text-align: center;
-    }
-
-    .footer p {
-      font-size: 11px;
-      color: var(--text-light);
-      line-height: 1.6;
-    }
-
-    .footer strong {
-      color: var(--text-mid);
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 15px 20px;
+      font-size: 14px;
       font-weight: 500;
+      font-family: 'Noto Sans KR', sans-serif;
+      color: var(--text-secondary);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+    .btn-secondary:hover { border-color: var(--text-primary); color: var(--text-primary); transform: translateY(-1px); }
+    .btn-secondary:active { transform: translateY(0); }
+
+    .footer {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.7;
     }
 
-    /* 입장 애니메이션 */
-    .container {
-      animation: fadeUp 0.5s ease both;
-    }
+    /* ── 인쇄 (A4) ── */
+    .print-url { display: none; }
 
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 15mm 20mm;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+
+      html, body {
+        background: #fff;
+        min-height: unset;
+        padding: 0;
+        display: block;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 267mm; /* 297 - 30mm margin */
+      }
+
+      .container { animation: none; }
+
+      .btn-row,
+      .divider,
+      .footer,
+      .hint { display: none !important; }
+
+      .qr-wrap {
+        padding: 40px;
+        border: 1.5px solid #ddd;
+        box-shadow: none;
+        margin-bottom: 20px;
+      }
+
+      .print-url {
+        display: block;
+        font-size: 12px;
+        color: #aaa;
+        margin-top: 16px;
+        word-break: break-all;
+        letter-spacing: 0.01em;
       }
     }
 
     @media (max-width: 480px) {
-      .header,
-      .qr-card,
-      .footer {
-        padding-left: 24px;
-        padding-right: 24px;
-      }
-
-      .title {
-        font-size: 22px;
-      }
+      .btn-row { flex-direction: column; }
     }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <div class="header">
-    <div class="brand">
-      <div class="brand-logo">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-        </svg>
-      </div>
-      <span class="brand-name">SBS아카데미 컴퓨터아트학원 안산점</span>
-    </div>
-    <div class="event-badge">📋 EVENT</div>
-    <h1 class="title">QR코드를 스캔하고<br><span>참여해 주세요!</span></h1>
-    <p class="subtitle">카메라 앱으로 QR코드를 비추면<br>바로 이동합니다</p>
+
+  <span class="badge">SBS아카데미 컴퓨터아트학원 안산점</span>
+
+  <svg class="logo" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="56" height="56" rx="16" fill="#111"/>
+    <rect x="14" y="18" width="10" height="10" rx="2" fill="white"/>
+    <rect x="14" y="30" width="10" height="8" rx="2" fill="white" opacity="0.5"/>
+    <rect x="26" y="18" width="16" height="4" rx="2" fill="white"/>
+    <rect x="26" y="25" width="12" height="4" rx="2" fill="white" opacity="0.7"/>
+    <rect x="26" y="32" width="8" height="4" rx="2" fill="white" opacity="0.4"/>
+  </svg>
+
+  <h1>이벤트<br>참여하기</h1>
+  <p class="subtitle">QR코드를 스캔해 참여해 주세요</p>
+
+  <div class="qr-wrap">
+    <div id="qrcode"></div>
   </div>
 
-  <div class="qr-card">
-    <div class="qr-wrapper">
-      <div class="qr-corner-tr"></div>
-      <div class="qr-corner-bl"></div>
-      <div id="qrcode"></div>
-    </div>
+  <p class="hint">
+    카메라 앱으로 QR코드를 비추면 바로 이동합니다<br>
+    또는 아래 버튼으로 직접 이동하세요
+  </p>
 
-    <div class="qr-label">
-      <span class="icon">📱</span>
-      <p>카메라로 스캔하세요</p>
-      <small>또는 아래 버튼으로 직접 이동</small>
-    </div>
+  <div class="divider"><span>바로 가기</span></div>
 
-    <div class="divider">
-      <span>직접 이동</span>
-    </div>
-
-    <a href="https://form.naver.com/response/fYVfthvrOK-NrPLytttJpA" target="_blank" class="link-btn">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+  <div class="btn-row">
+    <a href="https://form.naver.com/response/fYVfthvrOK-NrPLytttJpA" target="_blank" class="btn-primary">
+      <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
       </svg>
       네이버 폼 바로 가기
     </a>
+    <button class="btn-secondary" onclick="window.print()">
+      <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.056 48.056 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z"/>
+      </svg>
+      인쇄
+    </button>
   </div>
 
+  <span class="print-url">form.naver.com/response/fYVfthvrOK-NrPLytttJpA</span>
+
   <div class="footer">
-    <p><strong>SBS아카데미 컴퓨터아트학원 안산점</strong><br>
-    본 페이지는 이벤트 참여를 위한 안내 페이지입니다.</p>
+    본 페이지는 이벤트 참여 안내를 위한 페이지입니다
   </div>
+
 </div>
 
 <script>
-  // QR 코드 생성 (크게)
   new QRCode(document.getElementById("qrcode"), {
     text: "https://form.naver.com/response/fYVfthvrOK-NrPLytttJpA",
-    width: 260,
-    height: 260,
-    colorDark: "#1a1a1a",
+    width: 240,
+    height: 240,
+    colorDark: "#111111",
     colorLight: "#ffffff",
     correctLevel: QRCode.CorrectLevel.H
   });
