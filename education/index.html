@@ -8,97 +8,86 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --pink: #FF5C8A; --pink-light: #FFE8EF; --pink-mid: #FFB3C8;
-      --black: #1A1A1A; --gray: #666; --gray-light: #F5F5F5;
-      --gray-mid: #E8E8E8; --white: #FFFFFF;
-    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #EFEFEF; font-family: 'Noto Sans KR', sans-serif; color: var(--black); }
+    body { background: #f5f5f5; font-family: 'Noto Sans KR', sans-serif; color: #1a1a1a; }
 
     nav {
-      background: var(--white); border-bottom: 1.5px solid var(--gray-mid);
+      background: #fff; border-bottom: 1px solid #e8e8e8;
       position: sticky; top: 0; z-index: 100;
-      padding: 0 40px; height: 56px;
+      padding: 0 24px; height: 52px;
       display: flex; align-items: center; justify-content: space-between;
     }
-    .logo { font-family: 'Black Han Sans', sans-serif; font-size: 20px; color: var(--pink); text-decoration: none; }
-    .logo span { color: var(--black); }
-    nav ul { list-style: none; display: flex; gap: 2rem; }
-    nav a { font-size: 13px; font-weight: 500; color: var(--gray); text-decoration: none; transition: color 0.2s; }
-    nav a:hover, nav a.active { color: var(--pink); }
+    .logo { font-family: 'Black Han Sans', sans-serif; font-size: 18px; color: #FF5C8A; text-decoration: none; }
+    .logo span { color: #1a1a1a; }
+    nav ul { list-style: none; display: flex; gap: 20px; }
+    nav a { font-size: 13px; font-weight: 500; color: #888; text-decoration: none; transition: color 0.2s; }
+    nav a:hover, nav a.active { color: #1a1a1a; font-weight: 700; }
 
-    .page-header {
-      background: var(--pink); padding: 44px 40px 36px;
-      position: relative; overflow: hidden;
+    .hero {
+      background: #fff; padding: 40px 24px 32px;
+      border-bottom: 1px solid #e8e8e8; text-align: center;
     }
-    .page-header::before {
-      content: ''; position: absolute; top: -30px; right: -30px;
-      width: 160px; height: 160px; border-radius: 50%;
-      background: rgba(255,255,255,0.1);
+    .hero-icon {
+      width: 56px; height: 56px; background: #1a1a1a; border-radius: 14px;
+      margin: 0 auto 18px; display: flex; align-items: center; justify-content: center;
     }
-    .breadcrumb { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.6); margin-bottom: 8px; letter-spacing: 0.05em; }
-    .breadcrumb a { color: rgba(255,255,255,0.8); text-decoration: none; }
-    .breadcrumb span { margin: 0 6px; }
-    .page-header h1 {
+    .hero-icon svg { width: 28px; height: 28px; fill: #fff; }
+    .hero h1 {
       font-family: 'Black Han Sans', sans-serif;
-      font-size: clamp(36px, 6vw, 60px); color: var(--white);
-      letter-spacing: -1.5px; line-height: 1; position: relative; z-index: 1;
+      font-size: 36px; color: #1a1a1a; line-height: 1.2;
+      letter-spacing: -1px; margin-bottom: 8px;
     }
-    .page-header-sub { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.8); margin-top: 8px; position: relative; z-index: 1; }
+    .hero-sub { font-size: 13px; color: #aaa; }
 
-    .section { padding: 40px; max-width: 1100px; margin: 0 auto; }
-    .section-title {
-      font-family: 'Black Han Sans', sans-serif; font-size: 18px;
-      color: var(--black); margin-bottom: 20px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .section-title::after { content: ''; flex: 1; height: 1.5px; background: var(--gray-mid); }
+    .body-wrap { max-width: 560px; margin: 0 auto; padding: 28px 20px 60px; }
 
-    /* 소개 인물 카드 */
-    .people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-bottom: 48px; }
-    .people-card {
-      background: var(--white); border-radius: 12px;
-      padding: 28px 20px 24px; text-align: center;
-      border: 1.5px solid var(--gray-mid);
-      text-decoration: none; color: inherit;
-      transition: border-color 0.2s, box-shadow 0.2s;
+    .section-label {
+      font-size: 11px; font-weight: 700; color: #aaa;
+      letter-spacing: 0.1em; margin-bottom: 12px; margin-top: 32px;
     }
-    .people-card:hover { border-color: var(--pink); box-shadow: 0 4px 16px rgba(255,92,138,0.12); }
-    .people-card .avatar {
-      width: 64px; height: 64px; border-radius: 50%;
-      background: var(--pink-light); margin: 0 auto 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 24px;
-    }
-    .people-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-    .people-card p { font-size: 12px; color: var(--gray); }
+    .section-label:first-child { margin-top: 0; }
 
-    /* 학과 카드 그리드 */
-    .dept-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
-    .dept-card {
-      background: var(--white); border-radius: 12px;
-      padding: 24px 20px 20px;
-      border: 1.5px solid var(--gray-mid);
-      text-decoration: none; color: inherit;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      display: flex; flex-direction: column; gap: 8px;
+    .people-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .pcard {
+      background: #fff; border-radius: 14px; border: 1px solid #e8e8e8;
+      padding: 22px 16px; text-align: center;
+      text-decoration: none; color: inherit; display: block;
+      transition: border-color 0.2s;
     }
-    .dept-card:hover { border-color: var(--pink); box-shadow: 0 4px 16px rgba(255,92,138,0.12); }
-    .dept-icon { font-size: 28px; }
-    .dept-card h3 { font-family: 'Black Han Sans', sans-serif; font-size: 15px; }
-    .dept-card p { font-size: 12px; color: var(--gray); line-height: 1.5; }
-    .dept-tag {
-      display: inline-block; background: var(--pink-light); color: var(--pink);
-      font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px;
-      width: fit-content; margin-top: 4px;
+    .pcard:hover { border-color: #1a1a1a; }
+    .pcard-icon {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: #f5f5f5; margin: 0 auto 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 20px;
     }
+    .pcard h3 { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 2px; }
+    .pcard p { font-size: 11px; color: #aaa; }
 
-    @media (max-width: 600px) {
-      nav { padding: 0 20px; }
-      .page-header { padding: 36px 20px 28px; }
-      .section { padding: 28px 20px; }
-      nav ul { gap: 1rem; }
+    .dept-list { display: flex; flex-direction: column; gap: 8px; }
+    .dcard {
+      background: #fff; border-radius: 14px; border: 1px solid #e8e8e8;
+      padding: 16px 18px; text-decoration: none; color: inherit;
+      display: flex; align-items: center; gap: 14px;
+      transition: border-color 0.2s;
+    }
+    .dcard:hover { border-color: #1a1a1a; }
+    .dcard-icon {
+      width: 42px; height: 42px; border-radius: 10px;
+      background: #f5f5f5; display: flex; align-items: center;
+      justify-content: center; font-size: 18px; flex-shrink: 0;
+    }
+    .dcard-info { flex: 1; min-width: 0; }
+    .dcard-info h3 { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 2px; }
+    .dcard-info p { font-size: 12px; color: #aaa; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .dcard-tag {
+      font-size: 11px; font-weight: 700; color: #888;
+      background: #f0f0f0; padding: 3px 9px; border-radius: 20px; white-space: nowrap;
+    }
+    .dcard-arrow { color: #ccc; font-size: 18px; font-weight: 300; flex-shrink: 0; }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 30px; }
+      .dcard-info p { display: none; }
     }
   </style>
 </head>
@@ -112,91 +101,94 @@
   </ul>
 </nav>
 
-<div class="page-header">
-  <div class="breadcrumb"><a href="/">hyunlab</a><span>›</span>Education</div>
-  <h1>Education</h1>
-  <p class="page-header-sub">상담 자료 아카이브</p>
+<div class="hero">
+  <div class="hero-icon">
+    <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+  </div>
+  <h1>Education<br>상담 자료</h1>
+  <p class="hero-sub">Career Archive — SBS아카데미 컴퓨터아트학원</p>
 </div>
 
-<div class="section">
-  <div class="section-title">소개</div>
-  <div class="people-grid">
-    <a href="/education/mentor" class="people-card">
-      <div class="avatar">🧭</div>
+<div class="body-wrap">
+
+  <div class="section-label">소개</div>
+  <div class="people-row">
+    <a href="/education/mentor" class="pcard">
+      <div class="pcard-icon">🧭</div>
       <h3>멘토 소개</h3>
       <p>Mentor</p>
     </a>
-    <a href="/education/teacher" class="people-card">
-      <div class="avatar">🎓</div>
+    <a href="/education/teacher" class="pcard">
+      <div class="pcard-icon">🎓</div>
       <h3>강사 소개</h3>
       <p>Teacher</p>
     </a>
   </div>
 
-  <div class="section-title">상담 자료</div>
-  <div class="dept-grid">
-    <a href="/education/editorial" class="dept-card">
-      <div class="dept-icon">🎨</div>
-      <h3>시각/편집디자인</h3>
-      <p>시각디자인, 편집디자인 상담 자료</p>
-      <span class="dept-tag">editorial</span>
+  <div class="section-label">상담 자료</div>
+  <div class="dept-list">
+    <a href="/education/editorial" class="dcard">
+      <div class="dcard-icon">🎨</div>
+      <div class="dcard-info"><h3>시각/편집디자인</h3><p>시각디자인, 편집디자인 상담 자료</p></div>
+      <span class="dcard-tag">editorial</span>
+      <span class="dcard-arrow">›</span>
     </a>
-    <a href="/education/drawing" class="dept-card">
-      <div class="dept-icon">✏️</div>
-      <h3>드로잉/아트웍</h3>
-      <p>드로잉, 아트웍 상담 자료</p>
-      <span class="dept-tag">drawing</span>
+    <a href="/education/drawing" class="dcard">
+      <div class="dcard-icon">✏️</div>
+      <div class="dcard-info"><h3>드로잉/아트웍</h3><p>드로잉, 아트웍 상담 자료</p></div>
+      <span class="dcard-tag">drawing</span>
+      <span class="dcard-arrow">›</span>
     </a>
-    <a href="/education/motion" class="dept-card">
-      <div class="dept-icon">🎬</div>
-      <h3>2D/3D 모션그래픽</h3>
-      <p>모션그래픽 상담 자료</p>
-      <span class="dept-tag">motion</span>
+    <a href="/education/motion" class="dcard">
+      <div class="dcard-icon">🎬</div>
+      <div class="dcard-info"><h3>2D/3D 모션그래픽</h3><p>모션그래픽 상담 자료</p></div>
+      <span class="dcard-tag">motion</span>
+      <span class="dcard-arrow">›</span>
     </a>
-    <a href="/education/cg" class="dept-card">
-      <div class="dept-icon">💻</div>
-      <h3>CG/마야</h3>
-      <p>CG, 마야 상담 자료</p>
-      <span class="dept-tag">cg</span>
+    <a href="/education/cg" class="dcard">
+      <div class="dcard-icon">💻</div>
+      <div class="dcard-info"><h3>CG/마야</h3><p>CG, 마야 상담 자료</p></div>
+      <span class="dcard-tag">cg</span>
+      <span class="dcard-arrow">›</span>
     </a>
-    <a href="/education/interior" class="dept-card">
-      <div class="dept-icon">🏠</div>
-      <h3>인테리어/건축</h3>
-      <p>인테리어, 건축 상담 자료</p>
-      <span class="dept-tag">interior</span>
+    <a href="/education/interior" class="dcard">
+      <div class="dcard-icon">🏠</div>
+      <div class="dcard-info"><h3>인테리어/건축</h3><p>인테리어, 건축 상담 자료</p></div>
+      <span class="dcard-tag">interior</span>
+      <span class="dcard-arrow">›</span>
     </a>
-    <a href="/education/machine" class="dept-card">
-      <div class="dept-icon">⚙️</div>
-      <h3>기계/설계</h3>
-      <p>기계, 설계 상담 자료</p>
-      <span class="dept-tag">machine</span>
+    <a href="/education/machine" class="dcard">
+      <div class="dcard-icon">⚙️</div>
+      <div class="dcard-info"><h3>기계/설계</h3><p>기계, 설계 상담 자료</p></div>
+      <span class="dcard-tag">machine</span>
+      <span class="dcard-arrow">›</span>
     </a>
-    <a href="/education/it" class="dept-card">
-      <div class="dept-icon">🖥️</div>
-      <h3>IT/웹/프로그래밍</h3>
-      <p>IT, 웹, 프로그래밍 상담 자료</p>
-      <span class="dept-tag">it</span>
+    <a href="/education/it" class="dcard">
+      <div class="dcard-icon">🖥️</div>
+      <div class="dcard-info"><h3>IT/웹/프로그래밍</h3><p>IT, 웹, 프로그래밍 상담 자료</p></div>
+      <span class="dcard-tag">it</span>
+      <span class="dcard-arrow">›</span>
     </a>
-    <a href="/education/youtube" class="dept-card">
-      <div class="dept-icon">▶️</div>
-      <h3>유튜브</h3>
-      <p>유튜브 크리에이터 상담 자료</p>
-      <span class="dept-tag">youtube</span>
+    <a href="/education/youtube" class="dcard">
+      <div class="dcard-icon">▶️</div>
+      <div class="dcard-info"><h3>유튜브</h3><p>유튜브 크리에이터 상담 자료</p></div>
+      <span class="dcard-tag">youtube</span>
+      <span class="dcard-arrow">›</span>
     </a>
-    <a href="/education/ai" class="dept-card">
-      <div class="dept-icon">🤖</div>
-      <h3>AI</h3>
-      <p>AI 활용 상담 자료</p>
-      <span class="dept-tag">ai</span>
+    <a href="/education/ai" class="dcard">
+      <div class="dcard-icon">🤖</div>
+      <div class="dcard-info"><h3>AI</h3><p>AI 활용 상담 자료</p></div>
+      <span class="dcard-tag">ai</span>
+      <span class="dcard-arrow">›</span>
     </a>
-    <a href="/education/oa" class="dept-card">
-      <div class="dept-icon">📋</div>
-      <h3>자격증/OA</h3>
-      <p>자격증, OA 상담 자료</p>
-      <span class="dept-tag">oa</span>
+    <a href="/education/oa" class="dcard">
+      <div class="dcard-icon">📋</div>
+      <div class="dcard-info"><h3>자격증/OA</h3><p>자격증, OA 상담 자료</p></div>
+      <span class="dcard-tag">oa</span>
+      <span class="dcard-arrow">›</span>
     </a>
   </div>
-</div>
 
+</div>
 </body>
 </html>
