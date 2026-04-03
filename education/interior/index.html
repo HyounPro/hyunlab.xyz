@@ -10,36 +10,58 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #f5f5f5; font-family: 'Noto Sans KR', sans-serif; color: #1a1a1a; }
-    nav { background: #fff; border-bottom: 1px solid #e8e8e8; position: sticky; top: 0; z-index: 100; padding: 0 24px; height: 52px; display: flex; align-items: center; justify-content: space-between; }
+    nav { background: #fff; border-bottom: 1px solid #e8e8e8; position: sticky; top: 0; z-index: 100; padding: 0 28px; height: 52px; display: flex; align-items: center; justify-content: space-between; }
     .logo { font-family: 'Black Han Sans', sans-serif; font-size: 18px; color: #FF5C8A; text-decoration: none; }
     .logo span { color: #1a1a1a; }
     nav ul { list-style: none; display: flex; gap: 20px; }
     nav a { font-size: 13px; font-weight: 500; color: #888; text-decoration: none; transition: color 0.2s; }
     nav a:hover, nav a.active { color: #1a1a1a; font-weight: 700; }
-    .hero { background: #fff; padding: 36px 24px 28px; border-bottom: 1px solid #e8e8e8; text-align: center; }
-    .hero-icon { width: 56px; height: 56px; background: #1a1a1a; border-radius: 14px; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 26px; }
-    .breadcrumb { font-size: 11px; color: #aaa; margin-bottom: 12px; }
+
+    .hero { background: #fff; padding: 32px 28px 24px; border-bottom: 1px solid #e8e8e8; display: flex; align-items: center; gap: 20px; }
+    .hero-icon { width: 52px; height: 52px; background: #1a1a1a; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+    .hero-text { flex: 1; }
+    .breadcrumb { font-size: 11px; color: #aaa; margin-bottom: 6px; }
     .breadcrumb a { color: #888; text-decoration: none; }
     .breadcrumb span { margin: 0 5px; }
-    .hero h1 { font-family: 'Black Han Sans', sans-serif; font-size: 32px; color: #1a1a1a; letter-spacing: -1px; margin-bottom: 6px; }
-    .hero-sub { font-size: 13px; color: #aaa; }
-    .body-wrap { max-width: 560px; margin: 0 auto; padding: 24px 20px 60px; }
+    .hero h1 { font-family: 'Black Han Sans', sans-serif; font-size: 26px; color: #1a1a1a; letter-spacing: -0.5px; margin-bottom: 2px; }
+    .hero-sub { font-size: 12px; color: #aaa; }
+
+    .body-wrap { padding: 24px 28px 60px; }
     .section-label { font-size: 11px; font-weight: 700; color: #aaa; letter-spacing: 0.1em; margin-bottom: 12px; margin-top: 28px; }
     .section-label:first-child { margin-top: 0; }
+
     .card { background: #fff; border-radius: 14px; border: 1px solid #e8e8e8; padding: 22px 20px; }
     .card p { font-size: 14px; color: #555; line-height: 1.8; }
-    .teacher-item { display: flex; gap: 14px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid #f0f0f0; }
-    .teacher-item:last-child { border-bottom: none; padding-bottom: 0; }
-    .teacher-item:first-child { padding-top: 0; }
-    .t-photo { width: 52px; height: 52px; border-radius: 50%; background: #f0f0f0; flex-shrink: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 22px; }
-    .t-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-    .t-info h3 { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
-    .t-info p { font-size: 12px; color: #888; line-height: 1.6; }
+
+    /* Teacher grid */
+    .teacher-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+    .teacher-card { background: #fff; border-radius: 14px; border: 1px solid #e8e8e8; overflow: hidden; transition: border-color 0.2s; }
+    .teacher-card:hover { border-color: #1a1a1a; }
+    .teacher-photo { width: 100%; aspect-ratio: 1/1; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 48px; overflow: hidden; }
+    .teacher-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .teacher-body { padding: 14px 16px 16px; }
+    .teacher-name { font-family: 'Black Han Sans', sans-serif; font-size: 17px; margin-bottom: 6px; }
+    .dept-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
+    .dept-tag { background: #f0f0f0; color: #555; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
+    .subject-row { display: flex; align-items: flex-start; gap: 6px; margin-bottom: 6px; }
+    .subject-label { font-size: 10px; font-weight: 700; color: #888; background: #f5f5f5; border: 1px solid #e8e8e8; padding: 2px 6px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
+    .subject-value { font-size: 12px; color: #333; line-height: 1.6; }
+    .teacher-intro { font-size: 11px; color: #aaa; line-height: 1.6; margin-top: 8px; padding-top: 8px; border-top: 1px solid #f0f0f0; }
+
+    /* Career tags */
     .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
     .tag { font-size: 12px; font-weight: 700; color: #555; background: #f0f0f0; padding: 5px 12px; border-radius: 20px; }
-    .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+
+    /* Portfolio grid */
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
     .portfolio-item { aspect-ratio: 4/3; border-radius: 10px; background: #f0f0f0; border: 1px dashed #ddd; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #bbb; }
-    @media (max-width: 480px) { .hero h1 { font-size: 26px; } }
+
+    @media (max-width: 480px) {
+      .body-wrap { padding: 20px 16px 60px; }
+      nav { padding: 0 16px; }
+      .hero { padding: 24px 16px 20px; }
+      .teacher-grid { grid-template-columns: repeat(2, 1fr); }
+    }
   </style>
 </head>
 <body>
@@ -51,10 +73,12 @@
   </ul>
 </nav>
 <div class="hero">
-  <div class="breadcrumb"><a href="/education">Education</a><span>›</span>인테리어/건축</div>
   <div class="hero-icon">🏠</div>
-  <h1>인테리어/건축</h1>
-  <p class="hero-sub">Interior &amp; Architecture</p>
+  <div class="hero-text">
+    <div class="breadcrumb"><a href="/education">Education</a><span>›</span>인테리어/건축</div>
+    <h1>인테리어/건축</h1>
+    <p class="hero-sub">Interior &amp; Architecture</p>
+  </div>
 </div>
 <div class="body-wrap">
   <div class="section-label">ABOUT</div>
@@ -75,32 +99,53 @@
   </div>
 </div>
 <script>
+const DEPT_KO = {
+  editorial:'시각/편집디자인', drawing:'드로잉/아트웍',
+  motion:'2D/3D 모션그래픽', cg:'CG/마야',
+  interior:'인테리어/건축', machine:'기계/설계',
+  it:'IT/웹/프로그래밍', youtube:'유튜브',
+  webtoon:'웹툰', ai:'AI', oa:'자격증/OA',
+};
 const TEACHERS = [
-  { name:"위성혁", dept:["drawing","ai"], subjects:"디지털드로잉, 2D애니메이션, 웹툰", intro:"(현) SBS아카데미 안산 학과장", photo:"http://sbsansanart.co.kr/img/academy/teacher/artwork/teacher022.png" },
-  { name:"정희주", dept:["drawing","editorial"], subjects:"디지털드로잉, 편집디자인", intro:"(현) SBS아카데미 안산 강사", photo:"" },
-  { name:"나지우", dept:["drawing","oa"], subjects:"디지털드로잉, GTQ, GTQi", intro:"(현) SBS아카데미 안산 강사", photo:"" },
-  { name:"장수지", dept:["interior","machine"], subjects:"캐드, 스케치업, 맥스, 인벤터", intro:"홍익대 실내건축디자인 석사", photo:"http://sbsansanart.co.kr/img/academy/teacher/interior/teacher046.png" },
+  { name:"위성혁", dept:["drawing","webtoon","ai"], subjects:"디지털드로잉, 2D애니메이션, 웹툰", intro:"(현) SBS아카데미 컴퓨터아트학원 안산 학과장", photo:"http://sbsansanart.co.kr/img/academy/teacher/artwork/teacher022.png" },
+  { name:"정희주", dept:["drawing","editorial"], subjects:"디지털드로잉, 편집디자인", intro:"(현) SBS아카데미 컴퓨터아트학원 안산 강사", photo:"" },
+  { name:"나지우", dept:["drawing","oa"], subjects:"디지털드로잉, GTQ, GTQi", intro:"(현) SBS아카데미 컴퓨터아트학원 안산 강사", photo:"" },
+  { name:"장수지", dept:["interior","machine"], subjects:"캐드, 스케치업, 맥스, 인벤터", intro:"홍익대 실내건축디자인 석사, 다원앤컴퍼니 재직", photo:"http://sbsansanart.co.kr/img/academy/teacher/interior/teacher046.png" },
   { name:"성유진", dept:["interior"], subjects:"캐드, 스케치업, 맥스", intro:"인천대 도시건축학 학사", photo:"http://sbsansanart.co.kr/img/academy/teacher/interior/teacher072.png" },
-  { name:"이유진", dept:["interior"], subjects:"캐드, 스케치업, 맥스", intro:"(현) SBS아카데미 안산 강사", photo:"" },
-  { name:"이주형", dept:["cg","ai"], subjects:"마야, 누크", intro:"(현) SBS아카데미 안산 강사", photo:"http://sbsansanart.co.kr/img/academy/teacher/cg/teacher043.png" },
-  { name:"송지우", dept:["motion","ai"], subjects:"시포디, 프리미어, 에펙", intro:"(현) SBS아카데미 안산 강사", photo:"http://sbsansanart.co.kr/img/academy/teacher/cg/teacher084.png" },
-  { name:"이정우", dept:["motion"], subjects:"시포디, 프리미어, 에펙", intro:"(현) SBS아카데미 안산 강사", photo:"" },
+  { name:"이유진", dept:["interior"], subjects:"캐드, 스케치업, 맥스", intro:"(현) SBS아카데미 컴퓨터아트학원 안산 강사", photo:"" },
+  { name:"이주형", dept:["cg","ai"], subjects:"마야, 누크", intro:"(현) SBS아카데미 컴퓨터아트학원 안산 강사", photo:"http://sbsansanart.co.kr/img/academy/teacher/cg/teacher043.png" },
+  { name:"송지우", dept:["motion","ai"], subjects:"시포디, 프리미어, 에펙", intro:"(현) SBS아카데미 컴퓨터아트학원 안산 강사", photo:"http://sbsansanart.co.kr/img/academy/teacher/cg/teacher084.png" },
+  { name:"이정우", dept:["motion"], subjects:"시포디, 프리미어, 에펙", intro:"(현) SBS아카데미 컴퓨터아트학원 안산 강사", photo:"" },
   { name:"서재현", dept:["it"], subjects:"웹, 백엔드, 바이브코딩", intro:"한양대(ERICA) 소프트웨어 학사", photo:"" },
-  { name:"이효근", dept:["oa","ai"], subjects:"컴활, MOS, GTQ, GTQi", intro:"(현) SBS아카데미 안산 강사", photo:"http://sbsansanart.co.kr/img/academy/teacher/office/teacher020.png" },
-  { name:"양윤석", dept:["oa"], subjects:"전산회계, 전산세무", intro:"(현) SBS아카데미 안산 강사", photo:"http://sbsansanart.co.kr/img/academy/teacher/office/teacher021.png" },
+  { name:"이효근", dept:["oa","ai"], subjects:"컴활, MOS, GTQ, GTQi", intro:"(현) SBS아카데미 컴퓨터아트학원 안산 강사", photo:"http://sbsansanart.co.kr/img/academy/teacher/office/teacher020.png" },
+  { name:"양윤석", dept:["oa"], subjects:"전산회계, 전산세무", intro:"(현) SBS아카데미 컴퓨터아트학원 안산 강사", photo:"http://sbsansanart.co.kr/img/academy/teacher/office/teacher021.png" },
 ];
-const SLUG = "interior";
-const filtered = TEACHERS.filter(t => t.dept.includes(SLUG));
-const wrap = document.getElementById('teacherWrap');
-if (filtered.length === 0) {
-  wrap.innerHTML = '<p style="font-size:13px;color:#bbb;">강사 정보를 입력해주세요.</p>';
-} else {
-  wrap.innerHTML = filtered.map(t => `
-    <div class="teacher-item">
-      <div class="t-photo">${t.photo ? `<img src="${t.photo}" alt="${t.name}" onerror="this.parentElement.innerHTML='👤'">` : '👤'}</div>
-      <div class="t-info"><h3>${t.name}</h3><p>${t.subjects}<br>${t.intro}</p></div>
-    </div>`).join('');
+
+function renderTeachers(slug) {
+  const filtered = TEACHERS.filter(t => t.dept.includes(slug));
+  const wrap = document.getElementById('teacherWrap');
+  if (!wrap) return;
+  if (filtered.length === 0) {
+    wrap.innerHTML = '<p style="font-size:13px;color:#bbb;padding:4px 0;">강사 정보를 입력해주세요.</p>';
+    return;
+  }
+  wrap.innerHTML = '<div class="teacher-grid">' + filtered.map(t => `
+    <div class="teacher-card">
+      <div class="teacher-photo">
+        ${t.photo ? `<img src="${t.photo}" alt="${t.name}" onerror="this.parentElement.innerHTML='👤'">` : '👤'}
+      </div>
+      <div class="teacher-body">
+        <div class="teacher-name">${t.name}</div>
+        <div class="dept-tags">${t.dept.map(d=>`<span class="dept-tag">${DEPT_KO[d]||d}</span>`).join('')}</div>
+        <div class="subject-row">
+          <span class="subject-label">담당과목</span>
+          <span class="subject-value">${t.subjects}</span>
+        </div>
+        <p class="teacher-intro">${t.intro}</p>
+      </div>
+    </div>`).join('') + '</div>';
 }
+renderTeachers("interior");
 </script>
 </body>
 </html>

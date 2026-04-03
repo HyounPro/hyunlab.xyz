@@ -11,35 +11,21 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #f5f5f5; font-family: 'Noto Sans KR', sans-serif; color: #1a1a1a; }
 
-    nav {
-      background: #fff; border-bottom: 1px solid #e8e8e8;
-      position: sticky; top: 0; z-index: 100;
-      padding: 0 24px; height: 52px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
+    nav { background: #fff; border-bottom: 1px solid #e8e8e8; position: sticky; top: 0; z-index: 100; padding: 0 28px; height: 52px; display: flex; align-items: center; justify-content: space-between; }
     .logo { font-family: 'Black Han Sans', sans-serif; font-size: 18px; color: #FF5C8A; text-decoration: none; }
     .logo span { color: #1a1a1a; }
     nav ul { list-style: none; display: flex; gap: 20px; }
     nav a { font-size: 13px; font-weight: 500; color: #888; text-decoration: none; transition: color 0.2s; }
     nav a:hover, nav a.active { color: #1a1a1a; font-weight: 700; }
 
-    .hero {
-      background: #fff; padding: 40px 24px 32px;
-      border-bottom: 1px solid #e8e8e8; text-align: center;
-    }
-    .hero-icon {
-      width: 56px; height: 56px; background: #1a1a1a; border-radius: 14px;
-      margin: 0 auto 18px; display: flex; align-items: center; justify-content: center;
-    }
+    .hero { background: #fff; padding: 32px 28px 24px; border-bottom: 1px solid #e8e8e8; display: flex; align-items: center; gap: 20px; }
+    .hero-icon { width: 52px; height: 52px; background: #1a1a1a; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .hero-icon svg { width: 28px; height: 28px; fill: #fff; }
-    .hero h1 {
-      font-family: 'Black Han Sans', sans-serif;
-      font-size: 36px; color: #1a1a1a; line-height: 1.2;
-      letter-spacing: -1px; margin-bottom: 8px;
-    }
-    .hero-sub { font-size: 13px; color: #aaa; }
+    .hero-text { flex: 1; }
+    .hero h1 { font-family: 'Black Han Sans', sans-serif; font-size: 26px; color: #1a1a1a; letter-spacing: -0.5px; margin-bottom: 2px; }
+    .hero-sub { font-size: 12px; color: #aaa; }
 
-    .body-wrap { max-width: 560px; margin: 0 auto; padding: 28px 20px 60px; }
+    .body-wrap { padding: 24px 28px 60px; }
 
     .section-label {
       font-size: 11px; font-weight: 700; color: #aaa;
@@ -47,7 +33,7 @@
     }
     .section-label:first-child { margin-top: 0; }
 
-    .people-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .people-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
     .pcard {
       background: #fff; border-radius: 14px; border: 1px solid #e8e8e8;
       padding: 22px 16px; text-align: center;
@@ -63,31 +49,30 @@
     .pcard h3 { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 2px; }
     .pcard p { font-size: 11px; color: #aaa; }
 
-    .dept-list { display: flex; flex-direction: column; gap: 8px; }
+    .dept-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
     .dcard {
       background: #fff; border-radius: 14px; border: 1px solid #e8e8e8;
-      padding: 16px 18px; text-decoration: none; color: inherit;
-      display: flex; align-items: center; gap: 14px;
+      padding: 18px 18px 16px; text-decoration: none; color: inherit;
+      display: flex; flex-direction: column; gap: 10px;
       transition: border-color 0.2s;
     }
     .dcard:hover { border-color: #1a1a1a; }
+    .dcard-top { display: flex; align-items: center; gap: 12px; }
     .dcard-icon {
-      width: 42px; height: 42px; border-radius: 10px;
+      width: 40px; height: 40px; border-radius: 10px;
       background: #f5f5f5; display: flex; align-items: center;
       justify-content: center; font-size: 18px; flex-shrink: 0;
     }
-    .dcard-info { flex: 1; min-width: 0; }
     .dcard-info h3 { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 2px; }
-    .dcard-info p { font-size: 12px; color: #aaa; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .dcard-info p { font-size: 11px; color: #aaa; }
     .dcard-tag {
-      font-size: 11px; font-weight: 700; color: #888;
-      background: #f0f0f0; padding: 3px 9px; border-radius: 20px; white-space: nowrap;
+      font-size: 10px; font-weight: 700; color: #888;
+      background: #f0f0f0; padding: 2px 8px; border-radius: 20px; width: fit-content;
     }
-    .dcard-arrow { color: #ccc; font-size: 18px; font-weight: 300; flex-shrink: 0; }
 
     @media (max-width: 480px) {
-      .hero h1 { font-size: 30px; }
-      .dcard-info p { display: none; }
+      .body-wrap { padding: 20px 16px 60px; }
+      .hero { padding: 24px 16px 20px; }
     }
   </style>
 </head>
@@ -105,8 +90,10 @@
   <div class="hero-icon">
     <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
   </div>
-  <h1>Education<br>상담 자료</h1>
-  <p class="hero-sub">Career Archive — SBS아카데미 컴퓨터아트학원</p>
+  <div class="hero-text">
+    <h1>Education</h1>
+    <p class="hero-sub">상담 자료 아카이브 — SBS아카데미 컴퓨터아트학원</p>
+  </div>
 </div>
 
 <div class="body-wrap">
@@ -126,66 +113,50 @@
   </div>
 
   <div class="section-label">상담 자료</div>
-  <div class="dept-list">
+  <div class="dept-grid">
     <a href="/education/editorial" class="dcard">
-      <div class="dcard-icon">🎨</div>
-      <div class="dcard-info"><h3>시각/편집디자인</h3><p>시각디자인, 편집디자인 상담 자료</p></div>
+      <div class="dcard-top"><div class="dcard-icon">🎨</div><div class="dcard-info"><h3>시각/편집디자인</h3><p>시각디자인, 편집디자인</p></div></div>
       <span class="dcard-tag">editorial</span>
-      <span class="dcard-arrow">›</span>
     </a>
     <a href="/education/drawing" class="dcard">
-      <div class="dcard-icon">✏️</div>
-      <div class="dcard-info"><h3>드로잉/아트웍</h3><p>드로잉, 아트웍 상담 자료</p></div>
+      <div class="dcard-top"><div class="dcard-icon">✏️</div><div class="dcard-info"><h3>드로잉/아트웍</h3><p>드로잉, 아트웍</p></div></div>
       <span class="dcard-tag">drawing</span>
-      <span class="dcard-arrow">›</span>
+    </a>
+    <a href="/education/webtoon" class="dcard">
+      <div class="dcard-top"><div class="dcard-icon">📖</div><div class="dcard-info"><h3>웹툰</h3><p>웹툰 창작</p></div></div>
+      <span class="dcard-tag">webtoon</span>
     </a>
     <a href="/education/motion" class="dcard">
-      <div class="dcard-icon">🎬</div>
-      <div class="dcard-info"><h3>2D/3D 모션그래픽</h3><p>모션그래픽 상담 자료</p></div>
+      <div class="dcard-top"><div class="dcard-icon">🎬</div><div class="dcard-info"><h3>2D/3D 모션그래픽</h3><p>모션그래픽</p></div></div>
       <span class="dcard-tag">motion</span>
-      <span class="dcard-arrow">›</span>
     </a>
     <a href="/education/cg" class="dcard">
-      <div class="dcard-icon">💻</div>
-      <div class="dcard-info"><h3>CG/마야</h3><p>CG, 마야 상담 자료</p></div>
+      <div class="dcard-top"><div class="dcard-icon">💻</div><div class="dcard-info"><h3>CG/마야</h3><p>CG, 마야</p></div></div>
       <span class="dcard-tag">cg</span>
-      <span class="dcard-arrow">›</span>
     </a>
     <a href="/education/interior" class="dcard">
-      <div class="dcard-icon">🏠</div>
-      <div class="dcard-info"><h3>인테리어/건축</h3><p>인테리어, 건축 상담 자료</p></div>
+      <div class="dcard-top"><div class="dcard-icon">🏠</div><div class="dcard-info"><h3>인테리어/건축</h3><p>인테리어, 건축</p></div></div>
       <span class="dcard-tag">interior</span>
-      <span class="dcard-arrow">›</span>
     </a>
     <a href="/education/machine" class="dcard">
-      <div class="dcard-icon">⚙️</div>
-      <div class="dcard-info"><h3>기계/설계</h3><p>기계, 설계 상담 자료</p></div>
+      <div class="dcard-top"><div class="dcard-icon">⚙️</div><div class="dcard-info"><h3>기계/설계</h3><p>기계, 설계</p></div></div>
       <span class="dcard-tag">machine</span>
-      <span class="dcard-arrow">›</span>
     </a>
     <a href="/education/it" class="dcard">
-      <div class="dcard-icon">🖥️</div>
-      <div class="dcard-info"><h3>IT/웹/프로그래밍</h3><p>IT, 웹, 프로그래밍 상담 자료</p></div>
+      <div class="dcard-top"><div class="dcard-icon">🖥️</div><div class="dcard-info"><h3>IT/웹/프로그래밍</h3><p>IT, 웹, 프로그래밍</p></div></div>
       <span class="dcard-tag">it</span>
-      <span class="dcard-arrow">›</span>
     </a>
     <a href="/education/youtube" class="dcard">
-      <div class="dcard-icon">▶️</div>
-      <div class="dcard-info"><h3>유튜브</h3><p>유튜브 크리에이터 상담 자료</p></div>
+      <div class="dcard-top"><div class="dcard-icon">▶️</div><div class="dcard-info"><h3>유튜브</h3><p>유튜브 크리에이터</p></div></div>
       <span class="dcard-tag">youtube</span>
-      <span class="dcard-arrow">›</span>
     </a>
     <a href="/education/ai" class="dcard">
-      <div class="dcard-icon">🤖</div>
-      <div class="dcard-info"><h3>AI</h3><p>AI 활용 상담 자료</p></div>
+      <div class="dcard-top"><div class="dcard-icon">🤖</div><div class="dcard-info"><h3>AI</h3><p>AI 활용</p></div></div>
       <span class="dcard-tag">ai</span>
-      <span class="dcard-arrow">›</span>
     </a>
     <a href="/education/oa" class="dcard">
-      <div class="dcard-icon">📋</div>
-      <div class="dcard-info"><h3>자격증/OA</h3><p>자격증, OA 상담 자료</p></div>
+      <div class="dcard-top"><div class="dcard-icon">📋</div><div class="dcard-info"><h3>자격증/OA</h3><p>자격증, OA</p></div></div>
       <span class="dcard-tag">oa</span>
-      <span class="dcard-arrow">›</span>
     </a>
   </div>
 
