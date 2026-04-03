@@ -8,111 +8,41 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --pink: #FF5C8A; --pink-light: #FFE8EF; --pink-mid: #FFB3C8;
-      --black: #1A1A1A; --gray: #666; --gray-light: #F5F5F5;
-      --gray-mid: #E8E8E8; --white: #FFFFFF;
-    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #EFEFEF; font-family: 'Noto Sans KR', sans-serif; color: var(--black); }
-
-    nav {
-      background: var(--white); border-bottom: 1.5px solid var(--gray-mid);
-      position: sticky; top: 0; z-index: 100;
-      padding: 0 40px; height: 56px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .logo { font-family: 'Black Han Sans', sans-serif; font-size: 20px; color: var(--pink); text-decoration: none; }
-    .logo span { color: var(--black); }
-    nav ul { list-style: none; display: flex; gap: 2rem; }
-    nav a { font-size: 13px; font-weight: 500; color: var(--gray); text-decoration: none; transition: color 0.2s; }
-    nav a:hover, nav a.active { color: var(--pink); }
-
-    .page-header {
-      background: var(--pink); padding: 44px 40px 36px;
-      position: relative; overflow: hidden;
-    }
-    .page-header::before {
-      content: ''; position: absolute; top: -30px; right: -30px;
-      width: 160px; height: 160px; border-radius: 50%;
-      background: rgba(255,255,255,0.1);
-    }
-    .page-icon {
-      font-size: 36px; margin-bottom: 10px;
-      position: relative; z-index: 1;
-    }
-    .breadcrumb { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.6); margin-bottom: 8px; letter-spacing: 0.05em; }
-    .breadcrumb a { color: rgba(255,255,255,0.8); text-decoration: none; }
-    .breadcrumb span { margin: 0 6px; }
-    .page-header h1 {
-      font-family: 'Black Han Sans', sans-serif;
-      font-size: clamp(30px, 5vw, 52px); color: var(--white);
-      letter-spacing: -1.5px; line-height: 1; position: relative; z-index: 1;
-    }
-    .page-header-sub { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.75); margin-top: 6px; position: relative; z-index: 1; }
-
-    /* 섹션 공통 */
-    .content { max-width: 900px; margin: 0 auto; padding: 40px; }
-    .section { background: var(--white); border-radius: 14px; padding: 32px; margin-bottom: 20px; border: 1.5px solid var(--gray-mid); }
-    .section-label {
-      font-family: 'Black Han Sans', sans-serif; font-size: 13px;
-      color: var(--pink); letter-spacing: 0.05em;
-      margin-bottom: 12px; text-transform: uppercase;
-    }
-    .section h2 { font-family: 'Black Han Sans', sans-serif; font-size: 20px; margin-bottom: 16px; }
-
-    /* 학과 소개 */
-    .intro-placeholder {
-      background: var(--gray-light); border-radius: 8px;
-      padding: 28px; text-align: center;
-      color: var(--gray); font-size: 13px; line-height: 1.7;
-      border: 1.5px dashed var(--gray-mid);
-    }
-
-    /* 강사 소개 */
-    .teacher-card {
-      display: flex; gap: 20px; align-items: flex-start;
-      padding: 20px; background: var(--gray-light);
-      border-radius: 10px; border: 1.5px dashed var(--gray-mid);
-    }
-    .teacher-avatar {
-      width: 72px; height: 72px; border-radius: 50%;
-      background: var(--pink-light); flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center; font-size: 28px;
-    }
-    .teacher-info h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; color: var(--gray); }
-    .teacher-info p { font-size: 13px; color: var(--gray); line-height: 1.6; }
-
-    /* 취업처 */
-    .job-list { display: flex; flex-wrap: wrap; gap: 8px; }
-    .job-tag {
-      background: var(--pink-light); color: var(--pink);
-      font-size: 12px; font-weight: 700; padding: 6px 14px;
-      border-radius: 20px;
-    }
-    .job-placeholder { color: var(--gray); font-size: 13px; font-style: italic; }
-
-    /* 포트폴리오 */
-    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
-    .portfolio-item {
-      aspect-ratio: 4/3; border-radius: 8px;
-      background: var(--gray-light);
-      border: 1.5px dashed var(--gray-mid);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--gray); font-size: 12px;
-    }
-
-    @media (max-width: 600px) {
-      nav { padding: 0 20px; }
-      .page-header { padding: 32px 20px 24px; }
-      .content { padding: 20px; }
-      .section { padding: 24px 20px; }
-      .teacher-card { flex-direction: column; }
-    }
+    body { background: #f5f5f5; font-family: 'Noto Sans KR', sans-serif; color: #1a1a1a; }
+    nav { background: #fff; border-bottom: 1px solid #e8e8e8; position: sticky; top: 0; z-index: 100; padding: 0 24px; height: 52px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: 'Black Han Sans', sans-serif; font-size: 18px; color: #FF5C8A; text-decoration: none; }
+    .logo span { color: #1a1a1a; }
+    nav ul { list-style: none; display: flex; gap: 20px; }
+    nav a { font-size: 13px; font-weight: 500; color: #888; text-decoration: none; transition: color 0.2s; }
+    nav a:hover, nav a.active { color: #1a1a1a; font-weight: 700; }
+    .hero { background: #fff; padding: 36px 24px 28px; border-bottom: 1px solid #e8e8e8; text-align: center; }
+    .hero-icon { width: 56px; height: 56px; background: #1a1a1a; border-radius: 14px; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 26px; }
+    .breadcrumb { font-size: 11px; color: #aaa; margin-bottom: 12px; }
+    .breadcrumb a { color: #888; text-decoration: none; }
+    .breadcrumb span { margin: 0 5px; }
+    .hero h1 { font-family: 'Black Han Sans', sans-serif; font-size: 32px; color: #1a1a1a; letter-spacing: -1px; margin-bottom: 6px; }
+    .hero-sub { font-size: 13px; color: #aaa; }
+    .body-wrap { max-width: 560px; margin: 0 auto; padding: 24px 20px 60px; }
+    .section-label { font-size: 11px; font-weight: 700; color: #aaa; letter-spacing: 0.1em; margin-bottom: 12px; margin-top: 28px; }
+    .section-label:first-child { margin-top: 0; }
+    .card { background: #fff; border-radius: 14px; border: 1px solid #e8e8e8; padding: 22px 20px; }
+    .card p { font-size: 14px; color: #555; line-height: 1.8; }
+    .teacher-item { display: flex; gap: 14px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid #f0f0f0; }
+    .teacher-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .teacher-item:first-child { padding-top: 0; }
+    .t-photo { width: 52px; height: 52px; border-radius: 50%; background: #f0f0f0; flex-shrink: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+    .t-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .t-info h3 { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+    .t-info p { font-size: 12px; color: #888; line-height: 1.6; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag { font-size: 12px; font-weight: 700; color: #555; background: #f0f0f0; padding: 5px 12px; border-radius: 20px; }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .portfolio-item { aspect-ratio: 4/3; border-radius: 10px; background: #f0f0f0; border: 1px dashed #ddd; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #bbb; }
+    @media (max-width: 480px) { .hero h1 { font-size: 26px; } }
   </style>
 </head>
 <body>
-
 <nav>
   <a href="/" class="logo">hyun<span>lab</span></a>
   <ul>
@@ -120,79 +50,57 @@
     <li><a href="/education" class="active">Education</a></li>
   </ul>
 </nav>
-
-<div class="page-header">
-  <div class="breadcrumb"><a href="/">hyunlab</a><span>›</span><a href="/education">Education</a><span>›</span>드로잉/아트웍</div>
-  <div class="page-icon">✏️</div>
+<div class="hero">
+  <div class="breadcrumb"><a href="/education">Education</a><span>›</span>드로잉/아트웍</div>
+  <div class="hero-icon">✏️</div>
   <h1>드로잉/아트웍</h1>
-  <p class="page-header-sub">Drawing & Artwork</p>
+  <p class="hero-sub">Drawing &amp; Artwork</p>
 </div>
-
-<div class="content">
-
-  <!-- 학과 소개 -->
-  <div class="section">
-    <div class="section-label">About</div>
-    <h2>학과 소개</h2>
-    <div class="intro-placeholder">
-      학과 소개 내용을 입력해주세요.<br>
-      커리큘럼, 수업 방식, 특징 등을 작성할 수 있어요.
-    </div>
+<div class="body-wrap">
+  <div class="section-label">ABOUT</div>
+  <div class="card">
+    <p>학과 소개 내용을 입력해주세요.<br>커리큘럼, 수업 방식, 특징 등을 작성할 수 있어요.</p>
   </div>
-
-  <!-- 강사 소개 -->
-  <div class="section">
-    <div class="section-label">Teacher</div>
-    <h2>강사 소개</h2>
-    <div class="teacher-card">
-      <div class="teacher-avatar">👤</div>
-      <div class="teacher-info">
-        <h3>강사명</h3>
-        <p>강사 소개 및 경력을 입력해주세요.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- 취업처 -->
-  <div class="section">
-    <div class="section-label">Career</div>
-    <h2>취업처</h2>
-    <div class="job-list">
-      <span class="job-placeholder">취업처 정보를 입력해주세요.</span>
-    </div>
-  </div>
-
-  <!-- 포트폴리오 -->
-  <div class="section">
-    <div class="section-label">Portfolio</div>
-    <h2>포트폴리오</h2>
+  <div class="section-label">TEACHER</div>
+  <div class="card" id="teacherWrap"></div>
+  <div class="section-label">CAREER</div>
+  <div class="card"><div class="tag-list"><span style="font-size:13px;color:#bbb;">취업처 정보를 입력해주세요.</span></div></div>
+  <div class="section-label">PORTFOLIO</div>
+  <div class="card">
     <div class="portfolio-grid">
       <div class="portfolio-item">작품 1</div>
       <div class="portfolio-item">작품 2</div>
       <div class="portfolio-item">작품 3</div>
     </div>
   </div>
-
 </div>
-
+<script>
+const TEACHERS = [
+  { name:"위성혁", dept:["drawing","ai"], subjects:"디지털드로잉, 2D애니메이션, 웹툰", intro:"(현) SBS아카데미 안산 학과장", photo:"http://sbsansanart.co.kr/img/academy/teacher/artwork/teacher022.png" },
+  { name:"정희주", dept:["drawing","editorial"], subjects:"디지털드로잉, 편집디자인", intro:"(현) SBS아카데미 안산 강사", photo:"" },
+  { name:"나지우", dept:["drawing","oa"], subjects:"디지털드로잉, GTQ, GTQi", intro:"(현) SBS아카데미 안산 강사", photo:"" },
+  { name:"장수지", dept:["interior","machine"], subjects:"캐드, 스케치업, 맥스, 인벤터", intro:"홍익대 실내건축디자인 석사", photo:"http://sbsansanart.co.kr/img/academy/teacher/interior/teacher046.png" },
+  { name:"성유진", dept:["interior"], subjects:"캐드, 스케치업, 맥스", intro:"인천대 도시건축학 학사", photo:"http://sbsansanart.co.kr/img/academy/teacher/interior/teacher072.png" },
+  { name:"이유진", dept:["interior"], subjects:"캐드, 스케치업, 맥스", intro:"(현) SBS아카데미 안산 강사", photo:"" },
+  { name:"이주형", dept:["cg","ai"], subjects:"마야, 누크", intro:"(현) SBS아카데미 안산 강사", photo:"http://sbsansanart.co.kr/img/academy/teacher/cg/teacher043.png" },
+  { name:"송지우", dept:["motion","ai"], subjects:"시포디, 프리미어, 에펙", intro:"(현) SBS아카데미 안산 강사", photo:"http://sbsansanart.co.kr/img/academy/teacher/cg/teacher084.png" },
+  { name:"이정우", dept:["motion"], subjects:"시포디, 프리미어, 에펙", intro:"(현) SBS아카데미 안산 강사", photo:"" },
+  { name:"서재현", dept:["it"], subjects:"웹, 백엔드, 바이브코딩", intro:"한양대(ERICA) 소프트웨어 학사", photo:"" },
+  { name:"이효근", dept:["oa","ai"], subjects:"컴활, MOS, GTQ, GTQi", intro:"(현) SBS아카데미 안산 강사", photo:"http://sbsansanart.co.kr/img/academy/teacher/office/teacher020.png" },
+  { name:"양윤석", dept:["oa"], subjects:"전산회계, 전산세무", intro:"(현) SBS아카데미 안산 강사", photo:"http://sbsansanart.co.kr/img/academy/teacher/office/teacher021.png" },
+];
+const SLUG = "drawing";
+const filtered = TEACHERS.filter(t => t.dept.includes(SLUG));
+const wrap = document.getElementById('teacherWrap');
+if (filtered.length === 0) {
+  wrap.innerHTML = '<p style="font-size:13px;color:#bbb;">강사 정보를 입력해주세요.</p>';
+} else {
+  wrap.innerHTML = filtered.map(t => `
+    <div class="teacher-item">
+      <div class="t-photo">${t.photo ? `<img src="${t.photo}" alt="${t.name}" onerror="this.parentElement.innerHTML='👤'">` : '👤'}</div>
+      <div class="t-info"><h3>${t.name}</h3><p>${t.subjects}<br>${t.intro}</p></div>
+    </div>`).join('');
+}
+</script>
 </body>
 </html>
-
-<script>
-const DEPT_KO = {
-  editorial: "시각/편집디자인",
-  drawing:   "드로잉/아트웍",
-  motion:    "2D/3D 모션그래픽",
-  cg:        "CG/마야",
-  interior:  "인테리어/건축",
-  machine:   "기계/설계",
-  it:        "IT/웹/프로그래밍",
-  youtube:   "유튜브",
-  ai:        "AI",
-  oa:        "자격증/OA",
-};
-document.querySelectorAll(".dept-tag").forEach(el => {
-  const slug = el.textContent.trim().toLowerCase();
-  if (DEPT_KO[slug]) el.textContent = DEPT_KO[slug];
-});
-</script>
