@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>영업 컨택 전략 — hyunlab</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue:        #1B6FFF;
+      --blue-dark:   #0F4FCC;
+      --blue-light:  #E8F0FF;
+      --blue-mid:    #93B4FF;
+      --black:       #111827;
+      --gray-dark:   #374151;
+      --gray:        #6B7280;
+      --gray-light:  #F3F4F6;
+      --gray-mid:    #E5E7EB;
+      --white:       #FFFFFF;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--white);
+      font-family: 'Noto Sans KR', sans-serif;
+      color: var(--black);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--white);
+      border-bottom: 1.5px solid var(--gray-mid);
+      position: sticky; top: 0; z-index: 100;
+      padding: 0 40px; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 20px; color: #FF5C8A;
+      text-decoration: none;
+    }
+    .logo span { color: var(--black); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav a {
+      font-size: 13px; font-weight: 500;
+      color: var(--gray); text-decoration: none;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--blue); }
+    nav a.active { color: var(--blue); font-weight: 700; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--black);
+      padding: 72px 40px 64px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 600px; height: 100%;
+      background: linear-gradient(135deg, transparent 40%, rgba(27,111,255,0.12) 100%);
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -60px; right: 80px;
+      width: 300px; height: 300px; border-radius: 50%;
+      border: 1px solid rgba(27,111,255,0.2);
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(27,111,255,0.15);
+      border: 1px solid rgba(27,111,255,0.3);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: 11px; font-weight: 600;
+      color: var(--blue-mid);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 6px var(--blue);
+    }
+    .hero h1 {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: clamp(40px, 6vw, 72px);
+      color: var(--white);
+      letter-spacing: -2px;
+      line-height: 1.05;
+      position: relative; z-index: 1;
+    }
+    .hero h1 .accent { color: var(--blue); }
+    .hero-sub {
+      font-size: 15px; font-weight: 400;
+      color: rgba(255,255,255,0.5);
+      margin-top: 16px;
+      max-width: 480px;
+      position: relative; z-index: 1;
+    }
+    .hero-meta {
+      display: flex; align-items: center; gap: 24px;
+      margin-top: 40px;
+      position: relative; z-index: 1;
+    }
+    .hero-stat {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .hero-stat-num {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 28px; color: var(--white);
+      letter-spacing: -1px;
+    }
+    .hero-stat-num span { color: var(--blue); font-size: 16px; }
+    .hero-stat-label {
+      font-size: 11px; color: rgba(255,255,255,0.4);
+      letter-spacing: 0.05em;
+    }
+    .hero-divider {
+      width: 1px; height: 40px;
+      background: rgba(255,255,255,0.1);
+    }
+    .hero-badge {
+      margin-left: auto;
+      background: var(--blue);
+      border-radius: 12px;
+      padding: 10px 20px;
+      font-size: 12px; font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.02em;
+      position: relative; z-index: 1;
+      cursor: default;
+    }
+
+    /* ── CONTENT WRAPPER ── */
+    .content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 40px 100px;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 28px;
+    }
+    .section-label::before {
+      content: '';
+      width: 3px; height: 20px;
+      background: var(--blue);
+      border-radius: 2px;
+    }
+    .section-label h2 {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 22px; color: var(--black);
+      letter-spacing: -0.5px;
+    }
+    .section-label .badge {
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      font-size: 11px; font-weight: 700;
+      padding: 3px 10px; border-radius: 100px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── INTRO BANNER ── */
+    .intro-banner {
+      background: var(--blue-light);
+      border-left: 4px solid var(--blue);
+      border-radius: 0 12px 12px 0;
+      padding: 20px 24px;
+      margin-bottom: 48px;
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .intro-banner-icon {
+      font-size: 22px; flex-shrink: 0; margin-top: 2px;
+    }
+    .intro-banner p {
+      font-size: 14px; color: var(--gray-dark);
+      line-height: 1.7;
+    }
+    .intro-banner p strong { color: var(--blue-dark); }
+
+    /* ── STRATEGY GRID ── */
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+
+    .strategy-card {
+      background: var(--white);
+      border: 1.5px solid var(--gray-mid);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.25s ease;
+      cursor: default;
+      position: relative;
+    }
+    .strategy-card:hover {
+      border-color: var(--blue);
+      box-shadow: 0 8px 32px rgba(27,111,255,0.12);
+      transform: translateY(-3px);
+    }
+    .strategy-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--blue);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .strategy-card:hover::before { opacity: 1; }
+
+    .card-header {
+      padding: 24px 24px 16px;
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .card-icon {
+      width: 44px; height: 44px;
+      background: var(--blue-light);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .card-title-wrap { flex: 1; }
+    .card-number {
+      font-size: 10px; font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .card-title {
+      font-size: 16px; font-weight: 700;
+      color: var(--black);
+      letter-spacing: -0.3px;
+      line-height: 1.3;
+    }
+    .card-tag {
+      font-size: 10px; font-weight: 600;
+      padding: 3px 9px; border-radius: 100px;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+    .tag-new {
+      background: #FFF3E0;
+      color: #E65100;
+    }
+    .tag-core {
+      background: var(--blue-light);
+      color: var(--blue-dark);
+    }
+    .tag-advanced {
+      background: #F3E8FF;
+      color: #6B21A8;
+    }
+    .tag-basic {
+      background: var(--gray-light);
+      color: var(--gray-dark);
+    }
+
+    .card-body {
+      padding: 0 24px 20px;
+    }
+    .card-desc {
+      font-size: 13px; color: var(--gray);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .card-placeholder {
+      background: var(--gray-light);
+      border-radius: 8px;
+      padding: 14px 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .card-placeholder-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gray-mid);
+      flex-shrink: 0;
+    }
+    .card-placeholder-text {
+      font-size: 12px; color: var(--gray);
+      font-style: italic;
+    }
+
+    .card-footer {
+      padding: 14px 24px;
+      border-top: 1px solid var(--gray-mid);
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--gray-light);
+    }
+    .card-footer-label {
+      font-size: 11px; color: var(--gray);
+      font-weight: 500;
+    }
+    .card-arrow {
+      width: 28px; height: 28px;
+      background: var(--white);
+      border: 1.5px solid var(--gray-mid);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+      color: var(--gray);
+      transition: all 0.2s;
+    }
+    .strategy-card:hover .card-arrow {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: var(--white);
+    }
+
+    /* ── TIPS SECTION ── */
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 60px;
+    }
+    .tip-card {
+      background: var(--gray-light);
+      border-radius: 12px;
+      padding: 20px 20px;
+      transition: background 0.2s;
+    }
+    .tip-card:hover { background: var(--blue-light); }
+    .tip-icon { font-size: 22px; margin-bottom: 10px; }
+    .tip-title {
+      font-size: 13px; font-weight: 700;
+      color: var(--black); margin-bottom: 6px;
+    }
+    .tip-desc {
+      font-size: 12px; color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* ── CHECKLIST ── */
+    .checklist-wrap {
+      background: var(--black);
+      border-radius: 20px;
+      padding: 40px 44px;
+      position: relative; overflow: hidden;
+    }
+    .checklist-wrap::before {
+      content: '';
+      position: absolute; top: -40px; right: -40px;
+      width: 200px; height: 200px; border-radius: 50%;
+      border: 1px solid rgba(27,111,255,0.2);
+    }
+    .checklist-wrap h3 {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 22px; color: var(--white);
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .checklist-sub {
+      font-size: 13px; color: rgba(255,255,255,0.45);
+      margin-bottom: 28px;
+    }
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 10px;
+      position: relative; z-index: 1;
+    }
+    .checklist-item {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 13px 16px;
+    }
+    .check-circle {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      border: 2px solid rgba(27,111,255,0.5);
+      background: rgba(27,111,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 10px; color: var(--blue);
+    }
+    .checklist-item span {
+      font-size: 13px; color: rgba(255,255,255,0.75);
+      font-weight: 500;
+    }
+
+    /* ── COMING SOON BANNER ── */
+    .coming-soon {
+      margin-top: 48px;
+      border: 1.5px dashed var(--gray-mid);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+    }
+    .coming-soon-icon { font-size: 32px; margin-bottom: 12px; }
+    .coming-soon h3 {
+      font-size: 16px; font-weight: 700;
+      color: var(--black); margin-bottom: 8px;
+    }
+    .coming-soon p {
+      font-size: 13px; color: var(--gray);
+    }
+    .coming-soon .update-badge {
+      display: inline-block;
+      margin-top: 16px;
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      font-size: 11px; font-weight: 700;
+      padding: 5px 14px; border-radius: 100px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      nav ul { display: none; }
+      .hero { padding: 48px 20px 44px; }
+      .hero-meta { flex-wrap: wrap; gap: 16px; }
+      .hero-badge { margin-left: 0; }
+      .content { padding: 40px 20px 60px; }
+      .checklist-wrap { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="logo"><span>hyun</span>lab</a>
+    <ul>
+      <li><a href="/main">Works</a></li>
+      <li><a href="/education">Education</a></li>
+      <li><a href="/mentor" class="active">Mentor</a></li>
+      <li><a href="/recipe">Recipe</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">Sales Contact Strategy</div>
+    <h1>상황별<br><span class="accent">컨택 전략</span></h1>
+    <p class="hero-sub">상황에 맞는 영업 컨택 전략을 정리합니다.<br>처음 연락부터 성사까지, 단계별 접근법.</p>
+    <div class="hero-meta">
+      <div class="hero-stat">
+        <div class="hero-stat-num">6<span>+</span></div>
+        <div class="hero-stat-label">컨택 시나리오</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4<span>단계</span></div>
+        <div class="hero-stat-label">전략 프레임워크</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">∞</div>
+        <div class="hero-stat-label">업데이트 예정</div>
+      </div>
+      <div class="hero-badge">🚧 콘텐츠 업데이트 중</div>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- INTRO NOTICE -->
+    <div class="intro-banner">
+      <div class="intro-banner-icon">💡</div>
+      <p>
+        이 페이지는 <strong>상황별 영업 컨택 전략</strong>을 정리한 공간입니다.<br>
+        콘텐츠는 순차적으로 채워질 예정입니다. 각 카드를 클릭하면 세부 전략을 확인할 수 있습니다.
+      </p>
+    </div>
+
+    <!-- STRATEGY CARDS -->
+    <div class="section-label">
+      <h2>상황별 컨택 전략</h2>
+      <span class="badge">6 Scenarios</span>
+    </div>
+
+    <div class="strategy-grid">
+
+      <!-- Card 1 -->
+      <div class="strategy-card">
+        <div class="card-header">
+          <div class="card-icon">📞</div>
+          <div class="card-title-wrap">
+            <div class="card-number">Scenario 01</div>
+            <div class="card-title">첫 번째 콜드 컨택</div>
+          </div>
+          <span class="card-tag tag-core">CORE</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">전혀 모르는 상대에게 처음 연락할 때의 전략. 거절 없이 대화를 이어가는 첫 마디 설계.</p>
+          <div class="card-placeholder">
+            <div class="card-placeholder-dot"></div>
+            <span class="card-placeholder-text">세부 내용 업데이트 예정</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-footer-label">자세히 보기</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="strategy-card">
+        <div class="card-header">
+          <div class="card-icon">🔄</div>
+          <div class="card-title-wrap">
+            <div class="card-number">Scenario 02</div>
+            <div class="card-title">거절 이후 재컨택</div>
+          </div>
+          <span class="card-tag tag-advanced">ADVANCED</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">한 번 거절당한 상대에게 자연스럽게 다시 연락하는 방법. 타이밍과 메시지 전략.</p>
+          <div class="card-placeholder">
+            <div class="card-placeholder-dot"></div>
+            <span class="card-placeholder-text">세부 내용 업데이트 예정</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-footer-label">자세히 보기</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="strategy-card">
+        <div class="card-header">
+          <div class="card-icon">💬</div>
+          <div class="card-title-wrap">
+            <div class="card-number">Scenario 03</div>
+            <div class="card-title">소개 통한 간접 컨택</div>
+          </div>
+          <span class="card-tag tag-core">CORE</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">지인이나 공통 인맥을 통해 소개받아 첫 연락할 때의 접근법. 신뢰 레버리지 활용.</p>
+          <div class="card-placeholder">
+            <div class="card-placeholder-dot"></div>
+            <span class="card-placeholder-text">세부 내용 업데이트 예정</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-footer-label">자세히 보기</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="strategy-card">
+        <div class="card-header">
+          <div class="card-icon">📱</div>
+          <div class="card-title-wrap">
+            <div class="card-number">Scenario 04</div>
+            <div class="card-title">SNS/온라인 첫 컨택</div>
+          </div>
+          <span class="card-tag tag-new">NEW</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">LinkedIn, 인스타그램, 카카오 등 온라인 채널을 활용한 컨택 전략. 플랫폼별 뉘앙스 차이.</p>
+          <div class="card-placeholder">
+            <div class="card-placeholder-dot"></div>
+            <span class="card-placeholder-text">세부 내용 업데이트 예정</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-footer-label">자세히 보기</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="strategy-card">
+        <div class="card-header">
+          <div class="card-icon">🤝</div>
+          <div class="card-title-wrap">
+            <div class="card-number">Scenario 05</div>
+            <div class="card-title">행사/네트워킹 현장</div>
+          </div>
+          <span class="card-tag tag-basic">BASIC</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">세미나, 박람회, 네트워킹 행사 등 오프라인 현장에서의 즉흥 컨택 기술.</p>
+          <div class="card-placeholder">
+            <div class="card-placeholder-dot"></div>
+            <span class="card-placeholder-text">세부 내용 업데이트 예정</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-footer-label">자세히 보기</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="strategy-card">
+        <div class="card-header">
+          <div class="card-icon">📧</div>
+          <div class="card-title-wrap">
+            <div class="card-number">Scenario 06</div>
+            <div class="card-title">이메일 첫 접근</div>
+          </div>
+          <span class="card-tag tag-advanced">ADVANCED</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">열리는 이메일을 쓰는 법. 제목·본문·CTA 구성 원칙과 A/B 테스트 팁.</p>
+          <div class="card-placeholder">
+            <div class="card-placeholder-dot"></div>
+            <span class="card-placeholder-text">세부 내용 업데이트 예정</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-footer-label">자세히 보기</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TIPS -->
+    <div class="section-label" style="margin-top: 12px;">
+      <h2>핵심 원칙</h2>
+      <span class="badge">Quick Tips</span>
+    </div>
+
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon">⚡</div>
+        <div class="tip-title">첫 인상 7초</div>
+        <p class="tip-desc">첫 문장이 전부다. 가치 제안을 앞에 두고 자기소개는 뒤로.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🎯</div>
+        <div class="tip-title">맞춤형 접근</div>
+        <p class="tip-desc">상대방 리서치 없이 보내는 메시지는 스팸이다.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">📅</div>
+        <div class="tip-title">타이밍이 전략</div>
+        <p class="tip-desc">같은 말도 언제 하느냐에 따라 결과가 달라진다.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🔁</div>
+        <div class="tip-title">팔로우업 시스템</div>
+        <p class="tip-desc">한 번으로 끝내지 않는다. 체계적인 후속 컨택이 성과를 만든다.</p>
+      </div>
+    </div>
+
+    <!-- CHECKLIST -->
+    <div class="checklist-wrap">
+      <h3>컨택 전 체크리스트</h3>
+      <p class="checklist-sub">실행 전 반드시 확인해야 할 기본기</p>
+      <div class="checklist">
+        <div class="checklist-item">
+          <div class="check-circle">✓</div>
+          <span>상대방 기본 정보 파악</span>
+        </div>
+        <div class="checklist-item">
+          <div class="check-circle">✓</div>
+          <span>내가 줄 수 있는 가치 정리</span>
+        </div>
+        <div class="checklist-item">
+          <div class="check-circle">✓</div>
+          <span>컨택 목적 & 목표 명확화</span>
+        </div>
+        <div class="checklist-item">
+          <div class="check-circle">✓</div>
+          <span>채널 선택 (콜/문자/이메일/SNS)</span>
+        </div>
+        <div class="checklist-item">
+          <div class="check-circle">✓</div>
+          <span>거절 시 대응 플랜 준비</span>
+        </div>
+        <div class="checklist-item">
+          <div class="check-circle">✓</div>
+          <span>팔로우업 일정 사전 설정</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMING SOON -->
+    <div class="coming-soon">
+      <div class="coming-soon-icon">📝</div>
+      <h3>세부 콘텐츠 준비 중</h3>
+      <p>각 시나리오별 스크립트, 실전 예시, 템플릿이 순차적으로 추가됩니다.</p>
+      <span class="update-badge">🔵 지속 업데이트 예정</span>
+    </div>
+
+  </div>
+
+</body>
+</html>
