@@ -55,7 +55,7 @@
 
     /* ── HERO ── */
     .hero {
-      background: var(--black);
+      background: var(--blue);
       padding: 72px 40px 64px;
       position: relative; overflow: hidden;
     }
@@ -63,7 +63,7 @@
       content: '';
       position: absolute; top: 0; right: 0;
       width: 600px; height: 100%;
-      background: linear-gradient(135deg, transparent 40%, rgba(27,111,255,0.12) 100%);
+      background: linear-gradient(135deg, transparent 40%, rgba(0,0,0,0.08) 100%);
     }
     .hero::after {
       content: '';
@@ -344,7 +344,8 @@
 
     /* ── CHECKLIST ── */
     .checklist-wrap {
-      background: var(--black);
+      background: var(--blue-light);
+      border: 1.5px solid var(--blue-mid);
       border-radius: 20px;
       padding: 40px 44px;
       position: relative; overflow: hidden;
@@ -353,16 +354,16 @@
       content: '';
       position: absolute; top: -40px; right: -40px;
       width: 200px; height: 200px; border-radius: 50%;
-      border: 1px solid rgba(27,111,255,0.2);
+      border: 1px solid rgba(27,111,255,0.15);
     }
     .checklist-wrap h3 {
       font-family: 'Black Han Sans', sans-serif;
-      font-size: 22px; color: var(--white);
+      font-size: 22px; color: var(--black);
       letter-spacing: -0.5px;
       margin-bottom: 8px;
     }
     .checklist-sub {
-      font-size: 13px; color: rgba(255,255,255,0.45);
+      font-size: 13px; color: var(--gray);
       margin-bottom: 28px;
     }
     .checklist {
@@ -373,22 +374,22 @@
     }
     .checklist-item {
       display: flex; align-items: center; gap: 12px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--white);
+      border: 1px solid rgba(27,111,255,0.15);
       border-radius: 10px;
       padding: 13px 16px;
     }
     .check-circle {
       width: 20px; height: 20px;
       border-radius: 50%;
-      border: 2px solid rgba(27,111,255,0.5);
-      background: rgba(27,111,255,0.1);
+      border: 2px solid var(--blue);
+      background: var(--blue-light);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
       font-size: 10px; color: var(--blue);
     }
     .checklist-item span {
-      font-size: 13px; color: rgba(255,255,255,0.75);
+      font-size: 13px; color: var(--gray-dark);
       font-weight: 500;
     }
 
